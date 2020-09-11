@@ -1,0 +1,51 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	/* text-align: center; */
+}
+
+h1{
+	text-align: center;
+}
+
+ul li {
+	list-style-type: none;
+	display: inline;
+}
+
+a:link {
+	text-decoration: none;
+	color: #000;
+}
+
+a:hover{
+	color: #B6CEC7;
+}
+
+a:visited{
+	text-decoration: none;
+	color: #000;
+}
+
+/*
+form{
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 10px;
+}
+*/
+
+table{
+	border-collapse: collapse;
+	/*border: 1px solid #000;*/
+	/*border: 1px solid #e6d1cf;*/
+	width: 37rem;
+	margin: 1em auto;
+}
+
+
+
+
+

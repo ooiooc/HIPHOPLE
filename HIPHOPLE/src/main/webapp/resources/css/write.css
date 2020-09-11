@@ -1,0 +1,65 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	/* text-align: center; */
+}
+
+h1{
+	text-align: center;
+}
+
+/*
+form{
+	width: 500px;
+	margin: 0 auto;
+	text-align: center;
+	padding: 10px 10px;
+}
+*/
+
+table{
+	border-collapse: collapse;
+	/*border: 1px solid #000;*/
+	/*border: 1px solid #e6d1cf;*/
+	width: 37rem;
+	margin: 1em auto;
+}
+
+td{
+	padding: 0.8em;
+}
+
+
+
+textarea {
+	width: 460px;
+	height: 400px;
+	resize:none;
+	text-indent: 6px;
+}
+
+.writeBtn{
+	text-align: center;
+}
+
+.writeBtn input{
+	border: 0;
+	font-size: 16px;
+	width: 100px;
+	padding: 4px;
+	border-radius: 8px;
+}
+
+input{
+	font-size: 16px;
+}
+
+tr{
+	border-bottom: 1px solid black;
+} 
+
+td:nth-child(1){
+	width: 80px;
+	/* background: pink; */
+}

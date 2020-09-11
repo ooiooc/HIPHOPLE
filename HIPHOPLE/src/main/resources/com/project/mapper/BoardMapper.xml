@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.mapper.BoardMapper">
+	
+	<!-- 게시글 추가 -->
+	<insert id="insert">
+	<!-- insert 하기 전 bno 생성 -->
+	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+		select max(bno)+1 bno from notice
+	</selectKey>
+     	insert into notice (bno, title, content, writer)
+		values(#{bno}, #{title}, #{content}, #{writer})
+	</insert>
+	
+	<!-- 게시글 조회 -->
+	<select id="select" resultType="com.project.domain.BoardVO">
+		select * from notice where bno=#{bno}
+	</select>
+	
+	<!-- 게시글 수정 -->
+	<update id="update">
+		update notice
+		set title=#{title}, content=#{content}, regdate=now() 
+		where bno=#{bno}
+	</update>
+    
+    <!-- 게시글 삭제 -->
+    <delete id="delete">
+		delete from notice where bno=#{bno}
+	</delete>
+	
+	<!-- 게시판 전체 글 조회 -->
+	<select id="listAll" resultType="com.project.domain.BoardVO">
+	<![CDATA[
+		select * from notice where bno > 0 order by bno desc
+	]]>
+	</select>
+	
+	<!-- 게시글 페이징 -->
+	<select id="listPage" resultType="com.project.domain.BoardVO">
+	
+	select bno, title, content, writer, regdate, viewcnt
+		from (select @rownum:=@rownum+1 as rownum, b.* 
+			from (select @rownum:=0) as tmp, notice as b 
+
+		<include refid="search"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
+	  
+	    order by bno desc
+	   ) as boardList
+	
+	<![CDATA[
+		where rownum > (#{pageNum}-1)*#{amount} 
+			and rownum <= #{pageNum}*#{amount};
+	]]> 
+	</select>
+	
+	<!-- 공지사항 게시물 총 갯수 -->
+	<select id="getTotalCount" resultType="int">
+		select count(*) from notice
+	</select>
+	
+	<!-- 공지사항 조회수 update -->
+	<update id="updateViewcnt" >
+		update notice set viewcnt = viewcnt+1 where bno = #{bno}
+	</update>
+	
+	<!-- 게시물 검색 -->
+	<sql id="search">
+		<!-- 선택했을때만 검색되도록 -->
+		<if test="type != null">
+		<!-- 첫번째 제목만 선택했을때 -->
+		<if test="type == 'T'.toString()">
+		where title like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'C'.toString()">
+		where content like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'W'.toString()">
+		where writer like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'TC'.toString()">
+		where (title like CONCAT('%', #{keyword}, '%') 
+		OR content like CONCAT('%', #{keyword}, '%'))
+		</if>
+		
+		<if test="type == 'CW'.toString()"> 
+		where (content like CONCAT('%', #{keyword}, '%') 
+		OR writer like CONCAT('%', #{keyword}, '%'))
+		</if>
+		
+		<if test="type == 'TCW'.toString()">
+		where (title like CONCAT('%', #{keyword}, '%')	
+			OR content like CONCAT('%', #{keyword}, '%') 
+			OR writer like CONCAT('%', #{keyword}, '%'))		
+		</if>
+	</if>
+	</sql>
+	
+	<!-- interview 게시물 총 갯수 -->
+	<select id="countBoard" resultType="int">
+		select count(*) from article
+	</select>
+
+	<!-- 페이징 처리 후 게시글 조회 -->
+	<select id="selectBoard" resultType="com.project.domain.BoardVO">
+		SELECT * 
+			FROM (
+				SELECT ROWNUM RN, A.* 
+					FROM (
+							SELECT * 
+							FROM ARTICLE 
+							ORDER BY SEQ DESC 
+							) A
+					)
+		WHERE RN BETWEEN #{start} AND #{end}
+	</select>
+
+</mapper>
+    

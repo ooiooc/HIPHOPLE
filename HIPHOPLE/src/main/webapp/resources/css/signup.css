@@ -1,0 +1,48 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+table{
+	border-collapse: collapse;
+	border: 1px solid #000;
+	width: 24rem;
+	margin: 1em auto;
+	/* text-align: center; */
+}
+
+h1{
+	text-align: center;
+}
+
+td{
+	padding: 0.8em;
+	border: 1px solid #000;
+}
+
+input{
+	text-align: center;
+	border: 0;
+}
+
+.btnArea{
+/* 	display: flex;
+	justify-content:space-between; */
+}
+
+.btnArea input{
+	width: 7em;
+	height: 2em;
+	font-size: 15px;
+}
+
+.msg{
+	color: red;
+	font-size: 12px;
+}
+
+#userid{
+	width: 120px;
+}
+

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.project.mapper.AdminMapper">
+
+    <!-- 로그인 -->
+   <!--  <select id = "login_check" parameterType=
+    "com.example.hansub_project.model.admin.dto.AdminDTO"
+    resultType="String">
+        select admin_id from admin
+        where admin_id=#{admin_id} and admin_pass=#{admin_pass}
+    </select>     -->
+ 
+    <!-- 회원 강제 탈퇴 -->
+<!--     <delete id="admin_member_forced_evictionCheck">
+    delete from member
+    where user_id=#{user_id}
+    </delete> -->
+
+</mapper>

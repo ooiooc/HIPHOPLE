@@ -1,0 +1,38 @@
+@charset "UTF-8";
+
+/* FOOTER.CSS */
+
+footer {
+    flex-shrink: 0; /* footer를 바닥에 고정시키기 위한 속성 */
+	height:100px;
+    /* bottom:0; */
+	text-align: center;
+	/* border: 1px solid #000; */
+	/* background:#5eaeff; */
+}
+
+.footer container{
+ transition: color 0.3s ease;
+}
+
+address {
+	font-style: normal;
+}
+
+li{
+	display: inline-block;
+}
+
+.footer-menu a{
+	padding-left: 15px;
+	padding-right: 15px;
+	/* border: 1px solid #000; */ /* inline-block 가로 정렬 시 발생하는 여백 제거 */
+	margin-right: -4px;
+}
+
+.footer-link li a{
+	padding-left: 2px;
+	padding-right: 2px;
+	line-height: 6px; /* 줄 간격 조정 */
+	/* border: 1px solid #000; */
+}

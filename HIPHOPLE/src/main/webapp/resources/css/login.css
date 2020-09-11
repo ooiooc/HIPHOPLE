@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+}
+
+h1{
+	text-align: center;
+}
+
+table{
+	border-collapse: collapse;
+	border: 1px solid #000;
+	width: 20rem;
+	margin: 0 auto;
+	
+}
+
+#joinBtn{
+	width: 80px;
+	font-size: 15px;
+}
+
+td{
+	padding: 0.4em;	
+	text-align: center;
+}
+
+th{
+	text-align: left;
+	text-indent: 0.8em;
+}
+
+input{
+	font-size: 14px;
+	text-align: center;
+}

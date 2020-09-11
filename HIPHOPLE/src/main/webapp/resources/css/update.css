@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+*{
+	font-family: 'Noto Sans KR', sans-serif;
+	/* text-align: center; */
+}
+
+h1{
+	text-align: center;
+}
+
+table{
+	border-collapse: collapse;
+	/*border: 1px solid #000;*/
+	border: 1px solid #e6d1cf;
+	width: 37rem;
+	margin: 1em auto;
+	text-align: center;
+}
+
+#modDiv{
+	margin: 1em auto;
+}

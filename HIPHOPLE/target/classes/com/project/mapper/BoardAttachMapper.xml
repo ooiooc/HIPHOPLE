@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+	<!-- BoardAttachMapper 인터페이스와 연결 -->
+	<mapper namespace="com.project.mapper.BoardAttachMapper">
+	
+	<!-- insert -->
+	<insert id="insert">
+		insert into upload (uuid, uploadPath, fileName, fileType, bno) 
+		values(#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno})
+	</insert>
+	
+	<!-- delete -->
+	<delete id="delete">
+		delete * from upload where bno=#{bno}
+	</delete>
+	
+	<!-- select -->
+	<select id="select" resultType="com.project.domain.BoardAttachVO">
+		select * from upload where bno=#{bno}
+	</select>
+	
+	</mapper>
