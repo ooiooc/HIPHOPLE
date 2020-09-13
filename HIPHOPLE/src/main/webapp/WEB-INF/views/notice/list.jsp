@@ -31,7 +31,10 @@
 	</div>
 	<hr>
 	
-	<h1>게시판</h1>
+	<!-- 카테고리 박스 : 공지사항 -->
+	<div class="category_notice" style="width:100px; 1px solid #000;">
+		<div class="cate_title"><span>공지사항</span></div>
+	</div><!--  -->
 	
 	<table border="1" style="text-align:center">
 		<tr>
