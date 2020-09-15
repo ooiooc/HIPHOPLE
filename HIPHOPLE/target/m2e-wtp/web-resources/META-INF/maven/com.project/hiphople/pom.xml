@@ -96,6 +96,16 @@
 		    <version>0.4.8</version>
 		</dependency>
 		
+		<!-- lombok 추가 -->
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<dependency>
+		    <groupId>org.projectlombok</groupId>
+		    <artifactId>lombok</artifactId>
+		    <version>1.18.12</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		
 		<!-- Spring Security -->
 		<!-- Spring Security: web -->
 <!-- 		<dependency>
