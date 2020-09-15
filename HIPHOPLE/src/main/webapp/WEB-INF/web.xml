@@ -58,17 +58,28 @@
     </welcome-file-list>
     
     
-    
-    
-    <!-- 모든 리퀘스트에 대해 필터링 하기위한 코드 -->
-<!--     <filter>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    <!-- security-context.xml 로딩할 수 있도록 설정 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/root-context.xml
+                     /WEB-INF/spring/security-context.xml
+        </param-value>
+    </context-param>
+
+	<!-- Spring Security -->
+	<listener>
+	<listener-class>org.springframework.security.web.session.HttpSessionEventPublisher</listener-class>
+	</listener>
+	
+	<filter>
+	<filter-name>springSecurityFilterChain</filter-name>
+	<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
 	</filter>
 	
 	<filter-mapping>
-		<filter-name>springSecurityFilterChain</filter-name>
-		<url-pattern>/*</url-pattern>
-	</filter-mapping> -->
+	<filter-name>springSecurityFilterChain</filter-name>
+	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+    
 
 </web-app>
