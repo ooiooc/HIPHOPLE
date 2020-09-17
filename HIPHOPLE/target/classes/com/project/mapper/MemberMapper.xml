@@ -8,17 +8,19 @@
 	
 	<!-- 회원가입 -->
 	<insert id="join">
-	insert into member(userid, userpw, username, email) values(#{userid},#{userpw},#{username},#{email})
+		INSERT INTO MEMBER(USERID, USERPW, USERNAME, EMAIL) 
+			VALUES (#{USERID}, #{USERPW}, #{USERNAME}, #{EMAIL})
 	</insert>
 	
 	<!-- 회원정보 상세조회 -->
 	<select id="memberInfo" resultType="com.project.domain.MemberVO">
-	select * from member where userid=#{userid}
+		SELECT * FROM MEMBER WHERE USERID = #{USERID}
 	</select>
 	
-	<!-- 회원목록 -->
+	<!-- 회원 목록 조회 -->
 	<select id="memberList" resultType="com.project.domain.MemberVO">
-	select * from member</select>
+		SELECT * FROM MEMBER
+	</select>
 	
 	<!-- 회원정보 수정 -->
 	<update id="updateMember">
@@ -31,18 +33,23 @@
 	
 	<!-- 회원 삭제 -->
 	<delete id="deleteMember">
-		delete from member 
-		where userid=#{userid};
+		DELETE FROM MEMBER WHERE USERID=#{USERID};
 	</delete>
 	
 	<!-- 로그인 정보 조회 -->
 	<select id="login" resultType="com.project.domain.MemberVO">
-		select userid, userpw, username, email from member where userid=#{userid} and userpw=#{userpw}
+		SELECT USERID, USERPW, USERNAME, EMAIL FROM MEMBER
+			WHERE USERID = #{USERID} AND USERPW = #{USERPW}
 	</select>
 	
 	<!-- 아이디 중복체크 -->
 	<select id="idChk" parameterType="String" resultType="int">
-		select count(*) from member where userid = #{userid}
+		SELECT COUNT(*) FROM MEMBER WHERE USERID = #{USERID}
+	</select>
+	
+	<!-- 로그인 패스워드 암호화 -->
+	<select id="loginBcrypt" resultType="com.project.domain.MemberVO">
+		SELECT USERID, USERPW,USERNAME FROM MEMBER WHERE USERID = #{USERID}
 	</select>
 	
 </mapper>
