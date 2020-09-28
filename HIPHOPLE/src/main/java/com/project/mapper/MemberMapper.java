@@ -8,6 +8,9 @@ public interface MemberMapper {
 	
 	//회원가입
 	public void join(MemberVO vo);
+
+	//권한 설정
+	public void insertAuth(MemberVO vo);
 	
 	//로그인 정보 조회
 	public MemberVO login(MemberVO vo);
@@ -26,5 +29,16 @@ public interface MemberMapper {
 
 	//아이디 중복체크
 	public int idChk(String userid);
-
+	
+	//로그인 패스워드 암호화
+	public MemberVO loginBcrypt(String userid);
+	
+	//비밀번호 찾기
+	public void newPassword(MemberVO vo);
+	
+	//임시 비밀번호 생성
+	public String getTempPassword();
+		
+	//이메일 계정조회
+	public int findPass(String email);
 }

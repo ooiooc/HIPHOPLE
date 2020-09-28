@@ -10,14 +10,11 @@ public class MemberVO {
 	private String email;
 	private Date regdate;
 	private Date updatedate;
-	private boolean useCookie;
+	private int enabled;
+	private String authority;
+
+	//private boolean useCookie;
 	
-	public boolean isUseCookie() {
-		return useCookie;
-	}
-	public void setUseCookie(boolean useCookie) {
-		this.useCookie = useCookie;
-	}
 	public String getUserid() {
 		return userid;
 	}
@@ -55,10 +52,27 @@ public class MemberVO {
 		this.updatedate = updatedate;
 	}
 	
+	public String getAuthority() {
+		return authority;
+	}
+	public void setAuthority(String authority) {
+		this.authority = authority;
+	}
+
+	public int getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(int enabled) {
+		this.enabled = enabled;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "MemberVO [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
-				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", useCookie=" + useCookie + "]";
+				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", enabled=" + enabled + ", authority="
+				+ authority + "]";
 	}
 	
 }
