@@ -15,4 +15,4 @@ WAS : Tomcat 8.5
 
 Browser : Chrome
 
-OpenAPI : summernote
+API : Summernote
