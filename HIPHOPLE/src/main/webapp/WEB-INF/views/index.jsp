@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-
 	<%@include file="include/header.jsp"%>
 
 		<section>
@@ -14,7 +13,7 @@
     			<div class="swiper-wrapper">
     			
     				<!-- Slide 1 -->
-			      	<div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/6005854/408/301/018/3c1c6a53dd631aa48ac0d095b14ce651.jpg)">
+			      	<div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/6005854/408/301/018/3c1c6a53dd631aa48ac0d095b14ce651.jpg); border:0;">
 			      	</div>
 					
 					<div class="swtitle-wrap"><span class="swtitle" style="color: #fff;"></span></div>
@@ -61,6 +60,14 @@
 	    		direction: 'horizontal', loop: true 
 	    		});
 	    	</script> -->
+	    	
+	   	<h1 style="text-align: center; letter-spacing: -1px;">Latest</h1>
+		<div class="popupVideo" style="position: relative; height:0; padding-bottom: 20%; margin: 40px 0px;">
+		<iframe width="560" height="315" src="https://www.youtube.com/embed/qxUkDghgE9Q?controls=0&autoplay=1&loop=1&mute=1" frameborder="0" allow="loop; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/qxUkDghgE9Q?controls=0&autoplay=1&loop=1&mute=1&playlist=qxUkDghgE9Q" frameborder="0" allow="loop; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+		
+		</div> 
+		<!-- modal -->
 
 	      	<script>
 			    var swiper = new Swiper('.swiper-container', {
@@ -78,8 +85,17 @@
 			    });
   			</script> 
   			
-  			<h1>main contents</h1>
-    
+  			<h1>Most popular</h1>
+  			<h1>Notice</h1>
+  			<div class="main_notice" style="border:1px solid 000;"> 
+  				<!-- 공지사항 게시글 5개까지 출력 -->
+	  			<c:forEach items="${list}" var="notice" begin="0" end="4">
+	  				<ul class="mnoticelist">
+	  					 <li><a href="/hiphople/notice/view?bno=${notice.bno}"><span>${notice.title}</span></a></li>
+	  				</ul>
+	  			</c:forEach>
+  			</div>
+    	
     	</section>
 	
 	<%@include file="include/footer.jsp"%>
