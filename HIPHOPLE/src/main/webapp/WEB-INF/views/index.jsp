@@ -3,8 +3,34 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-	<%@include file="include/header.jsp"%>
+<%@include file="include/header.jsp"%>
 
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<script type="text/javascript" src="resources/js/jquery-3.5.1.js"></script>
+
+<body>
+		
+		<!--  오늘 그만 보기 팝업 폼 -->
+		<form name="notice_form">
+			<div id="divpop1" class="divpop">    
+				<div class="title_area"><h1>레이어 팝업</h1></div>
+			         <div class="button_area">
+				         <div class="checkboxarea">
+				         <input type='checkbox' name='chkbox' id='todaycloseyn' value='Y'>&nbsp;오늘은 그만 보기</div>   
+			         	 <a href='#' onclick="javascript:closeWin(1);" >[닫기]</a>
+			    </div>
+		    </div>
+		</form>
+		
+	
+		<!--  -->
+		
 		<section>
 	    	
 	    	
@@ -65,11 +91,22 @@
 		<div class="popupVideo" style="position: relative; height:0; padding-bottom: 20%; margin: 40px 0px;">
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/qxUkDghgE9Q?controls=0&autoplay=1&loop=1&mute=1" frameborder="0" allow="loop; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/qxUkDghgE9Q?controls=0&autoplay=1&loop=1&mute=1&playlist=qxUkDghgE9Q" frameborder="0" allow="loop; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
-		
 		</div> 
 		<!-- modal -->
 
-	      	<script>
+  		
+  		<h1>Most popular</h1>
+  		<h1>Notice</h1>
+  		<div style="border:1px solid 000;" class="main_notice" > 
+  			<!-- 공지사항 게시글 5개까지 출력 -->
+	  		<c:forEach items="${list}" var="notice" begin="0" end="4">
+	  			<ul class="mnoticelist">
+	  			<li><a href="/hiphople/notice/view?bno=${notice.bno}"><span>${notice.title}</span></a></li>
+	  			</ul>
+	  		</c:forEach>
+  		</div>
+  		
+		<script type="text/javascript">
 			    var swiper = new Swiper('.swiper-container', {
 			      slidesPerView: 1,
 			      spaceBetween: 30,
@@ -82,20 +119,50 @@
 			        nextEl: '.swiper-button-next',
 			        prevEl: '.swiper-button-prev',
 			      },
+			    }); //슬라이더 끝
+			    
+			    /* 레이어 팝업 오늘 하루 그만 보기 */	
+				//쿠키 설정
+			    function setCookie(name, value, expiredays){
+			    	var todayDate = new Date();
+				    todayDate.setDate( todayDate.getDate() + expiredays );
+				    document.cookie = name + '=' + escape( value ) + '; path=/; expires=' + todayDate.toGMTString() + ';'
+				}
+			
+			    //쿠키 불러오기
+			    function getCookie(name) { 
+			        var obj = name + "="; 
+			        var x = 0; 
+			        while ( x <= document.cookie.length){ 
+			            var y = (x+obj.length); 
+			            if ( document.cookie.substring( x, y ) == obj ){ 
+			                if ((endOfCookie=document.cookie.indexOf( ";", y )) == -1 ) 
+			                    endOfCookie = document.cookie.length;
+			                return unescape( document.cookie.substring( y, endOfCookie ) ); 
+			            } 
+			            x = document.cookie.indexOf( " ", x ) + 1; 
+			            if ( x == 0 ) 
+			                break; 
+			        } 
+			        return ""; 
+			    }
+			
+			    //닫기 버튼 클릭시
+			    function closeWin(key){
+			        if($("#todaycloseyn").prop("checked")){
+			            setCookie('divpop'+key, 'Y' , 1 );
+			        }$("#divpop"+key+"").hide();
+			    }
+			
+			    $(function(){    
+			        if(getCookie("divpop1") !="Y"){
+			            $("#divpop1").show();
+			        }
 			    });
-  			</script> 
-  			
-  			<h1>Most popular</h1>
-  			<h1>Notice</h1>
-  			<div class="main_notice" style="border:1px solid 000;"> 
-  				<!-- 공지사항 게시글 5개까지 출력 -->
-	  			<c:forEach items="${list}" var="notice" begin="0" end="4">
-	  				<ul class="mnoticelist">
-	  					 <li><a href="/hiphople/notice/view?bno=${notice.bno}"><span>${notice.title}</span></a></li>
-	  				</ul>
-	  			</c:forEach>
-  			</div>
-    	
+			    
+  		</script> 
+
     	</section>
-	
+ 
 	<%@include file="include/footer.jsp"%>
+</body>
