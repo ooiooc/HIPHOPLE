@@ -1,10 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+</head>
+<body>
 
 	<footer>
-	<div class="footer container">
-		<ul>
-			<li class="footer-menu"><a href="#">ABOUT</a></li>
+	<div class="footer_container">
+		<!-- Footer Logo -->
+		<div class="footerLogo">
+            <h1><a href="/hiphople">
+                <img class="logo" src="../resources/image/logo_2018_white_400.png" alt="logo">
+            </a></h1>
+        </div>
+		<ul class="footer-menubox">
+			<li class="footer-menu"><a href="#">ABOUT HIPHOPLE</a></li>
 	        <li class="footer-menu"><a href="#">ADVERTISEMENT</a></li>
 	        <li class="footer-menu"><a href="#">RECRUIT</a></li>
 	        <li class="footer-menu"><a href="#">PRIVACY</a></li>
@@ -20,13 +33,14 @@
 	        <li>발행·편집인: 최성웅</li>	
 	        <li>청소년보호책임자: 최성웅</li>	
 		</ul>
-		<address>
+		<div class="rights">
 	       Copyright&copy;
-	       <a href="#"><strong>HIPHOPLE</strong></a>
+	       <span class="footer-cp"><a href="/hiphople">HIPHOPLE</a></span>
 	       All Rights Reserved.
-	    </address>
+	    </div>
 	</div><!-- footer container -->
 	</footer>
-	</div>
+	
+	<!-- </div> -->
 </body>
 </html>

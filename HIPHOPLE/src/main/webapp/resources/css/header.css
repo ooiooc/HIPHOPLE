@@ -1,3 +1,304 @@
 @charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+			/* Header */
+/* overall wrap */
+.container{
+	flex: 1 0 auto; /* footer를 바닥에 고정시키기 위한 속성 */
+	display: flex; 
+	flex-direction: column;
+	/* padding-bottom: 19px; */ /* footer height */
+}
 
 
+						
+h1{
+	font-size: 2em;
+	text-align: center;
+	margin: 0.67em 0;
+}
+
+/* Header Nav */
+/* side-nav 최상단 우측에 위치한 메뉴바 */
+.side-nav{
+	display: flex;
+	justify-content: flex-end;
+	padding: 2px;
+	font-size: 14px;
+	/* background: wheat; */
+	/* border: 1px solid #000; */
+}
+
+.side-nav li a{
+	padding: 6px; /* 메뉴별 좌우 여백넓이 지정해서 띄워주기 */
+}
+
+
+/* main-nav */
+
+/* 네비 박스 */
+.main-nav{
+	width: 100%;
+	display:flex;
+	justify-content:center;
+	letter-spacing: 2px; /* 자간 간격 조정 */
+	font-weight: bold; /* 글자 굵게 */
+	/* border: 1px solid #000; */
+	
+}
+
+/* 네비 메뉴 */
+.main-nav li{
+	display: inline-block;
+	margin-bottom: 8px;
+	text-align: center;
+	padding-left: 40px;
+	padding-right: 40px;
+	/* font-weight: 400; */
+ /* border: 1px solid #000; */
+}
+
+
+				/* header2 */
+/* 감싸는 header */
+.headerwrap{
+	background: #000;	
+	
+	width:100%;
+	height: 46px;
+	display: flex;
+	padding: 10px 0px;
+	justify-content: space-between;
+	border: 1px solid #000;
+}
+
+
+.smallLogo{
+	position: relative;
+	bottom: 34px;
+	left:10px;
+	border: 1px solid #000;
+}
+
+			/* main-nav2 */
+.main-nav2{
+	width: 100%;
+	display:flex;
+	color:#a0a8a6;
+	font-size: 14px;
+	justify-content:center;
+	letter-spacing: 2px; /* 자간 간격 조정 */
+	/* 
+	font-weight: bold; 글자 굵게
+	 */
+	/* border: 1px solid #000; */
+	
+}
+
+.main-nav2 li{
+	display: inline-block;
+	/* margin-bottom: 8px; */
+	text-align: center;
+	padding-left: 40px;
+	padding-right: 40px;
+	border: 1px solid #000;
+}
+
+.main-nav2 li a:link{
+	color:#a0a8a6;
+}
+
+.main-nav2 li a:visited{
+	color:#a0a8a6;
+}
+
+.main-nav2 li a:hover{
+	color:#e9e9e9;
+}
+
+			/* side-nav2 */
+.side-nav2{
+	display: flex;
+/* 	justify-content: flex-end; */
+	/* padding: 2px; */
+	font-size: 12px;
+	/* background: wheat; */
+	color:#a0a8a6;
+	/* border: 1px solid #fff; */
+	
+}
+
+.side-nav2 li a{
+	/* border: 1px solid #fff; */
+	padding: 6px;/* 메뉴별 좌우 여백넓이 지정해서 띄워주기 */
+}
+
+.side-nav2 li a:link{
+	color:#a0a8a6;
+}
+
+.side-nav2 li a:visited{
+	color:#a0a8a6;
+}
+
+.side-nav2 li a:hover{
+	color:#e9e9e9;
+}
+
+
+
+			/* INDEX.CSS */
+/* SECTION */
+section{
+	text-align: center;
+	/* background-color: wheat; */
+}
+
+/* 메인 이미지 슬라이드 */
+.swiper-container {
+    width: 100%;
+    height: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    /* position: relative; */
+  	text-align: center;
+  	border: 1px solid #000;
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: wheat;
+    background-size: cover;
+  	background-position: center;
+  	padding-bottom: 47%;
+  	overflow: hidden;
+  	border: 1px solid #000;
+	
+      /* Center slide text vertically */
+     /*  display: -webkit-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-pack: center;
+      -ms-flex-pack: center;
+      -webkit-justify-content: center;
+      justify-content: center;
+      -webkit-box-align: center;
+      -ms-flex-align: center;
+      -webkit-align-items: center;
+      align-items: center; */
+}
+
+.swtitle{
+	/* margin-top: 200px; */
+	font-weight: 800;
+	font-size: 2em;
+	border: 1px solid #000;
+	/* background-color: blue; */
+}
+
+/* 인덱스 레이어 팝업  
+z-index:999 top:50px; left:50px; display:none;*/
+
+.divpop {
+      position:absolute; z-index:1000; top:50px; left:50px;
+      width:350px; height:500px; border:1px solid #f6f7f1; background-color:#f6f7f1; display:none;}
+
+.title_area {font-weight:bold; text-align:center; width:100%}
+
+.button_area {display:flex; justify-content:space-between; position:absolute; width:100%; bottom:0; padding-left:10px; padding-right:10px; border: 0;} 
+
+
+
+
+			/* FOOTER.CSS */
+
+footer {
+    flex-shrink: 0; /* footer를 바닥에 고정시키기 위한 속성 */
+	height:60px;
+    /* bottom:0; */
+	text-align: center;
+	/* border: 1px solid #000; */
+	/* background:#5eaeff; */
+	color: #8a8a8a;
+	position: static;
+}
+
+.footer_container{
+	transition: color 0.3s ease;
+	padding: 20px;
+	background: #000;
+	border: 1px solid #000;
+}
+
+.footerLogo{
+	margin-top: 100px;
+	border: 1px solid #000;
+}
+
+.footerLogo img{
+	border: 1px solid #000;
+}
+
+address {
+	font-style: normal;
+	font-weight: bold;
+}
+
+
+
+.footer-cp a{
+	color: #8a8a8a;
+	
+}
+
+.footer-menubox a{
+	color: #8a8a8a;
+	font-size: 12px;
+}
+
+.footer-cp a:hover{
+	color: red;
+}
+
+.footer-menubox a:hover {
+	color: red;
+}
+.footer-menubox{
+	margin-bottom: 60px;
+	justify-content: center;
+	/* border: 1px solid #000; */
+}
+
+.footer-link{
+	/* border: 1px solid #000; */
+	justify-content: center;
+	font-size: 12px;
+}
+
+/**/
+.footer-menubox li, .footer-link li{
+	display: inline-block;
+}
+
+.footer-menu a{
+	padding-left: 15px;
+	padding-right: 15px;
+	/* border: 1px solid #000; */ /* inline-block 가로 정렬 시 발생하는 여백 제거 */
+	margin-right: -4px;
+}
+
+.footer-link li{
+	/* padding-left: 2px;
+	padding-right: 2px; */
+	line-height: 10px; /* 줄 간격 조정 */
+	margin: 4px;
+	/* border: 1px solid #000; */
+}
+
+/* copyright */
+.rights{
+	font-size: 12px;
+	padding-bottom: 58px;
+}
