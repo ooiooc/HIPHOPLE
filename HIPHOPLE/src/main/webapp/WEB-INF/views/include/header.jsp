@@ -19,8 +19,7 @@
 <link rel="stylesheet" type="text/css" href="resources/css/header.css"/>
 <!-- include summernote css/js-->
 <!-- <script src="../resources/js/summernote/summernote.js"></script>
-<script src="../re
-sources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/summernote-lite.js"></script>
 <script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css"/>
  -->

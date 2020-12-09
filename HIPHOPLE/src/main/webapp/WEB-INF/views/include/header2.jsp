@@ -18,6 +18,12 @@
 <link rel="stylesheet" type="text/css" href="../resources/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/header.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/member.css"/>
+<!-- summernote -->
+<script src="../resources/js/summernote/summernote.js"></script>
+<script src="../resources/js/summernote/summernote-lite.js"></script>
+<script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
+<link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css"/>
+
 </head>
 <body>
 	<div class="container">
