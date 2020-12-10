@@ -45,7 +45,7 @@
 		</tr>
 		</c:forEach>
 		
-		<sec:authorize access="hasAuthority('ROLE_ADMIN, ROLE_USER')"> 
+		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
 		<tr class="comm_tr">
 			<td colspan="5"><!-- <input type="submit" value="글쓰기" class="btn-register"> -->
 			<!-- a 태그는 get 방식으로 처리 -->
