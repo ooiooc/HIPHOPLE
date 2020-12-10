@@ -12,8 +12,8 @@
 	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
 		select max(bno)+1 bno from article
 	</selectKey>
-     	insert into article (bno, title, content, writer, url)
-		values(#{bno}, #{title}, #{content}, #{writer}, #{url})
+     	insert into article (bno, title, category, content, writer, url)
+		values(#{bno}, #{title},  #{category}, #{content}, #{writer}, #{url})
 	</insert>
 	
 	<!-- 게시글 조회 -->
@@ -39,5 +39,15 @@
 		select * from article where bno > 0 order by bno desc
 	]]>
 	</select>
+	
+	<!-- article 게시물 총 갯수 
+	<select id="getTotalCount" resultType="int">
+		select count(*) from article
+	</select>-->
+	
+	<!-- article 조회수 update -->
+	<update id="updateViewcnt" >
+		update article set viewcnt = viewcnt+1 where bno = #{bno}
+	</update>
 	
 </mapper>

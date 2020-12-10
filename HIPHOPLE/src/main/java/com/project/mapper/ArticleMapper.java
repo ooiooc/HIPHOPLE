@@ -21,6 +21,9 @@ public interface ArticleMapper {
 		
 	//게시물 리스트 조회
 	public List<ArticleVO> listAll() throws Exception;
+
+	//조회수 update
+	public int updateViewcnt(ArticleVO vo);
 		
 	//게시글 페이징
 	//public List<BoardVO> listPage(Criteria cri) throws Exception;

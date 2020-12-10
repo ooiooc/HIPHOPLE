@@ -6,6 +6,7 @@ public class ArticleVO {
 
 	private int bno;
 	private String title;
+	private String category;
 	private String content;
 	private String writer;
 	private String url;
@@ -23,9 +24,18 @@ public class ArticleVO {
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
 	public String getContent() {
 		return content;
 	}
@@ -58,8 +68,8 @@ public class ArticleVO {
 	}
 	@Override
 	public String toString() {
-		return "ArticleVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", url="
-				+ url + ", regdate=" + regdate + ", viewcnt=" + viewcnt + "]";
+		return "ArticleVO [bno=" + bno + ", title=" + title + ", category=" + category + ", content=" + content
+				+ ", writer=" + writer + ", url=" + url + ", regdate=" + regdate + ", viewcnt=" + viewcnt + "]";
 	}
 	
 }
