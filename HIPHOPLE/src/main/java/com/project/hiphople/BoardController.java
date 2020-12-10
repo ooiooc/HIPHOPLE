@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -55,7 +56,7 @@ public class BoardController{
  
 	//공지사항 리스트 화면 + 페이징
  	@RequestMapping(value = "notice/list", method = RequestMethod.GET)
-	public void listGet(Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
+	public void noticelistGet(Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
 		logger.info("리스트 get" + cri);
 		model.addAttribute("list", service.listPage(cri));		
 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
@@ -81,9 +82,8 @@ public class BoardController{
  	@RequestMapping(value="notice/update", method = RequestMethod.GET) //수정은 화면이 필요하기 때문에 GET
  		public void modifyGet(BoardVO board, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
  			logger.info("업데이트 get");
- 			model.addAttribute("update", service.select(board));
- 			
- 		}
+ 			model.addAttribute("update", service.select(board));	
+ 	}
  	
  	//공지사항 수정 기능
  	@RequestMapping(value="notice/update", method = RequestMethod.POST)
@@ -117,8 +117,56 @@ public class BoardController{
 	
 	}
 
+	//community 게시판 글쓰기 화면
+	@GetMapping("community/write")
+	public String boardWrite() {
+		logger.info("summernote 확인");
+		return "community/write";
+	}
 	
-	
-	
+	//community 글쓰기 처리
+	 @RequestMapping(value="community/insertComm", method = RequestMethod.POST)
+	 public String insertComm(BoardVO board, Model model) throws Exception{
+	 			
+	 		logger.info("커뮤니티 글쓰기 post");
+
+			/* board.setCategory("community"); */
+	 		logger.info("BoardVO에 저장되어 있는 값 :" + board);
+	 		service.insertComm(board); //insert SQL
+	 		model.addAttribute("result", "success");
+	 			
+	 	return "redirect:/community/list";
+
+	 }
+	 
+	//community 상세페이지
+	@RequestMapping(value = "community/view", method = RequestMethod.GET)
+	public void viewComm(BoardVO board, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+		logger.info("상세글 페이지 get" + board);
+		logger.info("상세글 페이지 get" + cri);
+			model.addAttribute("view", service.selectComm(board));
+	}
+	 	
+	//community 리스트 화면 페이징x
+ 	@RequestMapping(value = "community/list", method = RequestMethod.GET)
+	public void listComm(Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
+		logger.info("리스트 get" + cri);
+		model.addAttribute("list", service.commlistPage(cri));		
+		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
+ 	}
+ 	
+	/*
+	 * @RequestMapping(value="member/searchPwform", method=RequestMethod.GET) public
+	 * void searchPwForm(){ logger.info("비밀번호 찾기 화면");
+	 * 
+	 * }
+	 */
+ 	
+ 	//비디오 화면 모달 창 삽입
+ 	@RequestMapping(value="video/list", method = RequestMethod.GET)
+		public void videoGet() throws Exception{
+			logger.info("비디오 화면 이동 get");
+			
+	}
 	
 }
