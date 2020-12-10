@@ -9,11 +9,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Notice – HIPHOPLE</title>
+<title>Community – HIPHOPLE</title>
 <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script></head>
 <script type="text/javascript" src="../resources/js/view.js"></script></head>
 <link rel="stylesheet" type="text/css" href="../resources/css/view.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
 </head>
 <body>
 	<%@include file="../include/header2.jsp"%>
@@ -34,7 +33,7 @@
 	<input type="hidden" name="pageNum" value="${cri.pageNum}">
 	
 	<div class="notice_wrap">
-		<div class="notice_title"><h1 class="catetitle">NOTICE</h1></div>		
+		<div class="notice_title"><h1 class="catetitle">COMMUNITY</h1></div>		
 			<ul class="notice_box">
 				<li class="n_titlebox">
 					<div class="n_title">${view.title}</div>
@@ -44,7 +43,7 @@
 			</ul> <!-- notice list -->
 		
 		<div class="notice_content">
-			<!-- 공지사항 내용 -->
+			<!--  내용 -->
 			<div class="n_content">
 			${fn:replace(view.content, replaceChar, "<br/>")}
 			</div>
@@ -57,14 +56,13 @@
 			</div>
 			<!-- 목록 수정 삭제 버튼 영역 -->
 			<div class="notice_btn">
-				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
+				<c:if test="${login != null}">	
 				<button type="button" class="btn-warning">수정</button>
 				<button type="button" class="btn-danger">삭제</button>
-				</sec:authorize>
+				</c:if>
 				<button type="button" class="btn-primary">목록</button>
 			</div>
 		</div><!-- notice content 끝 -->
-		
 		
 		<!-- 댓글 설정 -->
 		<!-- 작성댓글 보이는 공간 -->
