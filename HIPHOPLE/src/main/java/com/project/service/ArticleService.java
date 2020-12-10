@@ -27,10 +27,10 @@ public interface ArticleService {
 	public List<ArticleVO> listAll() throws Exception;
 		
 	//게시글 리스트 페이징
-	//public List<BoardVO> listPage(Criteria cri) throws Exception;
+	public List<ArticleVO> postlistPage(Criteria cri) throws Exception;
 		
 	//페이징 처리를 위한 카운팅
-	///public int getTotalCount(Criteria cri) throws Exception;
+	public int getTotalCount(Criteria cri) throws Exception;
 		
 	//BoardAttachVO에 있는 정보를 불러오는 서비스
 	//여러개의 이미지 정보를 넘겨주기 위해 List 배열 타입

@@ -23,14 +23,12 @@ public interface ArticleMapper {
 	public List<ArticleVO> listAll() throws Exception;
 
 	//조회수 update
-	public int updateViewcnt(ArticleVO vo);
-		
-	//게시글 페이징
-	//public List<BoardVO> listPage(Criteria cri) throws Exception;
+	public int updateViewcnt(ArticleVO vo) throws Exception;
 
-	//총 게시글 count
-	//public int getTotalCount(Criteria cri);
+	//게시글 페이징
+	public List<ArticleVO> postlistPage(Criteria cri) throws Exception;
 		
-	//조회수 update
-	//public void updateViewcnt(BoardVO vo) throws Exception;
+	//총 게시글 count
+	public int getTotalCount(Criteria cri);
+		
 }

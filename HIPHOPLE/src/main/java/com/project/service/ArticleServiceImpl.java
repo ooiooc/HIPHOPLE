@@ -4,8 +4,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.project.domain.ArticleVO;
+import com.project.domain.BoardVO;
+import com.project.domain.Criteria;
 import com.project.mapper.BoardAttachMapper;
 import com.project.mapper.ArticleMapper;
 
@@ -26,8 +29,10 @@ public class ArticleServiceImpl implements ArticleService{
 	}
 	
 	//게시물 조회
+	@Transactional
 	@Override
 	public ArticleVO select(ArticleVO vo) throws Exception {
+		mapper.updateViewcnt(vo);
 		return mapper.select(vo);
 	}
 
@@ -49,7 +54,15 @@ public class ArticleServiceImpl implements ArticleService{
 	public List<ArticleVO> listAll() throws Exception {
 		return mapper.listAll();
 	}
+	
+	@Override
+	public List<ArticleVO> postlistPage(Criteria cri) throws Exception {
+		return mapper.postlistPage(cri);
+	}
+	
+	@Override
+	public int getTotalCount(Criteria cri) throws Exception {
+		return mapper.getTotalCount(cri);
+	}
 
-	
-	
 }
