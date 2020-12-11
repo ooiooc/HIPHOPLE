@@ -29,7 +29,7 @@
 		
 			<!-- 회원만 접근 가능 -->
 			<security:intercept-url pattern="/member/memberInfo" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
-			<security:intercept-url pattern="/community/write" access="hasRole('ROLE_USER','ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/community/write" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 			<!-- 관리자 권한 접근 가능 -->
 			<security:intercept-url pattern="/notice/write" access="hasRole('ROLE_ADMIN')"/>
 			<security:intercept-url pattern="/interview/write" access="hasRole('ROLE_ADMIN')"/>
@@ -40,8 +40,7 @@
 								password-parameter="userpw" 
 								default-target-url="/"
 								authentication-failure-url="/member/signin"/>
-								
-								
+																
 		<!-- 로그아웃 -->
 		<security:logout invalidate-session="true"
 						logout-success-url="/member/signin"
