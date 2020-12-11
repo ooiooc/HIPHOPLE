@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>HIPHOPLE</title>
 <!-- JS -->
 <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
 <!-- fontawesome -->
@@ -23,11 +23,10 @@
 <script src="../resources/js/summernote/summernote-lite.js"></script>
 <script src="../resources/js/summernote/lang/summernote-ko-KR.js"></script>
 <link rel="stylesheet" href="../resources/css/summernote/summernote-lite.css"/>
-
 </head>
 <body>
 	<div class="container">
-	<header>
+	<header class="header2">
     	<div class="headerwrap">
     		
             
@@ -44,8 +43,7 @@
                 <input type="hidden" name="userid" value="${login.userid}">
            		
                 <ul class="main-nav2">
-                  	<li class="main_menu"><a class="u_line" href="/hiphople">MAIN</a></li>
-                	<li class="main_menu"><a class="u_line" href="/hiphople/interview/list">NEWS</a></li>
+                  	<li class="main_menu"><a class="u_line" href="/hiphople/interview/list">NEWS</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/video/list">MUSIC</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/interview/list">INTERVIEW</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/notice/list">NOTICE</a></li>
@@ -56,13 +54,16 @@
             </form>
             
             <ul class="side-nav2">
+            	<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
+    				<li>관리자&nbsp;</li>
+				</sec:authorize> 
 				<sec:authorize access="hasAuthority('ROLE_USER')"> 
 				<sec:authentication property="principal.username" var="currentUserName"/>
-    				<li><a href="/hiphople/">${currentUserName}&nbsp;님</a></li>
+    				<li><a href="/hiphople/">${currentUserName}님</a></li>
     				<li><a href="/hiphople/member/memberInfo" class="updateMember">정보수정</a></li>
 				</sec:authorize> 
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
-    				<li><a href="/hiphople/">관리자 메인</a></li>
+    				<li><a href="/hiphople/">관리자 페이지</a></li>
 				</sec:authorize> 
 				
 				<sec:authorize access="isAuthenticated()">
@@ -73,9 +74,9 @@
 		
 				<sec:authorize access="! isAuthenticated()">
 					<li><a href="/hiphople/member/signin">LOGIN</a></li>
-					<li><a href="/hiphople/member/signup">JOIN</a></li>
+					<li><a href="/hiphople/member/signup">JOIN&emsp;</a></li>
 				</sec:authorize>
-					<li><a href="/hiphople/member/signup">MENU</a>&emsp;</li>
+					
 						<!-- 드롭다운 메뉴 
 						<ul class="side-sub"> 
 							<li><a href="/hiphople/member/login">LOGIN</a></li>
