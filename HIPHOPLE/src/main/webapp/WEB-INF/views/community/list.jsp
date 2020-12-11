@@ -17,12 +17,13 @@
 <body>
 	<%@include file="../include/header2.jsp"%>
 	
+	<div class="comwrap">
 	<h1 class="community_title">COMMUNITY</h1>
 	<h4 style="font-weight: 300; letter-spacing: 1px; font-size: 15px; text-align: center;">
 	조회수, 댓글 기능, 게시글 수정페이지 
 	</h4>
-	<table class="comm_box">
-		<tr class="comm_tr">
+	<table class="combox">
+		<tr class="comtr">
 			<th>번호</th>
 			<th>제목</th>
 			<th>작성자</th>
@@ -33,7 +34,7 @@
 		
 		<c:forEach items="${list}" var="comm"> <!-- 한 건씩 불러들여서 처리 -->
 		
-		<tr class="comm_tr">
+		<tr class="comtr">
 			<td>${comm.bno}</td>
 			<td><a href="/hiphople/community/view?bno=${comm.bno}&pageNum=${pageMaker.cri.pageNum}">${comm.title}</a></td>
 			<td>${comm.writer}</td>
@@ -46,10 +47,10 @@
 		</c:forEach>
 		
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
-		<tr class="comm_tr">
+		<tr>
 			<td colspan="5"><!-- <input type="submit" value="글쓰기" class="btn-register"> -->
 			<!-- a 태그는 get 방식으로 처리 -->
-			<button type="button" onclick="location.href='/hiphople/community/write'">글쓰기</button>
+			<button type="button" class="btn-write" onclick="location.href='/hiphople/community/write'">WRITE</button>
 			</td>
 		</tr>
 		</sec:authorize>
@@ -72,8 +73,8 @@
 	
 	<!-- community 검색 -->
 	<form action="/hiphople/community/list" method="get">
-	<div class="comm_search" style="text-align: center;">
-	<select name="type"><!-- 내가 검색창에서 선택한 옵션과 검색어를 남겨주기 위해서 아래와 같이 추가 (selected) -->
+	<div class="cmsearch" style="text-align: center;">
+	<select class="cmsearchbar" name="type"><!-- 내가 검색창에서 선택한 옵션과 검색어를 남겨주기 위해서 아래와 같이 추가 (selected) -->
 		<option value="T" <c:out value="${pageMaker.cri.type eq 'T'? 'selected':''}"/>>제목</option>
 		<option value="C" <c:out value="${pageMaker.cri.type eq 'C'? 'selected':''}"/>>내용</option>
 		<option value="W" <c:out value="${pageMaker.cri.type eq 'W'? 'selected':''}"/>>작성자</option>
@@ -82,11 +83,11 @@
 		<option value="TCW"<c:out value="${pageMaker.cri.type eq 'TCW'? 'selected':''}"/>>제목 + 내용 + 작성자</option>
 	</select>
 	
-	<input type="text" name="keyword" placeholder="검색어를 입력하세요" value="${pageMaker.cri.keyword}">
-	<button type="submit">검색</button>
+	<input type="text" class="cmsearchip" name="keyword" placeholder="검색어를 입력해주세요" value="${pageMaker.cri.keyword}">
+	<button type="submit" class="cmsearchbtn">검색</button>
 	</div>
 	</form>
-	
+	</div>
 	<%@include file="../include/footer.jsp"%>
 </body>
 </html>
