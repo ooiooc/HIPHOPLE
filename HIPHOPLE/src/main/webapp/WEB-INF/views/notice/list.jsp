@@ -15,7 +15,7 @@
 <body>
 	<%@include file="../include/header2.jsp"%>
 	<div class="notice_area">
-		<div class="notice_title"><h1 class="catelogin">NOTICE</h1></div>
+		<div class="notice_title"><h1 class="catenotice">NOTICE</h1></div>
 			<c:forEach items="${list}" var="notice"> 
 			<ul class="notice_list">
 				<li class="n_content">
