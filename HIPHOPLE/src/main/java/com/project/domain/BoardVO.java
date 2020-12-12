@@ -7,13 +7,14 @@ import com.project.domain.BoardAttachVO;
 public class BoardVO {
 
 	private int bno;
+	private String category;
 	private String title;
 	private String content;
 	private String writer;
 	private String regdate;
+	private String writerid;	
 	private int viewcnt;
 	private List<BoardAttachVO> attachList;
-	
 	
 	public int getBno() {
 		return bno;
@@ -59,10 +60,25 @@ public class BoardVO {
 		this.attachList = attachList;
 	}
 	
+	public String getCategory() {
+		return category;
+	}
+	public void setCategory(String category) {
+		this.category = category;
+	}
+	
+	public String getWriterid() {
+		return writerid;
+	}
+	public void setWriterid(String writerid) {
+		this.writerid = writerid;
+	}
+
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", title=" + title + ", content=" + content + ", writer=" + writer + ", regdate="
-				+ regdate + ", viewcnt=" + viewcnt + ", attachList=" + attachList + "]";
+		return "BoardVO [bno=" + bno + ", category=" + category + ", title=" + title + ", content=" + content
+				+ ", writer=" + writer + ", regdate=" + regdate + ", writerid=" + writerid + ", viewcnt=" + viewcnt
+				+ ", attachList=" + attachList + "]";
 	}
 	
 }
