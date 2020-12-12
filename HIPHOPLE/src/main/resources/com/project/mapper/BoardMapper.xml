@@ -6,7 +6,7 @@
     
 <mapper namespace="com.project.mapper.BoardMapper">
 	
-	<!-- 게시글 추가 -->
+	<!-- 공지사항 게시글 추가 -->
 	<insert id="insert">
 	<!-- insert 하기 전 bno 생성 -->
 	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
@@ -16,19 +16,19 @@
 		values(#{bno}, #{title}, #{content}, #{writer})
 	</insert>
 	
-	<!-- 게시글 조회 -->
+	<!-- 공지사항 게시글 조회 -->
 	<select id="select" resultType="com.project.domain.BoardVO">
 		select * from notice where bno=#{bno}
 	</select>
 	
-	<!-- 게시글 수정 -->
+	<!-- 공지사항 게시글 수정 -->
 	<update id="update">
 		update notice
-		set title=#{title}, content=#{content}, regdate=now() 
+		set title=#{title}, content=#{content}
 		where bno=#{bno}
 	</update>
     
-    <!-- 게시글 삭제 -->
+    <!--공지사항 게시글 삭제 -->
     <delete id="delete">
 		delete from notice where bno=#{bno}
 	</delete>
@@ -121,6 +121,95 @@
 					)
 		WHERE RN BETWEEN #{start} AND #{end}
 	</select>
+	
+							<!-- community -->
+	<!-- community 게시글 추가 -->
+	<insert id="insertComm">
+	
+	<!-- insert 하기 전 bno 생성 -->
+	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
+		select max(bno)+1 bno from community
+	</selectKey>
+     	insert into community (bno, category, title, content, writer, writerid)
+		values(#{bno}, #{category}, #{title}, #{content}, #{writer}, #{writerid})
+	</insert>
+	
+	<!-- community 게시글 조회 -->
+	<select id="selectComm" resultType="com.project.domain.BoardVO">
+		select * from community where bno=#{bno}
+	</select>
+	
+	<!-- community 게시글 수정 -->
+	<update id="updateCom">
+		update community
+		set title=#{title}, category=#{category}, content=#{content}, regdate=now() 
+		where bno=#{bno}
+	</update>
+    
+    <!-- community 게시글 삭제 -->
+    <delete id="deleteCom">
+		delete from community where bno=#{bno}
+	</delete>
+		
+	<!-- community 게시글 리스트 -->
+	<select id="commlistAll" resultType="com.project.domain.BoardVO">
+	<![CDATA[
+		select * from  where bno > 0 order by bno desc
+	]]>
+	</select>
+	
+	<!-- community 게시글 페이징 -->
+	<select id="commlistPage" resultType="com.project.domain.BoardVO">
+	
+	select bno, category, title, content, writer, regdate, viewcnt
+		from (select @rownum:=@rownum+1 as rownum, b.* 
+			from (select @rownum:=0) as tmp, community as b 
+
+		<include refid="cmsearch"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
+	  
+	    order by bno desc
+	   ) as boardList
+	
+	<![CDATA[
+		where rownum > (#{pageNum}-1)*#{amount} 
+			and rownum <= #{pageNum}*#{amount};
+	]]> 
+	</select>
+	
+	<!-- 게시물 검색 -->
+	<sql id="cmsearch">
+		<!-- 선택했을때만 검색되도록 -->
+		<if test="type != null">
+		<!-- 첫번째 제목만 선택했을때 -->
+		<if test="type == 'T'.toString()">
+		where title like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'C'.toString()">
+		where content like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'W'.toString()">
+		where writer like CONCAT('%', #{keyword}, '%')		
+		</if>
+		
+		<if test="type == 'TC'.toString()">
+		where (title like CONCAT('%', #{keyword}, '%') 
+		OR content like CONCAT('%', #{keyword}, '%'))
+		</if>
+		
+		<if test="type == 'CW'.toString()"> 
+		where (content like CONCAT('%', #{keyword}, '%') 
+		OR writer like CONCAT('%', #{keyword}, '%'))
+		</if>
+		
+		<if test="type == 'TCW'.toString()">
+		where (title like CONCAT('%', #{keyword}, '%')	
+			OR content like CONCAT('%', #{keyword}, '%') 
+			OR writer like CONCAT('%', #{keyword}, '%'))		
+		</if>
+	</if>
+	</sql>
 
 </mapper>
     
