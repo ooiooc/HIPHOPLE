@@ -37,25 +37,14 @@
 		<div class="swiper-container">
     		<div class="swiper-wrapper">
     			<!-- Slide 1 -->
-		      	<div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/6005854/408/301/018/3c1c6a53dd631aa48ac0d095b14ce651.jpg); border:0;">
-			   	</div>
-				<div class="swtitle-wrap"><span class="swtitle" style="color: #fff;"></span></div>
+		      	<div class="swiper-slide" style="background-image: url(resources/image/index/slide1.jpeg);"></div>
 			   	<!-- Slide 2 -->
-			   	<div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/11972418/618/286/018/02c275472022979a13ad37c8a3825c0f.jpg)">
-			   	</div>
+			   	<div class="swiper-slide" style="background-image: url(resources/image/index/slide2.jpg);"></div>
 			    <!-- Slide 3 -->
-			    <div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/6005854/907/290/018/1ca7e2af1c3af1b53a1ebd6c82a591ed.jpg)">
-			    </div>
+			    <div class="swiper-slide" style="background-image: url(resources/image/index/slide3.jpg);" ></div>
 			    <!-- Slide 4 -->
-			    <div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/115990/810/293/018/da251bc8ed7c154f920ba62d9c998a84.jpg)">
-			    </div>
-			   	<!-- Slide 5 -->
-			    <div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/6005854/526/311/018/3fbee9d9c7d69b3e99265c73ceed8232.jpg)">
-			    </div>
-			    <!-- Slide 6 -->
-				<div class="swiper-slide" style="background-image: url(http://hiphople.com/files/attach/images/562/980/292/018/3a4961ede28d32772652fc0f076157a6.jpg)">
-				</div>
-    			</div>
+			    <div class="swiper-slide" style="background-image: url(resources/image/index/slide4.jpg);"></div>
+    		</div>
 			    
 			    <!-- Add Pagination -->
 			    <div class="swiper-pagination swiper-pagination-white"></div>
@@ -65,6 +54,7 @@
 			    <div class="swiper-button-prev swiper-button-white"></div>
 		</div><!-- swiper-container -->
 
+  		
   		<!-- main contents -->
   		<div class="maincontents">
   		<h1>CONTENTS & CURATION</h1>
@@ -123,22 +113,62 @@
 		<div class="popupVideo" style="position: relative; height:0; padding-bottom: 20%; margin: 40px 0px;">
 		<iframe width="560" height="315" src="https://www.youtube.com/embed/qxUkDghgE9Q?controls=0&autoplay=1&loop=1&mute=1" frameborder="0" allow="loop; accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 		</div> --> 
-  		
-		<script type="text/javascript">
-			var swiper = new Swiper('.swiper-container', {
-			slidesPerView: 1,
-			spaceBetween: 30,
-			loop: true,
-			pagination: {
-			el: '.swiper-pagination',
-			clickable: true,
-			},
-			navigation: {
-			nextEl: '.swiper-button-next',
-			prevEl: '.swiper-button-prev',
-			},
-		}); //슬라이더 끝
-			    
+    	</section>
+
+	<footer>
+	<div class="footer_container">
+		<div class="footerLogo">
+            <h1><a href="/hiphople">
+                <img class="logo" src="resources/image/logo_2018_white_400.png" alt="logo">
+            </a></h1>
+        </div>
+		<ul class="footer-menubox">
+			<li class="footer-menu"><a href="#">ABOUT HIPHOPLE</a></li>
+	        <li class="footer-menu"><a href="#">ADVERTISEMENT</a></li>
+	        <li class="footer-menu"><a href="#">RECRUIT</a></li>
+	        <li class="footer-menu"><a href="#">PRIVACY</a></li>
+		</ul>
+	
+		<ul class="footer-link">
+			<li><strong>힙합엘이</strong></li>
+	        <li>서울시 마포구 와우산로10길 37, 2층</li>
+	        <li>070-4103-6000</li>
+	        <li>등록번호: 서울아04698</li>
+	        <li>등록·발행일: 2017.09.07</li>
+	        <li>발행·편집인: 최성웅</li>	
+	        <li>청소년보호책임자: 최성웅</li>	
+		</ul>
+		<div class="rights">
+	       Copyright&copy;
+	       <span class="footer-cp"><a href="/hiphople">HIPHOPLE</a></span>
+	       All Rights Reserved.
+	    </div>
+	</div><!-- footer container -->
+	</footer>
+	
+	<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+	
+	<script>
+		var swiper = new Swiper('.swiper-container',{
+				slidesPerView: 1,
+				spaceBetween: 30,
+				loop: true,
+				autoplay: {
+				        delay: 2500,
+				        disableOnInteraction: false,
+				},
+				pagination: {
+					el: '.swiper-pagination',
+					clickable: true,
+				},
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+			}); //슬라이더 끝
+		
+	</script>
+	<script>
 		/* 레이어 팝업 오늘 하루 그만 보기 */	
 		//쿠키 설정
 		function setCookie(name, value, expiredays){
@@ -180,38 +210,5 @@
 			   }
 			});
   		</script><!-- end 레이어 팝업 -->
-
-    	</section>
-
-	<footer>
-	<div class="footer_container">
-		<div class="footerLogo">
-            <h1><a href="/hiphople">
-                <img class="logo" src="resources/image/logo_2018_white_400.png" alt="logo">
-            </a></h1>
-        </div>
-		<ul class="footer-menubox">
-			<li class="footer-menu"><a href="#">ABOUT HIPHOPLE</a></li>
-	        <li class="footer-menu"><a href="#">ADVERTISEMENT</a></li>
-	        <li class="footer-menu"><a href="#">RECRUIT</a></li>
-	        <li class="footer-menu"><a href="#">PRIVACY</a></li>
-		</ul>
-	
-		<ul class="footer-link">
-			<li><strong>힙합엘이</strong></li>
-	        <li>서울시 마포구 와우산로10길 37, 2층</li>
-	        <li>070-4103-6000</li>
-	        <li>등록번호: 서울아04698</li>
-	        <li>등록·발행일: 2017.09.07</li>
-	        <li>발행·편집인: 최성웅</li>	
-	        <li>청소년보호책임자: 최성웅</li>	
-		</ul>
-		<div class="rights">
-	       Copyright&copy;
-	       <span class="footer-cp"><a href="/hiphople">HIPHOPLE</a></span>
-	       All Rights Reserved.
-	    </div>
-	</div><!-- footer container -->
-	</footer>
 </body>
 </html>
