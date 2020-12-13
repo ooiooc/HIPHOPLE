@@ -10,8 +10,7 @@
 	/* padding-bottom: 19px; */ /* footer height */
 }
 
-
-						
+				
 h1{
 	font-size: 2em;
 	text-align: center;
@@ -19,12 +18,25 @@ h1{
 }
 
 /* Header Nav */
+
+/* 두번째 헤더 */
+.headerwrap{
+	height : 100%;
+	width : 100vw;
+	background-color: rgba(255,255,255,0.7);
+	opacity: 0.85;
+	position: fixed;
+	z-index: 999;
+}
+
 /* side-nav 최상단 우측에 위치한 메뉴바 */
 .side-nav{
 	display: flex;
 	justify-content: flex-end;
 	padding: 2px;
 	font-size: 14px;
+	letter-spacing: 0.5px;
+	font-weight: 400;
 	/* background: wheat; */
 	/* border: 1px solid #000; */
 }
@@ -41,10 +53,7 @@ h1{
 	width: 100%;
 	display:flex;
 	justify-content:center;
-	letter-spacing: 2px; /* 자간 간격 조정 */
-	font-weight: bold; /* 글자 굵게 */
 	/* border: 1px solid #000; */
-	
 }
 
 /* 네비 메뉴 */
@@ -54,6 +63,8 @@ h1{
 	text-align: center;
 	padding-left: 40px;
 	padding-right: 40px;
+	letter-spacing: 1.2px; /* 자간 간격 조정 */
+	font-weight: 700; /* 글자 굵게 */
 	/* font-weight: 400; */
  /* border: 1px solid #000; */
 }
@@ -162,7 +173,7 @@ section{
     margin-right: auto;
     /* position: relative; */
   	text-align: center;
-  	border: 1px solid #000;
+  	/* border: 1px solid #000; */
 }
 
 .swiper-slide {
@@ -173,7 +184,7 @@ section{
   	background-position: center;
   	padding-bottom: 47%;
   	overflow: hidden;
-  	border: 1px solid #000;
+  	/* border: 1px solid #000; */
 	
       /* Center slide text vertically */
      /*  display: -webkit-box;
@@ -198,18 +209,118 @@ section{
 	/* background-color: blue; */
 }
 
-/* 인덱스 레이어 팝업  
+/* 메인 article section */
+div.maincontents{
+	width : 100%;
+	margin : 0 auto;
+	text-align: center;
+	padding : 50px 0;
+	background: #ededee;
+}
+
+.maincontents h1{
+	color: #333333; font-weight: 700; letter-spacing: 2px; font-size: 24px;
+}
+
+/* 그리드 영역 */
+#viewitems{
+	padding-top : 40px;
+	/* padding-bottom : 40px; */
+	display : grid;
+	grid-template-rows : repeat(auto-fit,minmax(18%,auto)) ;
+	/* 	grid-template-columns : repeat(auto-fit,minmax(18%,auto)) ; */
+	grid-template-columns : repeat(4, 1fr); ;
+	place-items : center start;
+	column-gap : 70px;
+	row-gap : 50px;
+	width : 70vw;
+	height : 100%;
+	margin : 0 auto;
+	justify-content: stretch;
+	/* border : 1px solid red; */	
+}
+
+
+@media all and (min-width:768px) and (max-width:1023px) { 
+	div#viewitems{
+	grid-template-rows : repeat(auto-fit,minmax(auto,100%)) ;
+	grid-template-columns : repeat(3, 1fr);
+	}
+}
+
+@media all and (max-width:767px) {
+	
+	div#viewitems{
+	grid-template-rows : repeat(auto-fit,minmax(auto,100%)) ;
+	grid-template-columns : repeat(2, 1fr); ;
+	}
+	
+}
+
+.griditems{
+	width: 100%;
+	height: 100%;
+
+}
+
+div#contents{
+	/* border :1px solid red; */
+	width :100%;
+	height : 100%;
+	display : flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+}
+
+div#imgarea{
+	width :100%;
+	height : 100%; 
+	overflow : hidden;
+	/* border : 1px solid red; */
+}
+
+
+div#contents img{
+	width : 100%;
+	height : 100%;
+}
+p.pcategory{
+	padding : 5px 0;
+	font-size : 15px;
+	font-weight: 700;
+	text-align: center;
+	letter-spacing: 1px;
+	
+}
+
+p.ptitle{
+	padding-bottom : 5px;
+	text-align: center;
+	font-size : 14px;
+	font-weight: 300;
+	letter-spacing: 1px;
+	/* text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap; */
+}
+
+
+/* 인덱스 레이어 팝업 
 z-index:999 top:50px; left:50px; display:none;*/
 
 .divpop {
       position:absolute; z-index:1000; top:50px; left:50px;
       width:350px; height:500px; border:1px solid #f6f7f1; background-color:#f6f7f1; display:none;}
 
-.title_area {font-weight:bold; text-align:center; width:100%}
+.title_area {font-weight:bold; text-align:center; width:100%; }
+
+.checkboxarea, .closebtn{letter-spacing: 1px;  font-weight: 300; font-size: 14px;}
 
 .button_area {display:flex; justify-content:space-between; position:absolute; width:100%; bottom:0; padding-left:10px; padding-right:10px; border: 0;} 
 
-
+.popuptitle {color: #999999; font-weight: 500; letter-spacing: 1px;}
 
 
 			/* FOOTER.CSS */
