@@ -21,6 +21,14 @@
 	<h1 class="community_title">COMMUNITY</h1>
 	<h4 style="font-weight: 300; letter-spacing: 1px; font-size: 15px; text-align: center;">
 	조회수, 댓글
+	<ul class="comlist">
+		<li class="comsubtitle"><a href="/hiphople/community/list">ALL</a></li>
+		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=music">음악</a></li>
+		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=review">리뷰</a></li>
+		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=lyrics">가사해석</a></li>
+		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=artwork">그림아트웍</a></li>
+		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=fboard">일반</a></li>
+	</ul>
 	</h4>
 	<table class="combox">
 		<tr class="comtr">
@@ -43,7 +51,7 @@
 		</tr>
 		</c:forEach>
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
-		<c:forEach items="${mypost}" var="viewall">
+		<c:forEach items="${mypost}" var="viewall" begin="0" end="0">
 		<tr>
 			<td colspan="5"><!-- 내가 작성한 글 보기-->
 			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${viewall.writer}'">내가 쓴 글</button>
