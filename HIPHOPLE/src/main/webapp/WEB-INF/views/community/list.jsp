@@ -10,7 +10,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Community – HIPHOPLE</title>
-<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script></head>
+<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/list.css"/>
 </head>
@@ -20,7 +20,7 @@
 	<div class="comwrap">
 	<h1 class="community_title">COMMUNITY</h1>
 	<h4 style="font-weight: 300; letter-spacing: 1px; font-size: 15px; text-align: center;">
-	조회수, 댓글 기능, 게시글 수정페이지 
+	조회수, 댓글
 	</h4>
 	<table class="combox">
 		<tr class="comtr">
@@ -30,10 +30,7 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
-		<!-- 타이틀란은 반복 x -->
-		
-		<c:forEach items="${list}" var="comm"> <!-- 한 건씩 불러들여서 처리 -->
-		
+		<c:forEach items="${list}" var="comm">
 		<tr class="comtr">
 			<td>${comm.bno}</td>
 			<td><a href="/hiphople/community/view?bno=${comm.bno}&pageNum=${pageMaker.cri.pageNum}">${comm.title}</a></td>
@@ -45,12 +42,18 @@
 			<td>${comm.viewcnt}</td>
 		</tr>
 		</c:forEach>
-		
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
+		<c:forEach items="${mypost}" var="viewall">
+		<tr>
+			<td colspan="5"><!-- 내가 작성한 글 보기-->
+			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${viewall.writer}'">내가 쓴 글</button>
+ 		</td>
+		</tr>
+		</c:forEach>
 		<tr>
 			<td colspan="5"><!-- <input type="submit" value="글쓰기" class="btn-register"> -->
 			<!-- a 태그는 get 방식으로 처리 -->
-			<button type="button" class="btn-write" onclick="location.href='/hiphople/community/write'">WRITE</button>
+			<button type="button" class="cmwrite" onclick="location.href='/hiphople/community/write'">WRITE</button>
 			</td>
 		</tr>
 		</sec:authorize>
