@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.project.domain.Criteria;
 import com.project.domain.MemberVO;
 import com.project.domain.PageDTO;
+import com.mysql.cj.Session;
 import com.project.domain.BoardAttachVO;
 //import com.myspring.domain.BoardAttachVO;
 //import com.myspring.domain.PageDTO;
@@ -40,25 +41,31 @@ public class BoardController{
 	
  	private static final Logger logger = LoggerFactory.getLogger(BoardController.class);
  	
+ 	//게시글 좋아요 기능
+ 	@RequestMapping(value = "like.do", method = RequestMethod.POST)
+ 	public void likePost() throws Exception{
+ 		
+ 	}
+ 	
  	//공지사항 글쓰기 화면
  	@RequestMapping(value="notice/write", method = RequestMethod.GET)
- 		public void insertGET() throws Exception{
- 			logger.info("글쓰기 화면 이동 get");
+ 	public void insertGET() throws Exception{
+ 		logger.info("글쓰기 화면 이동 get");
  			
  	}
 
  	//공지사항 글쓰기 기능
  	@RequestMapping(value="notice/insert", method = RequestMethod.POST)
- 		public String insertPost(BoardVO board, Model model) throws Exception{
+ 	public String insertPost(BoardVO board, Model model) throws Exception{
  			
- 			logger.info("글쓰기 post");
- 			logger.info("BoardVO에 저장되어 있는 값 :" + board);
+ 		logger.info("글쓰기 post");
+ 		logger.info("BoardVO에 저장되어 있는 값 :" + board);
+ 		
+ 		board.setWriter("힙합엘이");
+ 		service.insert(board); //insert SQL
+ 		model.addAttribute("result", "success");
  			
- 			board.setWriter("힙합엘이");
- 			service.insert(board); //insert SQL
- 			model.addAttribute("result", "success");
- 			
- 			return "redirect:/notice/list";
+ 		return "redirect:/notice/list";
 
  	}
  
@@ -185,7 +192,7 @@ public class BoardController{
 		return "redirect:/community/list"; 
 	}
  	
-	//공지사항 삭제
+	//community 삭제
  	@RequestMapping(value = "community/delete", method = RequestMethod.POST)
 	public String removeComm(BoardVO board, Criteria cri, RedirectAttributes rttr) throws Exception{
 		logger.info("삭제 post");
@@ -195,12 +202,24 @@ public class BoardController{
 		return "redirect:/notice/list";
 	}	
 	 	
-	//community 리스트 화면 페이징x
+	//community 리스트 화면 페이징 o
  	@RequestMapping(value = "community/list", method = RequestMethod.GET)
-	public void listComm(Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
+	public void listComm(Model model, Criteria cri, BoardVO board) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
 		logger.info("리스트 get" + cri);
-		model.addAttribute("list", service.commlistPage(cri));		
+		model.addAttribute("list", service.commlistPage(cri));
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userid = authentication.getName(); 
+		model.addAttribute("mypost", service.allmyPost(userid));
+		
 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
+ 	}
+ 	
+ 	//community 내 글 리스트 조회
+ 	@RequestMapping(value = "viewall", method = RequestMethod.GET)
+	public void listGet(@ModelAttribute("boardVO") BoardVO boardVO, Model model, Criteria cri, String userid) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
+ 		logger.info("내가 작성한 글 전부 보기" + cri);
+ 		model.addAttribute("mypost", service.allmyPost(userid));
  	}
  	
 	/*

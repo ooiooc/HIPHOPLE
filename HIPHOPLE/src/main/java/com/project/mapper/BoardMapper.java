@@ -6,6 +6,7 @@ import com.project.domain.BoardVO;
 
 public interface BoardMapper {
 	
+					/* notice */
 	//게시물 등록
 	public void insert(BoardVO vo) throws Exception;
 	
@@ -29,4 +30,28 @@ public interface BoardMapper {
 		
 	//조회수 update
 	public void updateViewcnt(BoardVO vo) throws Exception;
+	
+					/* community */
+	//Community 게시판 글쓰기
+	public void insertComm(BoardVO vo) throws Exception;
+	
+	//Community 게시물 조회
+	public BoardVO selectComm(BoardVO vo) throws Exception;
+	
+	//community 내 글 조회
+	public List<BoardVO> allmyPost(String userid) throws Exception;
+	
+	//Community 수정
+	public void updateCom(BoardVO vo) throws Exception;
+
+	//Community 삭제
+	public void deleteCom(BoardVO vo) throws Exception;
+
+	//Community 게시물 리스트(페이징x)
+	public List<BoardVO> commlistAll() throws Exception;
+	
+	//Community 게시물 리스트(페이징o)
+	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
+
+	
 }

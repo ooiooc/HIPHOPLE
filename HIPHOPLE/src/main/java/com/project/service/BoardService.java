@@ -33,5 +33,27 @@ public interface BoardService {
 	//BoardAttachVO에 있는 정보를 불러오는 서비스
 	//여러개의 이미지 정보를 넘겨주기 위해 List 배열 타입
 	public List<BoardAttachVO> getAttachlist(int bno);
+	
+					/*커뮤니티*/
+	//커뮤니티 내 글 조회
+	public List<BoardVO> allmyPost(String userid) throws Exception;
+	
+	//커뮤니티 글쓰기
+	public void insertComm(BoardVO vo) throws Exception;
+	
+	//커뮤니티 상세페이지
+	public BoardVO selectComm(BoardVO vo) throws Exception;
+	
+	//커뮤니티 수정
+	public void updateCom(BoardVO vo) throws Exception;
+	
+	//커뮤니티 삭제
+	public void deleteCom(BoardVO vo) throws Exception;
+
+	//커뮤니티 리스트(여러 건에 대한 select)
+	public List<BoardVO> commlistAll() throws Exception;
+	
+	//커뮤니티 리스트 페이징
+	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
 
 }

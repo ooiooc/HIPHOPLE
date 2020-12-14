@@ -5,6 +5,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
     
 <mapper namespace="com.project.mapper.BoardMapper">
+
 	
 	<!-- 공지사항 게시글 추가 -->
 	<insert id="insert">
@@ -139,6 +140,11 @@
 		select * from community where bno=#{bno}
 	</select>
 	
+	<!-- 내가 작성한 글 보기 -->
+	<select id="allmyPost" resultType="com.project.domain.BoardVO">
+		select * from community where writerid=#{writerid} order by bno desc
+	</select>
+	
 	<!-- community 게시글 수정 -->
 	<update id="updateCom">
 		update community
@@ -210,6 +216,7 @@
 		</if>
 	</if>
 	</sql>
+	
 
 </mapper>
     

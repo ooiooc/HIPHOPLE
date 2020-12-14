@@ -21,7 +21,7 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardAttachMapper attachmapper;
 	
-	//글쓰기
+	//공지사항 글쓰기
 	@Transactional
 	@Override
 	public void insert(BoardVO vo) throws Exception {
@@ -29,11 +29,13 @@ public class BoardServiceImpl implements BoardService {
 		//board 테이블에 insert
 		mapper.insert(vo);
 		
-		//upload테이블에 insert
+		//upload 테이블에 insert 
+		if(vo.getAttachList() != null)
 			vo.getAttachList().forEach(upload->{
 			upload.setBno(vo.getBno());
 			attachmapper.insert(upload);
 		});
+		
 		
 	}
 	//게시글 조회(한 건을 select)
@@ -73,4 +75,44 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardAttachVO> getAttachlist(int bno) {
 		return attachmapper.select(bno);
 	}
+	
+	//커뮤니티 글쓰기
+	@Override
+	public void insertComm(BoardVO vo) throws Exception {
+		mapper.insertComm(vo);
+		
+	}
+	
+	//커뮤니티 상세페이지
+	@Override
+	public BoardVO selectComm(BoardVO vo) throws Exception {
+		return mapper.selectComm(vo);
+	}
+	
+	@Override
+	public void updateCom(BoardVO vo) throws Exception {
+		mapper.updateCom(vo);
+		
+	}
+	
+	@Override
+	public void deleteCom(BoardVO vo) throws Exception {
+		mapper.deleteCom(vo);		
+	}
+	
+	
+	@Override
+	public List<BoardVO> commlistAll() throws Exception {
+		return mapper.commlistAll();
+	}
+	
+	@Override
+	public List<BoardVO> commlistPage(Criteria cri) throws Exception {
+		return mapper.commlistPage(cri);
+	}
+	@Override
+	public List<BoardVO> allmyPost(String userid) throws Exception {
+		return mapper.allmyPost(userid);
+	}
+	
 }
