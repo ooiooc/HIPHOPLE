@@ -76,6 +76,10 @@
 		where content like CONCAT('%', #{keyword}, '%')		
 		</if>
 		
+		<if test="type == 'F'.toString()">
+		where category like CONCAT('%', #{category}, '%')		
+		</if>
+		
 		<if test="type == 'W'.toString()">
 		where writer like CONCAT('%', #{keyword}, '%')		
 		</if>
@@ -102,5 +106,11 @@
 	<select id="getTotalCount" resultType="int">
 		select count(*) from article
 	</select>
+	
+	<!-- view all category -->
+	<select id="categoryList" resultType="com.project.domain.CategoriesVO">
+		select * from categories
+	</select>
+	
 	
 </mapper>
