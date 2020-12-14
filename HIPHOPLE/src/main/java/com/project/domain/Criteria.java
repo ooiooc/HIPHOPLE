@@ -15,6 +15,9 @@ public class Criteria {
 		
 	//keyword
 	private String keyword;
+	
+	//category
+	private String category;
 		
 	//기본생성자 (1, 10에 대한 아래에 있는 매개변수 두개 호출)
 	public Criteria() {
@@ -66,6 +69,14 @@ public class Criteria {
 
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
 	}
 
 	@Override
