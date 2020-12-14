@@ -84,8 +84,10 @@ public class BoardServiceImpl implements BoardService {
 	}
 	
 	//커뮤니티 상세페이지
+	@Transactional
 	@Override
 	public BoardVO selectComm(BoardVO vo) throws Exception {
+		mapper.comViewcnt(vo);
 		return mapper.selectComm(vo);
 	}
 	

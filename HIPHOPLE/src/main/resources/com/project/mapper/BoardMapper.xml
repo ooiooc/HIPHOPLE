@@ -86,6 +86,10 @@
 		where writer like CONCAT('%', #{keyword}, '%')		
 		</if>
 		
+		<if test="type == 'F'.toString()">
+		where category like CONCAT('%', #{category}, '%')		
+		</if>
+		
 		<if test="type == 'TC'.toString()">
 		where (title like CONCAT('%', #{keyword}, '%') 
 		OR content like CONCAT('%', #{keyword}, '%'))
@@ -148,7 +152,7 @@
 	<!-- community 게시글 수정 -->
 	<update id="updateCom">
 		update community
-		set title=#{title}, category=#{category}, content=#{content}, regdate=now() 
+		set title=#{title}, category=#{category}, content=#{content}
 		where bno=#{bno}
 	</update>
     
@@ -171,7 +175,7 @@
 		from (select @rownum:=@rownum+1 as rownum, b.* 
 			from (select @rownum:=0) as tmp, community as b 
 
-		<include refid="cmsearch"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
+		<include refid="search"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
 	  
 	    order by bno desc
 	   ) as boardList
@@ -182,41 +186,10 @@
 	]]> 
 	</select>
 	
-	<!-- 게시물 검색 -->
-	<sql id="cmsearch">
-		<!-- 선택했을때만 검색되도록 -->
-		<if test="type != null">
-		<!-- 첫번째 제목만 선택했을때 -->
-		<if test="type == 'T'.toString()">
-		where title like CONCAT('%', #{keyword}, '%')		
-		</if>
-		
-		<if test="type == 'C'.toString()">
-		where content like CONCAT('%', #{keyword}, '%')		
-		</if>
-		
-		<if test="type == 'W'.toString()">
-		where writer like CONCAT('%', #{keyword}, '%')		
-		</if>
-		
-		<if test="type == 'TC'.toString()">
-		where (title like CONCAT('%', #{keyword}, '%') 
-		OR content like CONCAT('%', #{keyword}, '%'))
-		</if>
-		
-		<if test="type == 'CW'.toString()"> 
-		where (content like CONCAT('%', #{keyword}, '%') 
-		OR writer like CONCAT('%', #{keyword}, '%'))
-		</if>
-		
-		<if test="type == 'TCW'.toString()">
-		where (title like CONCAT('%', #{keyword}, '%')	
-			OR content like CONCAT('%', #{keyword}, '%') 
-			OR writer like CONCAT('%', #{keyword}, '%'))		
-		</if>
-	</if>
-	</sql>
-	
+	<!-- 커뮤니티 조회수 update -->
+	<update id="comViewcnt" >
+		update community set viewcnt = viewcnt+1 where bno = #{bno}
+	</update>
 
 </mapper>
     

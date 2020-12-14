@@ -52,6 +52,8 @@ public interface BoardMapper {
 	
 	//Community 게시물 리스트(페이징o)
 	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
-
+	
+	//Community 조회수 업데이트
+	public void comViewcnt(BoardVO vo) throws Exception;
 	
 }
