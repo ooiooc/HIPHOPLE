@@ -19,9 +19,7 @@
 	
 	<div class="comwrap">
 	<h1 class="community_title">COMMUNITY</h1>
-	<h4 style="font-weight: 300; letter-spacing: 1px; font-size: 15px; text-align: center;">
-	조회수, 댓글
-	<ul class="comlist">
+	<ul class="comlist">		
 		<li class="comsubtitle"><a href="/hiphople/community/list">ALL</a></li>
 		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=music">음악</a></li>
 		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=review">리뷰</a></li>
@@ -29,7 +27,6 @@
 		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=artwork">그림아트웍</a></li>
 		<li class="comsubtitle"><a href="/hiphople/community/list?type=F&category=fboard">일반</a></li>
 	</ul>
-	</h4>
 	<table class="combox">
 		<tr class="comtr">
 			<th>번호</th>
@@ -38,6 +35,11 @@
 			<th>작성일</th>
 			<th>조회수</th>
 		</tr>
+		<c:if test='${list.isEmpty()}'>
+		<tr>
+			<td colspan="5"><p class="nolist">작성된 게시글이 없습니다.</td>
+		</tr>
+		</c:if>
 		<c:forEach items="${list}" var="comm">
 		<tr class="comtr">
 			<td>${comm.bno}</td>
@@ -50,6 +52,7 @@
 			<td>${comm.viewcnt}</td>
 		</tr>
 		</c:forEach>
+		<%-- </c:if> --%>
 		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
 		<c:forEach items="${mypost}" var="viewall" begin="0" end="0">
 		<tr>
