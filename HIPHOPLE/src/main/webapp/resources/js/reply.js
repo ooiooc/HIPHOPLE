@@ -13,17 +13,21 @@ $(document).ready(function(){
 	function getAllList(page){	//getAllList 함수 선언
 		
 		$("#modDiv").hide(); // 댓글 수정창 숨기기
-		
+		var str="";
 		//method 방식이 get인 ajax시작($.getJSON)
 		//function은 data를 controller에게 주기위해 필요._.
 		//$.getJSON(서버 URL,[,데이터][,성공])
 		//$() 괄호 안에 들어가는 것은 선택자, 
+		
+		
 
+	
 		$.getJSON("/hiphople/replies/all/" + bno + "/" + page, function(data){
 	
 			console.log(data);
-			var str="";
-			
+			//var str="";
+			var recnt=data.replycnt;
+			$("#recnt").html("댓글 ( " + recnt + " )");
 			/*
 			$(data.list).each(
 			function(){
@@ -38,6 +42,11 @@ $(document).ready(function(){
 				str +="<div data-rno='" + this.rno + "'class='replyLi'>" + "<div class='replyer'>" + this.replyer + "</div>" + this.replytext + "<div class='replymod'><button class='replymodify'>수정</button></div></div>";
 			});
 			*/
+		if(recnt == 0){
+				str = "<p id='noreply'>등록된 댓글이 없습니다.</p>";
+				$("#replies").html(str);
+			
+			}else{
 			
 			$(data.list).each(function(){
 				str +="<div data-rno='" + this.rno + "'class='replyLi'>"
@@ -51,8 +60,8 @@ $(document).ready(function(){
 			console.log("댓글 전체수 =" + data.replycnt);
 			
 			//댓글 총 카운트 가져오기
-			var recnt=data.replycnt;
-			$("#recnt").html("댓글 ( " + recnt + " )");
+			//var recnt=data.replycnt;
+			//$("#recnt").html("댓글 ( " + recnt + " )");
 			
 			//endNum
 			var endNum = Math.ceil(page/10.0)*10;
@@ -89,10 +98,10 @@ $(document).ready(function(){
 		
 		//댓글 리스트
 		$("#replies").html(str);	
-	
-		})
-		//alert("댓글리스트 불러오기")
-	}//end 댓글리스트 getAllList 
+		}
+	}) // json
+	//alert("댓글리스트 불러오기")
+}//end 댓글리스트 getAllList 
 
 	
 		$("#replyPage").on("click","li a", function(e){
@@ -162,6 +171,7 @@ $(document).ready(function(){
 		// 댓글 삭제
 		$("#replyDelBtn").on("click", function(){
 			
+			if(confirm("댓글을 삭제하시겠습니까?")){
 			//댓글번호
 			//var rno = $(".modal-title").html(); //rno값 가져오기
 			var rno = $(this).parent().parent().find(".modal-title").val();
@@ -181,8 +191,9 @@ $(document).ready(function(){
 						getAllList(page);						
 					}
 				}
-			})
-	
+			})//ajax
+		}
+		
 		})//삭제 버튼 클릭 끝
 			
 		// 댓글 수정 put
