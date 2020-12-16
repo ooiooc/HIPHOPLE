@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,67 +21,90 @@ import com.project.domain.ArticleVO;
 import com.project.domain.BoardAttachVO;
 import com.project.domain.BoardVO;
 import com.project.domain.Criteria;
+import com.project.domain.MemberVO;
 import com.project.domain.PageDTO;
 import com.project.service.ArticleService;
 import com.project.service.BoardService;
+import com.project.service.MemberService;
 
 @Controller
-//@RequestMapping("interview")
+@RequestMapping("contents")
 public class ArticleController {
 
 	@Autowired
  	private ArticleService service;
+	
+	@Autowired
+	private MemberService meservice;
 
  	private static final Logger logger = LoggerFactory.getLogger(ArticleController.class);
 
 	//Interview 리스트 화면 + 페이징
-	
+	/*
 	@RequestMapping(value = "list", method = RequestMethod.GET) public void
 	listGet(Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언 
 		logger.info("리스트 get" + cri);
 		model.addAttribute("list", service.postlistPage(cri));
-		model.addAttribute("pageMaker", new PageDTO(cri,
-		service.getTotalCount(cri))); }
-	 
+		model.addAttribute("pageMaker", new PageDTO(cri,service.getTotalCount(cri))); }
+	*/ 
  	
-	//Interview 게시판 리스트 화면 (페이징 x)
-	@RequestMapping(value="interview/list", method = RequestMethod.GET)
+	//interview 게시판 리스트 화면 (페이징 o)
+	@RequestMapping(value="list", method = RequestMethod.GET)
 	public void articleList(Model model, Criteria cri) throws Exception{ 
 			logger.info("article list get");
 			/* model.addAttribute("list", service.listAll()); */
 			model.addAttribute("list", service.postlistPage(cri));	
 			model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
- 	}
+			model.addAttribute("category", service.categoryList());
+			
+	}
 	
 	//Interview 게시물 상세페이지 화면 
-	@RequestMapping(value="interview/view", method = RequestMethod.GET)
-	public void articleView(ArticleVO vo,  @ModelAttribute("cri") Criteria cri, Model model) throws Exception{ 
+	@RequestMapping(value="view", method = RequestMethod.GET)
+	public void articleView(ArticleVO vo,  @ModelAttribute("cri") Criteria cri, Model model, MemberVO mem) throws Exception{ 
 		logger.info("상세글 페이지 get" + vo);
 		logger.info("상세글 페이지 get" + cri);
-			model.addAttribute("view", service.select(vo));
+		
+		
+		// 현재 접속 중인 아이디를 불러와서 회원정보 조회 -> getUsername -> 댓글 작성자 set
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userid = authentication.getName(); //로그인된 username
+		
+		MemberVO userinfo = new MemberVO();
+		
+		if(userid != "anonymousUser") {
+			logger.info("현재 접속중인 회원 아이디는" + userid + ("입니다"));
+			userinfo.setUserid(userid);
+			userinfo = meservice.memberInfo(userinfo);
+			logger.info("현재 접속중인 회원정보 조회 : " + userinfo);
+			model.addAttribute("user", userinfo.getUsername());
+			}else {
+				userinfo.setUsername("비회원");
+				logger.info(userinfo.getUsername());
+				model.addAttribute("user", userinfo.getUsername());
+			}
+		model.addAttribute("view", service.select(vo));
 	}
 	
 	//Interview 게시판 글쓰기 화면 
-	@RequestMapping(value="interview/write", method = RequestMethod.GET)
+	@RequestMapping(value="write", method = RequestMethod.GET)
 	public void writeView() throws Exception{ 
 			logger.info("article 글쓰기");
 	}
 
 	//interview 글쓰기 기능
-	@RequestMapping(value="interview/insert", method = RequestMethod.POST)
+	@RequestMapping(value="insert", method = RequestMethod.POST)
 	public String insertPost(ArticleVO vo, Model model) throws Exception{
-	 			
 	 		logger.info("article 게시판 글쓰기 post");
 	 		logger.info("ArticleVO에 저장되어 있는 값 :" + vo);
-	 			
+	 		
+ 			vo.setWriter("힙합엘이");
 	 		service.insert(vo); //insert SQL
 	 		model.addAttribute("result", "success");
 	 			
 	 		return "redirect:/interview/list";
-
 	 	}
 	
-
 	//첨부파일 리스트 가져오기
 	/*
 	@RequestMapping(value = "notice/getAttachlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -89,12 +114,6 @@ public class ArticleController {
 		return new ResponseEntity<>(service.getAttachlist(bno), HttpStatus.OK);
 	}
 	*/
-	
-	//테스트 페이지 가져오기
-	@RequestMapping(value="test", method = RequestMethod.GET)
-	public void testGet() throws Exception{ 
-			logger.info("동영상 삽입 메인페이지 up");
-	}
 	
 
 }
