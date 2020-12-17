@@ -8,9 +8,10 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Contents – HIPHOPLE</title>
 <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="../resources/js/reply.js"></script>
+<script type="text/javascript" src="../resources/js/ctview.js"></script></head>
 <link rel="stylesheet" type="text/css" href="../resources/css/view.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/reset.css"/>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
@@ -21,9 +22,9 @@
 	<div class="contentswrap">
 		<div class="contsbox">
 			<div class="article_title">
-			<input type="hidden" name="pageNum" value="${cri.pageNum}">
 				<!-- bno -->
 				<input type="text" name="bno" id="bno" value="${view.bno}">
+				<input type="hidden" name="pageNum" value="${cri.pageNum}">
 				<div style="width: 140px; margin:0 auto; padding: 2px 2px; text-align: center; background: #999999;">
 				<h3 style="letter-spacing: 2px; font-weight: 400; font-size: 16px; color: #E9E9E9; text-align: center;">${view.category}</h3>
 				</div>
@@ -40,12 +41,18 @@
 			<fmt:formatDate value="${writeDate}" pattern="yyyy년 MM월 dd일"></fmt:formatDate>&emsp;/&emsp;조회 수 ${view.viewcnt}
 			</div>
 			
+			<!-- 업로드 영역 -->
+			<div class="uploadResult">
+				<h4>파일 업로드 목록</h4>
+				<ul>
+				</ul>
+			</div>
 		</div><!-- article box -->
 			<!-- article 목록 수정 버튼 -->
 			<div class="buttonList">
-				<button type="button" class="article_btn" onclick="location.href='/hiphople/contents/list'">목록</button>&emsp;
+				<button type="button" class="article_btn" id="contListbtn">목록</button>&emsp;
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
-				<button type="button" class="article_btn">수정</button>
+				<button type="button" class="article_btn" id="contModbtn">수정</button>
 				</sec:authorize>
 			</div>
 		
@@ -59,7 +66,7 @@
 				<!-- 작성된 댓글 리스트 -->
 				<!-- <ul id="replies">	
 				</ul> -->
-				<div id="replies">
+				<div id="replies" class="noreply">
 				</div>
 				
 				<!-- 댓글 수정창 -->
