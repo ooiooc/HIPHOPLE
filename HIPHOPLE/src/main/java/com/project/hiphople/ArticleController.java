@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.ArticleVO;
 import com.project.domain.BoardAttachVO;
@@ -24,7 +25,6 @@ import com.project.domain.Criteria;
 import com.project.domain.MemberVO;
 import com.project.domain.PageDTO;
 import com.project.service.ArticleService;
-import com.project.service.BoardService;
 import com.project.service.MemberService;
 
 @Controller
@@ -102,18 +102,36 @@ public class ArticleController {
 	 		service.insert(vo); //insert SQL
 	 		model.addAttribute("result", "success");
 	 			
-	 		return "redirect:/interview/list";
+	 		return "redirect:/contents/list";
 	 	}
 	
+	//contents 수정
+	@RequestMapping(value="update", method = RequestMethod.GET)
+	 	public void modifyGet(ArticleVO vo, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
+	 			logger.info("contents 업데이트 화면 get");
+	 			model.addAttribute("update", service.select(vo));	
+	 			logger.info("update get ::::: " + vo);
+	 	}
+	 
+	//contents 수정 기능
+	@RequestMapping(value="update.do", method = RequestMethod.POST)
+		public String modifyPost(ArticleVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
+			logger.info("update post" + vo);
+			service.update(vo);
+			
+			//수정했을때 아래의 내용 전송
+			rttr.addAttribute("pageNum", cri.getPageNum());
+			rttr.addFlashAttribute("msg", "SUCCESS!");
+			return "redirect:/contents/list"; 
+		}
+	 
 	//첨부파일 리스트 가져오기
-	/*
-	@RequestMapping(value = "notice/getAttachlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+	@RequestMapping(value = "getAttachlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
 	public ResponseEntity<List<BoardAttachVO>> getAttachlist(int bno){
 		logger.info("getAttachlist = " + bno);
 		logger.info("service.getAttachlist(bno) = " + service.getAttachlist(bno));
 		return new ResponseEntity<>(service.getAttachlist(bno), HttpStatus.OK);
 	}
-	*/
 	
 
 }
