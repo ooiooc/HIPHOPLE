@@ -6,6 +6,8 @@ let pwcheck=false; //비밀번호 유효성 검사 체크
 let iddupcheck=false; //아이디 중복체크
 let pwdupcheck=false; //비밀번호 중복체크
 
+let checkEmail=false; //이메일 중복체크
+
 let idreg;
 let idval; //아이디 입력 값 
 
@@ -14,8 +16,11 @@ let pwval; //비밀번호 입력 값
 let repwval; //비밀번호 확인 입력 값
 
 let nameval; // 이름 입력 값
-let emailval; // 이메일 입력 값
 
+let emailval; // 이메일 입력 값
+let emailreg; // 이메일 유효성 
+
+	
 
 $(document).ready(function(){
 	//id가 userid인 것을 선택하기 (id 선택자)
@@ -35,14 +40,6 @@ $(document).ready(function(){
 			//$("#idmsg").html("사용가능한 아이디입니다.");
 			idcheck = true; //아이디가 맞으면 true
 			
-			//아이디 중복체크(ajax 활용 : 1 = 중복 / 0 != 중복)
-			//사용자가 입력한 id값을 data로 처리하고 data값을 매개변수로 받아서 처리하는 controller를
-			//생성한 후 id값으로 select된 결과를 조회하여 성공적으로 ajax에게 값을 넘겨받아서 처리
-			
-			//Ajax : method방식이 get인 ajax 시작($.getJSON)
-			//function은 data를 controller에게 주기위해 필요._.
-			//$.getJSON(서버 URL,[,데이터][,성공])
-			//$() 괄호 안에 들어가는 것은 선택자
 			$.getJSON("/hiphople/member/checkId/" + idval, function(data){
 				console.log("data = " + data);
 				
@@ -107,13 +104,58 @@ $(document).ready(function(){
 				
 	})// end 비밀번호 유효성 검사
 	
+
+	
+	// 이메일 유효성 검사
+	$("#email").on("keyup", function(){
+		
+		emailreg=/([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+		emailval = $('#email').val();
+	
+		// 이메일 유효성 검사 // 공백x 테스트 통과하면
+		if(emailval != '' && emailval != 'undefined' && emailreg.test(emailval)){ 
+			$("#emailmsg").html("<p class='checkok'>사용가능한 이메일 입니다</p>");
+			
+			checkEmail = true;
+			
+			// ajax
+			$.ajax({
+            type: "post",
+            url: "/hiphople/member/checkEmail",
+			datatype: "json",
+            data: {"email": $('#email').val()},
+            success: function (data) {	
+                if (data == "1") {
+                    $("#emailmsg").html("<p class='checkno'>이미 사용중인 이메일입니다.</p>");
+						emaildupcheck = false;
+                    	$('#email').focus();
+                
+				}else if(data == "0") {
+					$("#emailmsg").html("<p class='checkok'>사용가능한 이메일입니다.</p>");
+						emaildupcheck = true;
+                        
+                    }
+                }
+            })// end ajax
+        
+		}else{
+
+			$("#emailmsg").html("<p class='checkno'>잘못된 형식의 이메일 주소입니다</p>");
+			checkEmail = false; //아이디가 맞지 않으면 false
+			$("#email").focus();
+					
+		}//else
+		
+	})// end 이메일 유효성 검사 keyup event
+
+
 }) // end document.ready	
 
 //document event가 끝나고  onsubmit 이벤트 실행 (form 전송하기 전 데이터의 유효성을 체크하기 위해서 주는 이벤트)
 //return true; 면 실행 / false면 실행 x
 
 
-function checkmem(){
+	function checkmem(){
 	//아이디가 유효성검사(idcheck)에 맞고, 비밀번호가 유효성 검사(pwcheck)에 맞으면
 	//조건추가 시 && 붙이고 추가해주면 된다(변수 안에 true/false값 저장되어 있기때문에 == 생략가능)
 	
@@ -128,7 +170,7 @@ function checkmem(){
 	
 			if(idcheck && pwcheck && iddupcheck && pwdupcheck){
 			//onsubmit에 true값 전송
-				alert("회원가입 완료");
+				alert("회원가입을 축하드려요! 모든 서비스를 이용하기 위해 이메일 인증을 완료해주세요.");
 				//location.href="${pageContext.request.contextPath}/member/joinOk";
 				return true;
 	
