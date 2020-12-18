@@ -7,7 +7,7 @@ import com.project.domain.MemberVO;
 public interface MemberService {
 
 	//회원가입 
-	public void join(MemberVO vo);
+	public void join(MemberVO vo) throws Exception;
 	
 	//권한 설정
 	public void insertAuth(MemberVO vo);
@@ -17,6 +17,9 @@ public interface MemberService {
 	
 	//아이디 중복체크
 	public int idChk(String userid);
+	
+	//이메일 중복체크
+	public int checkEmail(String email);
 	
 	//회원 목록 조회
 	public List<MemberVO> memberList();
@@ -41,4 +44,14 @@ public interface MemberService {
 		
 	//이메일 계정조회
 	public int findPass(String email);
+	
+	//이메일 인증여부 authstatus 업데이트
+	public void updateAuth(MemberVO vo);
+	
+	//이메일 인증여부 조회
+	public MemberVO checkAuth(MemberVO vo);
+		
+	//인증된 계정 활성화
+	//public void userAuth(MemberVO vo)
+	 
 }

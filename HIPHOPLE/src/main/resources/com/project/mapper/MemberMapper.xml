@@ -52,6 +52,11 @@
 		SELECT COUNT(*) FROM MEMBER WHERE USERID = #{USERID}
 	</select>
 	
+	<!-- 이메일 중복체크 -->
+	<select id="checkEmail" parameterType="String" resultType="int">
+		SELECT COUNT(*) FROM MEMBER WHERE EMAIL = #{EMAIL}
+	</select>
+	
 	<!-- 로그인 패스워드 암호화 -->
 	<!-- 사용자가 입력한 아이디와 패스워드 두 가지 모두 일치해야 가져오는 것이 아니라 아이디로 값을 불러오기 -->
 	<select id="loginBcrypt" resultType="com.project.domain.MemberVO">
@@ -76,7 +81,12 @@
 	
 	<!-- 회원가입 인증여부 확인할 유저 아이디 조회 -->
 	<select id="checkAuth" resultType="com.project.domain.MemberVO">
-		select userid from member where userid = #{userid} and authstatus=#{authstatus}
+		select userid from member where userid = #{userid} and authstatus= 0
+	</select>
+	
+	<!-- 로그인 시 authstatus != 1 일 경우(인증되지 않은 계정) 로그인 제한 -->
+	<select id="needAuth" resultType="com.project.domain.MemberVO">
+		select * from member where userid=#{userid} and userpw=#{userpw} and authstatus= 0
 	</select>
 	
 </mapper>

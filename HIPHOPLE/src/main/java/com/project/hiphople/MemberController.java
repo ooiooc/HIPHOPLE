@@ -12,11 +12,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -25,16 +27,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.service.EmailService;
-import com.project.service.FindPassService;
 import com.project.service.FindPassValidator;
 import com.project.service.MemberService;
 import com.sun.mail.handlers.message_rfc822;
 import com.google.protobuf.Service;
+import com.project.domain.MailUtils;
 import com.project.domain.MemberVO;
-import com.project.email.Email;
+import com.project.domain.TempKey;
+import com.project.domain.Email;
 import com.project.hiphople.MemberController;
 import com.project.mapper.MemberMapper;
 
@@ -51,6 +55,9 @@ public class MemberController {
 	private EmailService emailService;
 	
 	@Autowired
+	private JavaMailSender mailSender;
+	
+	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
 	
 	//회원가입 화면 폼 
@@ -60,22 +67,72 @@ public class MemberController {
 	}
 	
 	//회원가입 처리  
+	@Transactional
 	@RequestMapping(value = "join", method = RequestMethod.POST)
-	public String memberPost(MemberVO vo) {
+	public String memberPost(MemberVO vo) throws Exception{
 		
 		
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
-		
 		String encPassword = pwdEncoder.encode(vo.getUserpw());
-				
 		vo.setUserpw(encPassword);
+		logger.info("암호화된 비밀번호 : "+vo.getUserpw());
+		
+		String authkey = new TempKey().getKey(50, false); 
+		vo.setAuthkey(authkey);
+		logger.info("인증키 : "+vo.getAuthkey());
+
+		// 인증 메일 전송
+		// smtp를 이용하여 가입 시 입력한 이메일로 메일 전송 
+		// userid, authkey가 포함되어 있는 이메일 인증 링크를 클릭 시 해당 경로에 담겨있는 파라미터 값이 emailSuccess로 전달
+		MailUtils sendMail = new MailUtils(mailSender);
+		sendMail.setSubject("[HiphopLE] 회원가입 이메일 인증"); // 메일제목
+		sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>") // 메일내용
+				.append("<p>"+vo.getUserid()+"님 안녕하세요.</p><br>")
+				.append("<p>힙합엘이에 가입해주셔서 감사합니다.<br>")
+				.append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+				.append("<a href='http://localhost:8050/hiphople/member/emailSuccess?userid=") // 사용자가 인증메일 확인했을 때 클릭할 링크
+				.append(vo.getUserid())
+				.append("&authKey=")
+				.append(authkey)
+				.append("' target='_blenk'>이메일 인증 확인</a>")
+			    .toString());
+		sendMail.setFrom("shinvely90@gmail.com", "HiphopLE"); // 보낸이
+		sendMail.setTo(vo.getEmail()); // 받는이
+		sendMail.send();
 		
 		/* logger.info("회원가입 처리"+vo.getUserid()); */
-		logger.info("암호화된 비밀번호 : "+vo.getUserpw());
-		meservice.join(vo); //service불러오기
-		meservice.insertAuth(vo);
+		
+		meservice.join(vo); //service 불러오기
+		//meservice.insertAuth(vo); //DB에 기본정보 insert
 		return "redirect:/";
 	}
+	
+	// 이메일 인증 확인 후 파라미터 값으로 전달받은 회원 아이디, authstatus(인증여부)를 조회하여
+	// 해당 회원의 authstatus를 0 -> 1로 업데이트(인증 완료 & 회원가입 최종 성공)
+	@Transactional
+	@RequestMapping(value="emailSuccess", method=RequestMethod.GET) 
+	public ModelAndView emailConfirm(MemberVO vo, Model model, HttpServletRequest request, RedirectAttributes rttr){
+		
+		logger.info(vo.getUserid() + ": auth confirmed"); // 이메일 인증 링크 접속한 아이디 확인
+		
+		HttpSession session = request.getSession();
+		// 사용자에게 입력받은 userid과 authstatus값을 이용하여 checkAuth 실행 -> 유저 정보 확인
+		MemberVO mem = meservice.checkAuth(vo); 
+		
+		if(mem != null) { // 유저 정보 확인 후
+				meservice.updateAuth(vo);
+				SecurityContextHolder.getContext().setAuthentication(null);
+				session.removeAttribute("Authorization");
+			}else {
+				rttr.addFlashAttribute("msg", "비정상적인 접근입니다. 다시 인증해주세요.");
+			}
+				//vo.setAuthstatus(1); 
+				//model.addAttribute("authstatus", 1);
+				//model.addAttribute("email", vo.getEmail());
+		
+		return new ModelAndView("/member/emailSuccess");
+	}
+
 	
 	//회원가입 성공 화면
 	/*
@@ -86,8 +143,7 @@ public class MemberController {
 	//아이디 중복체크  
 	@ResponseBody
 	@RequestMapping(value = "checkId/{userid}", method = RequestMethod.GET)
-		public ResponseEntity<Integer> idChk(@PathVariable("userid") String userid) throws Exception{
-			
+	public ResponseEntity<Integer> idChk(@PathVariable("userid") String userid) throws Exception{
 		//getAjax를 이용하기 위하여 ResponseEntity 필요
 		//userid count값을 불러오기 위해서 return타입을 Integer로 불러와야 한다
 			
@@ -96,11 +152,17 @@ public class MemberController {
 		//int result = meservice.idChk(userid);
 		//meservice.idChk(userid)
 		//return new ResponseEntity<>(result, HttpStatus.OK);
-			
 		return new ResponseEntity<Integer>(meservice.idChk(userid),HttpStatus.OK);
-			
 	}
 	
+	//회원가입 이메일 중복체크
+	@ResponseBody
+	@RequestMapping(value = "checkEmail", method = RequestMethod.POST)
+	public int checkEmail(String email) throws Exception{
+		int result = meservice.checkEmail(email);
+		logger.info("이메일 중복체크 : " + result);
+		return result;
+	}
 	
 	//로그인 화면 폼 
 	@RequestMapping(value = "signin", method = RequestMethod.GET)
@@ -109,7 +171,7 @@ public class MemberController {
 	}
 	
 	
-	//로그인 기능 
+	//로그인 기능 (no 시큐리티)
 	/*
 	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
 	public String loginPost(MemberVO member, HttpSession session, HttpServletRequest request,RedirectAttributes rttr) throws Exception{
@@ -157,12 +219,6 @@ public class MemberController {
 	
 		model.addAttribute("member", meservice.memberInfo(vo));
 		logger.info("회원정보 조회" + vo);
-		
-		//model.addAttribute("member", meservice.memberInfo(vo));
-		//logger.info("회원정보 조회" + vo);
-		//session.getAttribute("userid");
-		//model.addAttribute("member", meservice.memberInfo(vo));
-		
 	}
 	
 	//회원정보 수정
@@ -195,11 +251,12 @@ public class MemberController {
 			rttr.addFlashAttribute("member",member);
 			rttr.addFlashAttribute("msg", "회원정보 수정 성공!");
 			return "redirect:/member/memberInfo?userid="+ member.getUserid(); 
-		}else {
 		
-		rttr.addFlashAttribute("member",member);
-		rttr.addFlashAttribute("msg", "회원정보 수정 실패!");
-		return "redirect:/member/memberInfo?userid="+ member.getUserid();
+		}else {
+			logger.info("회원정보 수정 실패");
+			rttr.addFlashAttribute("member", member);
+			rttr.addFlashAttribute("msg", "회원정보 수정 실패!");
+			return "redirect:/member/memberInfo?userid="+ member.getUserid();
 		
 		}
 	}//회원정보 수정 끝
@@ -297,7 +354,7 @@ public class MemberController {
  	//비밀번호 변경 update password (메일로 발송된 임시비밀번호로 해당 유저의 패스워드 변경)
 	//계정확인 findPass
  	@RequestMapping(value = "findpass", method = RequestMethod.POST)
- 	public String updatePw(String receiveMail, Model model, RedirectAttributes rttr) {
+ 	public String updatePw(String receiveMail, Model model, RedirectAttributes rttr) throws Exception {
  		
  		int result=meservice.findPass(receiveMail);
  				

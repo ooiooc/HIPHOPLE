@@ -1,7 +1,6 @@
 package com.project.mapper;
 
 import java.util.List;
-
 import com.project.domain.MemberVO;
 
 public interface MemberMapper {
@@ -30,6 +29,9 @@ public interface MemberMapper {
 	//아이디 중복체크
 	public int idChk(String userid);
 	
+	//이메일 중복체크
+	public int checkEmail(String email); 
+	
 	//로그인 패스워드 암호화
 	public MemberVO loginBcrypt(String userid);
 	
@@ -41,4 +43,14 @@ public interface MemberMapper {
 		
 	//이메일 계정조회
 	public int findPass(String email);
+	
+	//회원가입 인증 (authstatus 1로 변경하여 계정 활성화)
+	public void updateAuth(MemberVO vo);
+	
+	//회원가입 인증여부 조회
+	public MemberVO checkAuth(MemberVO vo);
+	
+	
+	
+
 }
