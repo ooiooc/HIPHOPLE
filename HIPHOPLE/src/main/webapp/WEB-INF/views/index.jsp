@@ -112,29 +112,29 @@
   		</div><!-- end video -->
   	
   		<!-- 커뮤니티 베스트 글 -->
-  		<div class="maincontents" style="border: 1px solid #000;">
-	  		<div class="viewboard" style="border: 1px solid #000;">
+  		<div class="maincontents" style="">
+	  		<div class="viewboard">
 		  		
 		  		<!-- grid 1 / community best -->
-		  		<div class="griditems" style="border: 1px solid #000; ">
-		  		<h2 class="mainsubtitle" style="margin-bottom: 10px; border: 1px solid #000;">POPULAR</h2>
+		  		<div class="griditems" id="gridlist">
+		  		<h2 class="mainsubtitle">POPULAR</h2>
 		  			<c:forEach items="${best}" var="best" varStatus="ranking">
 		  			<ul class="postlist">
-						<li><span class="ranking">${ranking.count}&emsp;</span>${best.title}</li>	  		
+						<li><span class="ranking">${ranking.count}&emsp;</span><a class="" href="/hiphople/community/view?bno=${best.bno}">${best.title}</a></li>	  		
 		  			</ul>
 		  			</c:forEach>
 		  		</div>
 		  		
 		  		<!-- grid 2 / latest notice -->
-		  		<div class="griditems" style=" border: 1px solid #000;"> 
-		  		<h2 class="mainsubtitle" style="margin-bottom: 10px; border: 1px solid #000;">LATEST</h2>
-		  			<ul class="postlist">
-						<c:forEach items="${latest}" var="latest" varStatus="ranking">
+		  		<div class="griditems" id="gridlist"> 
+		  		<h2 class="mainsubtitle">LATEST</h2>
+		  			<c:forEach items="${latest}" var="latest" varStatus="ranking">
 			  			<ul class="postlist">
-							<li><span class="ranking">${ranking.count}&emsp;</span>${latest.title}</li>	  		
+							<li><span class="ranking">${ranking.count}&emsp;</span><a class=""  href="/hiphople/notice/view?bno=${latest.bno}">${latest.title}</a></li>	  		
 			  			</ul>
 			  			</c:forEach>  		
 		  			</ul>
+		  
 		  		</div>
 	  		</div>
   		</div>
