@@ -30,16 +30,16 @@
 				</div>
 				<h1 style="letter-spacing: 2px; font-weight: 500; font-size: 30px; color: #999999;">${view.title}</h1><!-- category -->
 			</div>
-			
+			<div class="article_writer" style="letter-spacing: 1px; font-weight: 400;color:#999999; text-align: right; padding-right: 10px;">
+			<fmt:parseDate var="writeDate" value="${view.regdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
+			<fmt:formatDate value="${writeDate}" pattern="yyyy년 MM월 dd일"></fmt:formatDate>&emsp;/&emsp;${view.viewcnt} views
+			</div>
 			<div class="article_text">
 				<p style="font: bold;">
 				${fn:replace(view.content, replaceChar, "<br/>")}
 				</p>
 			</div>
-			<div class="article_writer">
-			<fmt:parseDate var="writeDate" value="${view.regdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
-			<fmt:formatDate value="${writeDate}" pattern="yyyy년 MM월 dd일"></fmt:formatDate>&emsp;/&emsp;조회 수 ${view.viewcnt}
-			</div>
+			
 			
 			<!-- 업로드 영역 -->
 			<div class="uploadResult">
@@ -91,14 +91,27 @@
 			
 			<!-- 댓글 작성란 -->	
 			<div class="replyForm">
-					<div class="reply_writer">
-					<input class="reply_writerbox" id="newReplyWriter" type="hidden" value="${user}"></div>
+				<div class="reply_writer">
+				<input class="reply_writerbox" id="newReplyWriter" type="hidden" value="${user}"></div>
+					<!-- 회원 댓글창 -->
+					<sec:authorize access="isAuthenticated()">
 					<div class="reply_text">
 					<textarea class="reply_textbox" id="newReplyText" cols="60" rows="10" placeholder="댓글을 입력해주세요"></textarea>
 					</div>
-					
 					<div class="replySumbit"><button type="submit" id="replybtn">등록</button></div>
+					</sec:authorize>
+					
+					<!-- 비회원 댓글창 -->
+					<sec:authorize access="!isAuthenticated()">
+					<div class="reply_text">
+					<a href="/hiphople/member/signin">
+					<textarea class="reply_textbox" id="newReplyText" cols="60" rows="10" placeholder="" >댓글 쓰기 권한이 없습니다. 로그인 하시겠습니까?</textarea>
+					</a>
+					</div>
+					<div class="replySumbit"><button type="submit" id="replybtn" disabled="disabled">등록</button></div>
+					</sec:authorize>
 			</div>
+			
 		</div><!-- end 댓글 -->
 	</div><!-- wrap -->
 	</form>
