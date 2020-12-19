@@ -37,7 +37,10 @@
 		<div class="swiper-container">
     		<div class="swiper-wrapper">
     			<!-- Slide 1 -->
-		      	<div class="swiper-slide" style="background-image: url(resources/image/index/slide1.jpeg);"></div>
+		      	<div class="swiper-slide" style="background-image: url(resources/image/index/slide1.jpeg);">
+		      	<div style="width: 100%; bottom: 60px; font-size: 2.2em; font-weight: 700; letter-spacing:3px; color:#dddddd; position: absolute;">
+				오왼, 정규 4집 [소년] 발표</div>	
+		      	</div>
 			   	<!-- Slide 2 -->
 			   	<div class="swiper-slide" style="background-image: url(resources/image/index/slide2.jpg);"></div>
 			    <!-- Slide 3 -->
@@ -65,7 +68,7 @@
 						<div id="contents">
 							<div id="imgarea"><img src="resources/image/hiphopledefault.jpg" alt=""/></div>	
 							<p class="pcategory">${article.category}</p>
-							<p class="ptitle"><a href="/hiphople/community/view?bno=${article.bno}">${article.title}</a></p>
+							<p class="ptitle"><a href="/hiphople/contents/view?bno=${article.bno}">${article.title}</a></p>
 						</div>
 						
 				</div>
@@ -107,7 +110,35 @@
 				</div>
   			</div><!-- grid item -->
   		</div><!-- end video -->
-  
+  	
+  		<!-- 커뮤니티 베스트 글 -->
+  		<div class="maincontents" style="border: 1px solid #000;">
+	  		<div class="viewboard" style="border: 1px solid #000;">
+		  		
+		  		<!-- grid 1 / community best -->
+		  		<div class="griditems" style="border: 1px solid #000; ">
+		  		<h2 class="mainsubtitle" style="margin-bottom: 10px; border: 1px solid #000;">POPULAR</h2>
+		  			<c:forEach items="${best}" var="best" varStatus="ranking">
+		  			<ul class="postlist">
+						<li><span class="ranking">${ranking.count}&emsp;</span>${best.title}</li>	  		
+		  			</ul>
+		  			</c:forEach>
+		  		</div>
+		  		
+		  		<!-- grid 2 / latest notice -->
+		  		<div class="griditems" style=" border: 1px solid #000;"> 
+		  		<h2 class="mainsubtitle" style="margin-bottom: 10px; border: 1px solid #000;">LATEST</h2>
+		  			<ul class="postlist">
+						<c:forEach items="${latest}" var="latest" varStatus="ranking">
+			  			<ul class="postlist">
+							<li><span class="ranking">${ranking.count}&emsp;</span>${latest.title}</li>	  		
+			  			</ul>
+			  			</c:forEach>  		
+		  			</ul>
+		  		</div>
+	  		</div>
+  		</div>
+  		
   		<!-- 	
 	   	<h1 style="text-align: center; letter-spacing: -1px;">LATEST</h1>
 		<div class="popupVideo" style="position: relative; height:0; padding-bottom: 20%; margin: 40px 0px;">
