@@ -56,4 +56,9 @@ public interface BoardMapper {
 	//Community 조회수 업데이트
 	public void comViewcnt(BoardVO vo) throws Exception;
 	
+	//Community 베스트 게시물 list limit 5
+	public List<BoardVO> bestList() throws Exception; 
+	
+	//공지사항 최신 게시물 list limit 5
+	public List<BoardVO> latestList() throws Exception;
 }

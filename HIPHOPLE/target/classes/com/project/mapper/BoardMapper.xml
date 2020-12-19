@@ -190,6 +190,22 @@
 	<update id="comViewcnt" >
 		update community set viewcnt = viewcnt+1 where bno = #{bno}
 	</update>
-
+	
+	<!-- 커뮤니티 베스트 게시글 메인 출력 no rownum -->
+	<select id="bestList" resultType="com.project.domain.BoardVO">
+	select * from community order by viewcnt desc limit 5;
+	</select>
+	
+	<!-- 커뮤니티 베스트 게시글 메인 출력 (rownum 생성 list 생성)
+	<select id="bestList" resultType="com.project.domain.BoardVO">
+	select @rownum := @rownum + 1 as rownum, n.* from community n,(select @rownum := 0 )tmp order by viewcnt desc limit 5;
+	</select>
+	 -->
+	
+	<!-- 최신 공지사항 글 출력 -->
+	<select id="latestList" resultType="com.project.domain.BoardVO">
+	select * from notice order by regdate desc limit 5;
+	</select>
+		
 </mapper>
     

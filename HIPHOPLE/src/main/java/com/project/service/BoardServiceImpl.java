@@ -97,6 +97,7 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 	
+	@Transactional
 	@Override
 	public void deleteCom(BoardVO vo) throws Exception {
 		mapper.deleteCom(vo);		
@@ -115,6 +116,17 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<BoardVO> allmyPost(String userid) throws Exception {
 		return mapper.allmyPost(userid);
+	}
+	// 메인 커뮤니티 베스트 게시글
+	@Override
+	public List<BoardVO> bestList() throws Exception {
+		return mapper.bestList();
+	}
+	
+	// 메인 최신 공지사항 게시글
+	@Override
+	public List<BoardVO> latestList() throws Exception {
+		return mapper.latestList();
 	}
 	
 }

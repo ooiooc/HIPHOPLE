@@ -56,4 +56,9 @@ public interface BoardService {
 	//커뮤니티 리스트 페이징
 	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
 
+	//Community 베스트 게시물 list limit 5
+	public List<BoardVO> bestList() throws Exception; 
+	
+	//공지사항 최신 게시물 5개 list limit 5
+	public List<BoardVO> latestList() throws Exception;
 }
