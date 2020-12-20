@@ -91,6 +91,7 @@ $(document).ready(function(){
 				}else{
 					$("#repwmsg").html("<p class='checkno'>비밀번호가 일치하지 않습니다.</p>");
 					pwdupcheck=false;
+					$('#repw').focus();
 				}
 			
 			})// end 비밀번호 일치
@@ -168,7 +169,7 @@ $(document).ready(function(){
 		
 		}else{
 	
-			if(idcheck && pwcheck && iddupcheck && pwdupcheck){
+			if(idcheck && pwcheck && iddupcheck && pwdupcheck && emaildupcheck){
 			//onsubmit에 true값 전송
 				alert("회원가입을 축하드려요! 모든 서비스를 이용하기 위해 이메일 인증을 완료해주세요.");
 				//location.href="${pageContext.request.contextPath}/member/joinOk";
