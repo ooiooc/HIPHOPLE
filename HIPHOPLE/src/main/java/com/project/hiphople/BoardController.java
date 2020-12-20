@@ -170,7 +170,7 @@ public class BoardController{
 	public void viewComm(BoardVO board, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 		logger.info("상세글 페이지 get" + board);
 		logger.info("상세글 페이지 get" + cri);
-			model.addAttribute("view", service.selectComm(board));
+		model.addAttribute("view", service.selectComm(board));
 	}
 	
  	//Community 수정 화면
@@ -210,16 +210,23 @@ public class BoardController{
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		String userid = authentication.getName(); 
+		model.addAttribute("writerid", userid);
 		model.addAttribute("mypost", service.allmyPost(userid));
-		
 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
  	}
  	
  	//community 내 글 리스트 조회
- 	@RequestMapping(value = "viewall", method = RequestMethod.GET)
-	public void listGet(@ModelAttribute("boardVO") BoardVO boardVO, Model model, Criteria cri, String userid) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
+ 	@RequestMapping(value = "viewall/{userid}", method = RequestMethod.GET)
+	public void mypostGet(@ModelAttribute("boardVO") BoardVO vo, Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
  		logger.info("내가 작성한 글 전부 보기" + cri);
+ 		
+ 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		String userid = authentication.getName();
+ 		
+ 		model.addAttribute("writerid", userid);
  		model.addAttribute("mypost", service.allmyPost(userid));
+ 		
+ 		
  	}
  	
 	/*
@@ -228,6 +235,7 @@ public class BoardController{
 	 * 
 	 * }
 	 */
+ 	
  	
  	//비디오 화면 모달 창 삽입
  	@RequestMapping(value="video/list", method = RequestMethod.GET)
