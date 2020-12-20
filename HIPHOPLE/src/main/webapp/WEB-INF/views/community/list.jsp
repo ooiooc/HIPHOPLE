@@ -16,7 +16,6 @@
 </head>
 <body>
 	<%@include file="../include/header2.jsp"%>
-	
 	<div class="comwrap">
 	<h1 class="community_title">COMMUNITY</h1>
 	<ul class="comlist">		
@@ -52,15 +51,14 @@
 			<td>${comm.viewcnt}</td>
 		</tr>
 		</c:forEach>
-		<%-- </c:if> --%>
-		<sec:authorize access="hasAnyRole('ROLE_ADMIN', 'ROLE_USER')"> 
-		<c:forEach items="${mypost}" var="viewall" begin="0" end="0">
+		
+		<sec:authorize access="isAuthenticated()">
 		<tr>
 			<td colspan="5"><!-- 내가 작성한 글 보기-->
-			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${viewall.writer}'">내가 쓴 글</button>
- 		</td>
+			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${writerid}'">내가 쓴 글</button>
+ 			</td>
 		</tr>
-		</c:forEach>
+
 		<tr>
 			<td colspan="5"><!-- <input type="submit" value="글쓰기" class="btn-register"> -->
 			<!-- a 태그는 get 방식으로 처리 -->
