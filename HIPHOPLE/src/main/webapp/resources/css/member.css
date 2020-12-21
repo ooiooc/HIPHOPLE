@@ -73,9 +73,16 @@ body{
 	width: 178px;
 	height: 44px;
 	font-size: 14px;
-	letter-spacing: 0.5px;
-	margin-bottom: 50px;
+	letter-spacing: 1px;
+	margin-bottom: 10px;
 	border: 0;
+}
+
+.signup_btnbox input:hover{
+	border:0;
+	background: #333333;
+	color:#ffffff;
+	
 }
 		/* 유효성 검사 msg */
 .checkok{
@@ -166,7 +173,8 @@ body{
 	height:40px;
 	font-size: 13px; 
 	font-weight: 300px;
-	padding: 10px;
+	/* padding:8px; */
+	padding-left:2px;
 	/* border: 1px solid #E9E9E9; */
 }
 
@@ -180,7 +188,6 @@ body{
 	cursor:pointer;
 	border: 0;
 	margin: 6px;
-	
 }
 
 #loginsub{
@@ -196,6 +203,20 @@ body{
 	width: 300px;
 	justify-content: center;
 	/* margin: 30px;	 */
+}
+
+.google{
+	width:100%;
+	padding-top:2px;
+	padding-left:8px;
+	/* border: 1px solid #E9E9E9; */
+}
+.googleLogin{
+	width: 386px;
+	height: 40px;
+	color: #999999; font-size: 13px; letter-spacing: 0.5px;
+	cursor:pointer;
+	border: 0;
 }
 			/* 로그인 화면 끝 */
 			
@@ -317,11 +338,16 @@ a:visited{
 			
 			
 			/* 비밀번호 찾기 */
+/* 전체 영역 */
 .passwrap{
+	width:100%;
+	height:100%;
 	margin: 0 auto;
 	/* border: 1px solid #000; */
-	padding: 30px;
+	padding: 63px;
 }
+
+/* 비밀번호 찾기 타이틀 */
 .passtitle{
 	text-align: center;
 	padding: 10px;
@@ -338,11 +364,12 @@ a:visited{
 	letter-spacing: 0.5px;
 }
 .findpwForm{
-	/* border: 1px solid #000; */
 	padding:40px;
 	text-align: center;
+	/* border: 1px solid #000; */
 }
 .passinfo{
+	padding: 30px;
 	margin: 20px;
 	/* border: 1px solid #000; */
 }
@@ -365,9 +392,8 @@ a:visited{
 	border: 0;
 	letter-spacing: 0.5px;
 	color: #ffffff;
-	background-color: #333333;
+	background-color: #333333;	
 }
-
 			/* 비밀번호 찾기 끝 */
 			
 			
@@ -375,41 +401,42 @@ a:visited{
 .withdrwlwrap{
 	/* border: 1px solid #000; */
 	width: 100%;
-	height:auto;
+	height:100%;
+	padding: 50px;
 	font-family: 'Apple SD Gothic Neo';
 	letter-spacing: 0.5px;
 }
 
+/* 회원 탈퇴 타이틀 */
+.wdrwl_title{
+	padding: 20px;
+	text-align: center;
+	/* margin: 50px; */
+	letter-spacing: 1px;
+}
 
 /* 탈퇴 화면 박스 */
 .withdrwlForm{
 	width: 800px;
 	height:auto;
-	/* background: #e9e9e9; */
-	/* border: 1px solid #e9e9e9; */
 	text-align: center;
-	padding: 120px;
+	padding: 60px;
 	margin: 0 auto;
+	/* background: #e9e9e9; */
+	/* border: 1px solid #e9e9e9;  */
 }
-
-/* 회원 탈퇴 타이틀 */
-.wdrwl_title{
-	text-align: center;
-	margin-top: 50px;
-	letter-spacing: 1px;
-}
-
 
 .wdrwl_txt{
 	font-size: 16px;
 	font-weight:300;
 	letter-spacing: 0.5px;
+	margin-bottom: 11px;
 }
 
 
 .repassform{
+	padding: 30px;
 	/* border: 1px solid #000; */
-	padding: 20px;
 }
 
 .wdrwlInput{
@@ -419,7 +446,7 @@ a:visited{
 	font-size:14px;
 	font-weight:300;
 	text-align: center;
-	border: 1px solid #e9e9e9;
+	/* border: 1px solid #E9E9E9; */
 }
 
 /* 회원탈퇴 비밀번호 재 확인 */
