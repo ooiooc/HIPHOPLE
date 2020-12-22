@@ -29,6 +29,7 @@
 		
 			<!-- 회원만 접근 가능 -->
 			<security:intercept-url pattern="/member/memberInfo" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/member/withdrawal" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 			<security:intercept-url pattern="/community/write" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 			<!-- 관리자 권한 접근 가능 -->
 			<security:intercept-url pattern="/notice/write" access="hasRole('ROLE_ADMIN')"/>
