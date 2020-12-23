@@ -39,7 +39,7 @@ public interface BoardMapper {
 	public BoardVO selectComm(BoardVO vo) throws Exception;
 	
 	//community 내 글 조회
-	public List<BoardVO> allmyPost(String userid) throws Exception;
+	public String allmyPost(String writerid) throws Exception;
 	
 	//Community 수정
 	public void updateCom(BoardVO vo) throws Exception;
@@ -53,6 +53,9 @@ public interface BoardMapper {
 	//Community 게시물 리스트(페이징o)
 	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
 	
+	//community 게시물 총 갯수
+	public int comTotalcount(Criteria cri) throws Exception;
+	
 	//Community 조회수 업데이트
 	public void comViewcnt(BoardVO vo) throws Exception;
 	
@@ -61,4 +64,5 @@ public interface BoardMapper {
 	
 	//공지사항 최신 게시물 list limit 5
 	public List<BoardVO> latestList() throws Exception;
+	
 }

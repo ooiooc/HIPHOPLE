@@ -80,7 +80,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insertComm(BoardVO vo) throws Exception {
 		mapper.insertComm(vo);
-		
 	}
 	
 	//커뮤니티 상세페이지
@@ -113,9 +112,16 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> commlistPage(Criteria cri) throws Exception {
 		return mapper.commlistPage(cri);
 	}
+	
+	// 커뮤니티 게시물 총 갯수
 	@Override
-	public List<BoardVO> allmyPost(String userid) throws Exception {
-		return mapper.allmyPost(userid);
+	public int comTotalcount(Criteria cri) throws Exception {
+		return mapper.comTotalcount(cri);
+	}
+	
+	@Override
+	public String allmyPost(String writerid) throws Exception {
+		return mapper.allmyPost(writerid);
 	}
 	// 메인 커뮤니티 베스트 게시글
 	@Override
@@ -128,5 +134,6 @@ public class BoardServiceImpl implements BoardService {
 	public List<BoardVO> latestList() throws Exception {
 		return mapper.latestList();
 	}
+
 	
 }

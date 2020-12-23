@@ -36,7 +36,7 @@ public interface BoardService {
 	
 					/*커뮤니티*/
 	//커뮤니티 내 글 조회
-	public List<BoardVO> allmyPost(String userid) throws Exception;
+	public String allmyPost(String writerid) throws Exception;
 	
 	//커뮤니티 글쓰기
 	public void insertComm(BoardVO vo) throws Exception;
@@ -55,10 +55,14 @@ public interface BoardService {
 	
 	//커뮤니티 리스트 페이징
 	public List<BoardVO> commlistPage(Criteria cri) throws Exception;
-
-	//Community 베스트 게시물 list limit 5
+	
+	//커뮤니티 게시물 총 갯수
+	public int comTotalcount(Criteria cri) throws Exception;
+	
+	//커뮤니티 베스트 게시물 list limit 5
 	public List<BoardVO> bestList() throws Exception; 
 	
 	//공지사항 최신 게시물 5개 list limit 5
 	public List<BoardVO> latestList() throws Exception;
+	
 }

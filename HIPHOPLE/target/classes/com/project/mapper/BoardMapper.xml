@@ -108,10 +108,7 @@
 	</if>
 	</sql>
 	
-	<!-- interview 게시물 총 갯수 -->
-	<select id="countBoard" resultType="int">
-		select count(*) from article
-	</select>
+
 
 	<!-- 페이징 처리 후 게시글 조회 -->
 	<select id="selectBoard" resultType="com.project.domain.BoardVO">
@@ -145,8 +142,8 @@
 	</select>
 	
 	<!-- 내가 작성한 글 보기 -->
-	<select id="allmyPost" resultType="com.project.domain.BoardVO">
-		select * from community where writerid=#{writerid} order by bno desc
+	<select id="allmyPost" resultType="String">
+		select distinct writer from community where writerid=#{writerid}
 	</select>
 	
 	<!-- community 게시글 수정 -->
@@ -186,6 +183,11 @@
 	]]> 
 	</select>
 	
+	<!-- 커뮤니티 게시물 총 갯수 -->
+	<select id="comTotalcount" resultType="int">
+		select count(*) from community
+	</select>
+	
 	<!-- 커뮤니티 조회수 update -->
 	<update id="comViewcnt" >
 		update community set viewcnt = viewcnt+1 where bno = #{bno}
@@ -205,6 +207,11 @@
 	<!-- 최신 공지사항 글 출력 -->
 	<select id="latestList" resultType="com.project.domain.BoardVO">
 	select * from notice order by regdate desc limit 5;
+	</select>
+	
+	<!-- 커뮤니티 내가 쓴 글 count-->
+	<select id="totalMypost" resultType="int">
+	select count(*) from community where writerid = #{writerid};
 	</select>
 		
 </mapper>
