@@ -9,6 +9,7 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.project.domain.Criteria;
 import com.project.domain.MailUtils;
 import com.project.domain.MemberVO;
 import com.project.domain.TempKey;
@@ -30,9 +31,9 @@ public class MemberServiceImpl implements MemberService{
 	
 	//로그인
 	@Override
-	public MemberVO login(MemberVO member) {
+	public MemberVO login(String userid) {
 		
-		return memapper.login(member);
+		return memapper.login(userid);
 		
 	}
 	
@@ -81,8 +82,14 @@ public class MemberServiceImpl implements MemberService{
 
 	//회원목록 리스트
 	@Override
-	public List<MemberVO> memberList() {
-		return memapper.memberList();
+	public List<MemberVO> memberList(Criteria cri) {
+		return memapper.memberList(cri);
+	}
+	
+	//전체 회원 수
+	@Override
+	public int memberTotal() {
+		return memapper.memberTotal();
 	}
 
 	//회원정보 조회
@@ -113,9 +120,14 @@ public class MemberServiceImpl implements MemberService{
 	@Override
 	public void deleteMember(MemberVO vo) {
 		memapper.deleteMember(vo);
-		
 	}
-	
+
+	//패스워드 체크
+	@Override
+	public int passCheck(MemberVO vo) {
+		return memapper.passCheck(vo);
+	}
+
 	//임시비밀번호 변경
 	@Override
 	public void newPassword(MemberVO vo) {
@@ -163,5 +175,16 @@ public class MemberServiceImpl implements MemberService{
 		return memapper.checkEmail(email);
 	}
 
+	//로그인 Authstatus 조회
+	@Override
+	public String loginAuth(String userid) {
+		return memapper.loginAuth(userid);
+	}
+	
+	//회원관리 페이지 카운팅
+	@Override
+	public int meminfoCount(Criteria cri) {
+		return memapper.meminfoCount(cri);
+	}
 
 }
