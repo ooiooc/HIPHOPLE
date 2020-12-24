@@ -48,13 +48,6 @@ public class AdminController {
 		model.addAttribute("total", meservice.memberTotal()); // 총 회원 수
 		model.addAttribute("pageMaker", new PageDTO(cri, meservice.meminfoCount(cri)));
 		
-		/*
-		if(currentUser == "ooiooc") {
-			logger.info("관리자 접속 중입니다");
-			model.addAttribute("msg","관리자");
-			}else {
-				rttr.addFlashAttribute("msg", "회원");
-		}*/
 		}
 }// end
 
