@@ -66,7 +66,8 @@
 				<c:if test="${admin.authstatus == 0}">
 				<td><c:out value="비활성" /></td>
 				</c:if>
-				<td></td>
+				<td><c:if test="${admin.userid eq 'ooiooc'}"><c:out value="관리자" /></c:if>
+				</td>
 			</tr>
 			</c:forEach>
 		</table>
