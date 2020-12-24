@@ -50,7 +50,9 @@ $(document).ready(function(){
 			
 			$(data.list).each(function(){
 				str +="<div data-rno='" + this.rno + "'class='replyLi'>"
-				+"<p class='replyer'>"+ this.replyer +"</p>"
+				+"<p class='replyer'>"+ this.replyer
+				+"<span class='replydate'>" + this.regdate + "</span></p>"
+				+"<p class='replyid'>"+ this.replyid +"</p>"
 				+"<p class='replytext'>" + this.replytext + "</p>"
 				+"<a class='replymodify'>수정</a></div>";
 			});
@@ -116,6 +118,7 @@ $(document).ready(function(){
 
 		//댓글 등록
 			$("#replybtn").on("click", function(){
+				var replyid = $("#newReplyUserid").val(); //댓글 작성자 아이디
 				var replyer = $("#newReplyWriter").val(); //댓글 작성자
 				var replytext = $("#newReplyText").val(); //댓글 내용
 			
@@ -127,12 +130,12 @@ $(document).ready(function(){
 				"Content-Type":"application/json",
 				"X-HTTP-Method-Override":"POST"},
 			dataType: "text",
-			data : JSON.stringify({bno : bno, replyer : replyer, replytext : replytext}),
+			data : JSON.stringify({bno : bno, replyer : replyer, replyid : replyid, replytext : replytext}),
 			success : function(result){
 					
 					if(result == "SUCCESS"){
 						
-						alert("댓글 등록완료");
+						alert("댓글이 등록되었습니다.");
 						getAllList(page); //get 함수호출	
 					}
 					//,	errore:function(err){		
@@ -155,17 +158,25 @@ $(document).ready(function(){
 			var reply = $(this).parent();
 			var rno = reply.attr("data-rno");
 			var replyer = reply.find(".replyer").text(); 
+			var replyid = reply.find(".replyid").text(); 
 			var replytext = reply.find(".replytext").text(); 
+			var newreplyid = $("#newReplyUserid").val();
 			
-			//alert(rno + ":" + replytext + " 작성자/"+ replyer);
+			// 현재 접속 중인 아이디와 댓글 작성 아이디와 일치할 경우 수정창 보이기
+			if(newreplyid == replyid){
+				alert("현재 세션 접속 중인 아이디와 댓글 아이디가 일치합니다.");
+				//alert(rno + ":" + replytext + " [작성자]"+ replyer+" [작성자 아이디]" + replyid);
 			
-			// 기존의 댓글 불러오기
-			$(".modal-title").val(rno); 
-			$("#replytext").val(replytext); 
-			//$(".modal-title").html(rno);
-			///$("#replyer").val(replyer);
-
-			$("#modDiv").show("slow"); //수정창 보이기
+				// 기존의 댓글 불러오기
+				$(".modal-title").val(rno); 
+				$("#replyid").val(replyid); 
+				$("#replytext").val(replytext); 
+				//$(".modal-title").html(rno);
+				///$("#replyer").val(replyer);
+	
+				$("#modDiv").show("slow"); //수정창 보이기
+			}
+			
 		})//end 수정 버튼 클릭이벤트
 		
 		// 댓글 삭제
