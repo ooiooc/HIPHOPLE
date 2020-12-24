@@ -1,10 +1,12 @@
 package com.project.hiphople;
 
+import java.io.PrintWriter;
 import java.lang.reflect.Member;
 import java.security.Principal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -71,7 +73,6 @@ public class MemberController {
 	@RequestMapping(value = "join", method = RequestMethod.POST)
 	public String memberPost(MemberVO vo) throws Exception{
 		
-		
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder();
 		String encPassword = pwdEncoder.encode(vo.getUserpw());
 		vo.setUserpw(encPassword);
@@ -103,7 +104,7 @@ public class MemberController {
 		/* logger.info("회원가입 처리"+vo.getUserid()); */
 		
 		meservice.join(vo); //service 불러오기
-		//meservice.insertAuth(vo); //DB에 기본정보 insert
+		meservice.insertAuth(vo); //DB에 기본정보 insert
 		return "redirect:/";
 	}
 	
@@ -144,6 +145,7 @@ public class MemberController {
 	@ResponseBody
 	@RequestMapping(value = "checkId/{userid}", method = RequestMethod.GET)
 	public ResponseEntity<Integer> idChk(@PathVariable("userid") String userid) throws Exception{
+			
 		//getAjax를 이용하기 위하여 ResponseEntity 필요
 		//userid count값을 불러오기 위해서 return타입을 Integer로 불러와야 한다
 			
@@ -152,7 +154,9 @@ public class MemberController {
 		//int result = meservice.idChk(userid);
 		//meservice.idChk(userid)
 		//return new ResponseEntity<>(result, HttpStatus.OK);
+			
 		return new ResponseEntity<Integer>(meservice.idChk(userid),HttpStatus.OK);
+			
 	}
 	
 	//회원가입 이메일 중복체크
@@ -169,8 +173,18 @@ public class MemberController {
 	public void loginGet() throws Exception{
 		logger.info("로그인 화면 이동");
 	}
-	
-	
+		
+	//로그인 authstatus 조회
+	/*
+	@ResponseBody
+	@RequestMapping(value = "loginAuth/{userid}", method = RequestMethod.GET)
+	public String loginAuth(@PathVariable("userid") String userid) throws Exception{
+		logger.info("userid = " + userid);
+		return result;
+		
+		//return result;
+	}*/
+		
 	//로그인 기능 (no 시큐리티)
 	/*
 	@RequestMapping(value = "loginPost", method = RequestMethod.POST)
@@ -248,7 +262,7 @@ public class MemberController {
 			member.setUserpw(passwordEncoder.encode(newPass));
 			logger.info("새 비밀번호" + newPass);
 			meservice.updateMember(member); //정보 수정
-			rttr.addFlashAttribute("member",member);
+			rttr.addFlashAttribute("member", member);
 			rttr.addFlashAttribute("msg", "회원정보 수정 성공!");
 			return "redirect:/member/memberInfo?userid="+ member.getUserid(); 
 		
@@ -276,7 +290,6 @@ public class MemberController {
  	}
  	
 	
-	
 	//회원탈퇴 view
  	@RequestMapping(value="/withdrawal", method = RequestMethod.GET)
  	public void withdawalGet() {
@@ -284,7 +297,7 @@ public class MemberController {
  	}
 
 	//회원탈퇴 성공 view
- 	@RequestMapping(value="/withdrwresult", method = RequestMethod.GET)
+ 	@RequestMapping(value="/withdrawalSuccess", method = RequestMethod.GET)
  	public String successGet() {
  		logger.info("회원탈퇴 성공 페이지");
  		return "member/withdrawalSuccess";
@@ -292,39 +305,85 @@ public class MemberController {
  	
  	//회원탈퇴 action
  	@RequestMapping(value="/withdrawal.do", method = RequestMethod.POST)
-    public String withdrawal(MemberVO vo, HttpSession session, @RequestParam(value = "checkpw") String checkpw) {
+    //public String withdrawal(MemberVO vo, Principal principal, HttpSession session, @RequestParam(value = "checkpw") String checkpw, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
+ 	public String withdrawal(MemberVO vo, Principal principal, HttpSession session, String checkpw, HttpServletResponse response, RedirectAttributes rttr) throws Exception {
+ 		//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
  		
- 		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
- 		
- 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userid = authentication.getName(); //로그인한 아이디 가져오기
+ 		//현재 로그인 유저 조회
+ 		String userid = principal.getName(); 
 		
 		MemberVO dbuserinfo = new MemberVO();
 		dbuserinfo.setUserid(userid);
 		dbuserinfo = meservice.memberInfo(dbuserinfo);
-		logger.info("데이터 베이스에 있는 로그인된 회원 정보" + dbuserinfo);
-		logger.info("접속 중인 아이디 :" + userid);
+		logger.info("DB에 있는 로그인된 회원 정보 : " + dbuserinfo);
+		logger.info("접속 중인 아이디 : " + userid);
+		logger.info("입력한 비밀번호 : " + checkpw);
 		
-		
-		logger.info("입력한 비밀번호 :" + checkpw);
-		
+		vo.setUserid(userid);
+		meservice.deleteMember(vo);
+		session.invalidate(); 
+		return "redirect:/member/withdrawalSuccess";
 		
 		//비밀번호 비교 
+		/*
 		Boolean pwdMatch = passwordEncoder.matches(checkpw, dbuserinfo.getUserpw());
+			
 			if(pwdMatch){ // 비밀번호가 맞다면 회원탈퇴 처리
 				vo.setUserid(userid);
 				meservice.deleteMember(vo);
 				logger.info("input pw :" + checkpw + "db pw:" + dbuserinfo.getUserpw());
 				session.invalidate(); //탈퇴시 로그아웃 처리
-				return "redirect:/member/withdrwresult";
+				return "redirect:/member/withdrawalSuccess";
 		
 			} else { //비밀번호가 일치하지 않으면
+				//rttr.addFlashAttribute("msg", "비밀번호를 다시 확인해주세요.");
 				logger.info("비밀번호가 일치하지 않습니다");
-	        	return "member/withdrawal";
+				return "redirect:/member/withdrawal";
 	        }
-
-		}
+ 		*/
+	}
  	
+	//패스워드 체크 
+ 	@ResponseBody
+	@RequestMapping(value="/passCheck", method = RequestMethod.POST)
+	//public boolean passChk(@RequestParam(value = "checkpw") String checkpw, MemberVO vo, Principal principal) throws Exception {
+	public boolean passCheck(String userpw, MemberVO vo, Principal principal) throws Exception {
+
+		// 현재 세션 사용자 정보 가져오기
+ 		//Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+ 		//String userid = authentication.getName(); 
+ 		
+		// Security 이용하여 현재 세션 사용자 정보 가져오기
+		String userid = principal.getName();
+		
+		// 현재 세션 사용자 정보 조회 (login 서비스 호출)
+		vo.setUserid(userid);
+		logger.info("탈퇴 요청 아이디 : " + vo.getUserid());
+		
+		MemberVO member = meservice.login(vo.getUserid());
+		logger.info("DB 패스워드 : " + member.getUserpw());
+
+		//member.setUserpw(userpw);
+		logger.info("입력한 패스워드 : " + userpw);
+		
+		// 시큐리티 암호화 클래스 
+ 		//BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		
+		// 입력한 비밀번호와 DB 비밀번호 비교
+		Boolean pwdMatch = passwordEncoder.matches(userpw, member.getUserpw());
+		
+		return pwdMatch;
+		/*
+		if(pwdMatch == true) {
+			logger.info("비밀번호 일치" );
+			return true;
+		
+		}else {
+			logger.info("비밀번호 불일치");
+			return false; // 일치하면 true, 불일치 false
+		}
+		*/
+	}//
 	
  	
  	//비밀번호 찾기
@@ -361,7 +420,7 @@ public class MemberController {
  		//회원정보가 없을때
  		if(result == 0) {
  			logger.info("회원정보가 없습니다");
- 			
+ 			//rttr.addFlashAttribute("회원정보가 없습니다.");
  		}else {
  			String newPass = meservice.getTempPassword();
  			String encodePass = passwordEncoder.encode(newPass);
@@ -388,4 +447,4 @@ public class MemberController {
 
  	}
 	
-}//end
+}//end Membercontroller
