@@ -9,11 +9,10 @@ public class ArticleVO {
 	private String category;
 	private String content;
 	private String writer;
-	private String url;
+	private String articleimg;
 	private String regdate;
 	private int viewcnt;
-	//private List<BoardAttachVO> attachList;
-	
+	private List<BoardAttachVO> attachList;
 	
 	public int getBno() {
 		return bno;
@@ -48,11 +47,11 @@ public class ArticleVO {
 	public void setWriter(String writer) {
 		this.writer = writer;
 	}
-	public String getUrl() {
-		return url;
+	public String getArticleimg() {
+		return articleimg;
 	}
-	public void setUrl(String url) {
-		this.url = url;
+	public void setArticleimg(String articleimg) {
+		this.articleimg = articleimg;
 	}
 	public String getRegdate() {
 		return regdate;
@@ -66,10 +65,17 @@ public class ArticleVO {
 	public void setViewcnt(int viewcnt) {
 		this.viewcnt = viewcnt;
 	}
+	public List<BoardAttachVO> getAttachList() {
+		return attachList;
+	}
+	public void setAttachList(List<BoardAttachVO> attachList) {
+		this.attachList = attachList;
+	}
 	@Override
 	public String toString() {
 		return "ArticleVO [bno=" + bno + ", title=" + title + ", category=" + category + ", content=" + content
-				+ ", writer=" + writer + ", url=" + url + ", regdate=" + regdate + ", viewcnt=" + viewcnt + "]";
+				+ ", writer=" + writer + ", articleimg=" + articleimg + ", regdate=" + regdate + ", viewcnt=" + viewcnt
+				+ ", attachList=" + attachList + "]";
 	}
 	
 }

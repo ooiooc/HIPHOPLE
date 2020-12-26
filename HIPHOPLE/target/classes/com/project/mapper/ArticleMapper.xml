@@ -12,8 +12,8 @@
 	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
 		select max(bno)+1 bno from article
 	</selectKey>
-     	insert into article (bno, title, category, content, writer, url)
-		values(#{bno}, #{title},  #{category}, #{content}, #{writer}, #{url})
+     	insert into article (bno, title, category, content, writer, articleimg)
+		values(#{bno}, #{title},  #{category}, #{content}, #{writer}, #{articleimg})
 	</insert>
 	
 	<!-- 게시글 조회 -->
