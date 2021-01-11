@@ -1,18 +1,18 @@
 # Springframework Sample Project
 
 ### 개발환경
--사용 언어 : Java 8
+- 사용 언어 : Java 8
 
--프론트엔드 : CSS3, HTML5, javascript, Jquery
+- 프론트엔드 : CSS3, HTML5, javascript, Jquery
 
--백엔드 : Springframework, SpringSecurity
+- 백엔드 : Springframework, SpringSecurity
 
--Database : MySQL
+- Database : MySQL
 
--IDE : Eclipse IDE for Java EE Developers
+- IDE : Eclipse IDE for Java EE Developers
 
--WAS : Tomcat 8.5
+- WAS : Tomcat 8.5
 
--Browser : Chrome
+- Browser : Chrome
 
--API : Summernote
+- API : Summernote
