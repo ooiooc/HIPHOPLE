@@ -3,7 +3,7 @@
 ### 개발환경
 사용 언어 : Java 8
 
-프론트엔드 : 메인페이지(CSS3, HTML5, javascript, Jquery)
+프론트엔드 : CSS3, HTML5, javascript, Jquery
 
 백엔드 : Springframework, SpringSecurity
 
