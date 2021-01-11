@@ -33,13 +33,13 @@
 							<a href="/hiphople/admin/list" class="">회원관리</a>
 						</li>
 						<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-							<a href="/hiphople/notice/list" class="">공지사항</a>
+							<a href="/hiphople/notice/write" class="">공지사항</a>
 						</li>
 						<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-							<a href="/hiphople/contents/write" class="">기사등록</a>
+							<a href="/hiphople/contents/write" class="adminnav">기사등록</a>
 						</li>
 						<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-							<a href="/hiphople/contents/write" class="">로그아웃</a>
+							<a href="#" onclick="document.getElementById('logout').submit();" class="adminnav">로그아웃</a>
 						</li>
 					</ul>
 				</nav>
