@@ -1,12 +1,12 @@
 # Springframework Sample Project
 
-> ### 개발환경
-## Front-End
+ ### 개발환경
+>## Front-End
 - language : Java 8
 
 - CSS3, HTML5, javascript, Jquery
 
-## Back-End
+>## Back-End
 - Springframework, SpringSecurity
 
 - Database : MySQL
@@ -19,6 +19,6 @@
 
 - API : Summernote
 
-> ### 주요 기능
+ ### 주요 기능
 `로그인` `회원가입 이메일 인증` `비밀번호 찾기`
 
