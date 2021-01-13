@@ -12,13 +12,25 @@
 	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
 		select max(bno)+1 bno from article
 	</selectKey>
-     	insert into article (bno, title, category, content, writer, articleimg)
-		values(#{bno}, #{title},  #{category}, #{content}, #{writer}, #{articleimg})
+     	insert into article (bno, title, category, content, writer)
+		values(#{bno}, #{title},  #{category}, #{content},  #{writer})
 	</insert>
 	
 	<!-- 게시글 조회 -->
+	<!-- select * from article as atc 
+			inner join article_upload as u 
+				on atc.bno = u.bno 
+					where atc.bno = #{bno}; -->
 	<select id="select" resultType="com.project.domain.ArticleVO">
 		select * from article where bno=#{bno}
+	</select>
+	
+	<!-- 게시글 업로드 이미지 조회 -->
+	<select id="uploadlist" resultType="com.project.domain.ArticleVO">
+	select * from article as atc 
+			inner join article_upload as u 
+				on atc.bno = u.bno 
+					where atc.bno = #{bno};
 	</select>
 	
 	<!-- 게시글 수정 -->
@@ -34,9 +46,10 @@
 	</delete>
 	
 	<!-- article 게시판 전체 글 조회 -->
+	<!-- select * from article where bno > 0 order by bno desc -->
 	<select id="listAll" resultType="com.project.domain.ArticleVO">
 	<![CDATA[
-		select * from article where bno > 0 order by bno desc
+		select * from article as atc join article_upload as u on atc.bno = u.bno where atc.bno > 0 order by atc.bno desc;
 	]]>
 	</select>
 	
@@ -45,23 +58,25 @@
 		update article set viewcnt = viewcnt+1 where bno = #{bno}
 	</update>
 	
+	
 	<!-- article 게시글 페이징 -->
 	<select id="postlistPage" resultType="com.project.domain.ArticleVO">
-	
-	select bno, category, title, content, writer, regdate, viewcnt
-		from (select @rownum:=@rownum+1 as rownum, b.* 
-			from (select @rownum:=0) as tmp, article as b 
 
-		<include refid="search"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
-	  
-	    order by bno desc
-	   ) as boardList
+	select atc.bno, atc.title, atc.category, atc.content, atc.writer, atc.regdate, atc.viewcnt, u.uuid, u.uploadPath, u.fileName 
+		from article as atc
+			join article_upload as u on atc.bno = u.bno
 	
-	<![CDATA[
-		where rownum > (#{pageNum}-1)*#{amount} 
-			and rownum <= #{pageNum}*#{amount};
-	]]> 
-	</select>
+		<if test="type != null">
+			<if test="type == 'F'.toString()">
+			where category like CONCAT('%', #{category}, '%')		
+			</if>
+		</if>	
+		
+		order by bno desc
+	
+	</select>	
+	
+
 	
 	<!-- 게시물 검색 -->
 	<sql id="search">
