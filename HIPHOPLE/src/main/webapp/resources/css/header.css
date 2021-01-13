@@ -17,23 +17,13 @@ h1{
 	margin: 0.67em 0;
 }
 
-/* Header Nav */
-
-/* 두번째 헤더 */
-.headerwrap{
-	height : 100%;
-	width : 100vw;
-	background-color: rgba(255,255,255,0.7);
-	opacity: 0.85;
-	position: fixed;
-	z-index: 999;
-}
+				/* Header Nav */
 
 /* side-nav 최상단 우측에 위치한 메뉴바 */
 .side-nav{
 	display: flex;
 	justify-content: flex-end;
-	padding: 2px;
+	padding: 6px;
 	font-size: 14px;
 	letter-spacing: 0.5px;
 	font-weight: 400;
@@ -44,7 +34,6 @@ h1{
 .side-nav li a{
 	padding: 6px; /* 메뉴별 좌우 여백넓이 지정해서 띄워주기 */
 }
-
 
 /* main-nav */
 
@@ -71,27 +60,48 @@ h1{
 
 
 				/* header2 */
-/* 감싸는 header */
+/* 두번째 헤더 */
 .headerwrap{
-	background: #000;	
-	
-	width:100%;
+	/* height : 100%; */
 	height: 46px;
+	width : 100vw;
+	/*background-color: rgba(255,255,255,0.7);*/
+	opacity: 0.85;
+	background: #000;	
+	position: fixed;
+	z-index: 999;
+	padding: 10px;
 	display: flex;
-	padding: 10px 0px;
 	justify-content: space-between;
 	border: 1px solid #000;
 }
-
+				
+/* 감싸는 header */
+/*
+.headerwrap{
+	background: #000;	
+	width:100%;
+	height: 46px;
+	display: flex;
+	padding: 10px;
+	justify-content: space-between;
+	border: 1px solid #000;
+}
+*/
+.subLogo{
+	/* background: #dddd; */
+	/* padding-left: 8px; */
+	
+}
 
 .smallLogo{
-	position: relative;
+	/* position: relative; */
+	/* left:10px; */
 	bottom: 34px;
-	left:10px;
 	border: 1px solid #000;
 }
 
-			/* main-nav2 */
+/* main-nav2 */
 .main-nav2{
 	width: 100%;
 	display:flex;
@@ -186,12 +196,12 @@ h1{
 	text-align:left;
 }
 
-			/* side-nav2 */
+/* side-nav2 */
 .side-nav2{
 	display: flex;
 /* 	justify-content: flex-end; */
 	/* padding: 2px; */
-	font-size: 13px; color:#a0a8a6; font-weight:300; letter-spacing: 0.5px;
+	font-size: 13px; color:#a0a8a6; font-weight:300; letter-spacing: 1px;
 	/* background: wheat; */
 	/* border: 1px solid #fff; */
 }
@@ -361,7 +371,7 @@ div#contents{
 }
 
 div#imgarea{
-	width :100%;
+	width : 100%;
 	height : 100%; 
 	overflow : hidden;
 	/* border : 1px solid red; */
@@ -371,6 +381,13 @@ div#contents img{
 	width : 100%;
 	height : 100%;
 }
+
+/* 게시글 타이틀란 */
+.contstitle{
+ 	width: 220px;
+	height: 100px;
+}
+
 p.pcategory{
 	padding : 5px 0;
 	font-size : 15px;
@@ -487,7 +504,7 @@ footer {
 	padding-left: 15px;
 	padding-right: 15px;
 	/* border: 1px solid #000; */ /* inline-block 가로 정렬 시 발생하는 여백 제거 */
-	font-size : 12px; font-weight: 300; letter-spacing: 0.5px;	
+	font-size : 12px; font-weight: 400; letter-spacing: 0.5px;	
 	margin-right: -4px;
 }
 
