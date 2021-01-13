@@ -30,7 +30,7 @@
 									<a href="/hiphople/admin/list" class="adminnav" id="adminlist">회원관리</a>
 								</li>
 								<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
-									<a href="/hiphople/notice/list" class="adminnav">공지사항</a>
+									<a href="/hiphople/notice/write" class="adminnav">공지사항</a>
 								</li>
 								<li class="woocommerce-MyAccount-navigation-link woocommerce-MyAccount-navigation-link--orders">
 									<a href="/hiphople/contents/write" class="adminnav">기사등록</a>

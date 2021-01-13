@@ -66,9 +66,11 @@
 			<c:forEach items="${list}" var="article" begin="0" end="3">
 				<div class="griditems">		
 						<div id="contents">
-							<div id="imgarea"><img src="resources/image/hiphopledefault.jpg" alt=""/></div>	
+							<div id="imgarea"><img  src="resources/upload/${article.uploadPath}/${article.uuid}_${article.fileName}" alt=""/></div>	
+							<div class="contstitle">
 							<p class="pcategory">${article.category}</p>
 							<p class="ptitle"><a href="/hiphople/contents/view?bno=${article.bno}">${article.title}</a></p>
+						   	</div>
 						</div>
 						
 				</div>

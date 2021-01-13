@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Interview – HIPHOPLE</title>
-<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script></head>
+<title>Contents – HIPHOPLE</title>
+<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
+<!-- <script type="text/javascript" src="../resources/js/ctlist.js"></script> -->
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/list.css"/>
 </head>
@@ -31,25 +32,32 @@
 				<!-- content1 -->
 				<div class="gridconts">
 					<div id="contsimg">
-						<a href="/hiphople/contents/view?bno=${article.bno}">
-						<img  src="../resources/image/hiphopledefault.jpg" alt=""/></a>
+					 	<!-- bno -->
+					 	<%-- <input id="bno" type="hidden" value="${article.bno}"/> --%>
+						<a href="/hiphople/contents/view?bno=${article.bno}&pageNum=${pageMaker.cri.pageNum}">
+							<!-- <ul>
+							</ul> -->
+						<img  src="../resources/upload/${article.uploadPath}/${article.uuid}_${article.fileName}" alt=""/>
+						<%-- <img  src="../resources/image/contents/${article.contsimg}" alt="대표이미지"/> --%>
+						</a> 
+						<%-- <img src="<c:url value='../resources/upload/${article.uploadPath}/${article.uuid}_${article.fileName}' />"/></a> --%>
+						
 					</div>
 					<div class="context">
 						<p class="contcate">${article.category}</p>
-						<p class="conttitle"><a href="/hiphople/contents/view?bno=${article.bno}">${article.title}</a></p>
+						<span class="conttitle"><a href="/hiphople/contents/view?bno=${article.bno}&pageNum=${pageMaker.cri.pageNum}">${article.title}</a></span>
 					</div>
 				</div>
 				</c:forEach>
 			</div>
 		</div>
-		
-		<div class="pageno">
-			<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
+		<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
 			<div class="article_write"><button class="writebtn"  onclick="location.href='/hiphople/contents/write'">WRITE</button></div>
-			</sec:authorize>
+		</sec:authorize>
+		<!--  
+		<div class="pageno">
+			
 	
-		
-			<!-- 페이징 -->
 			<div class="pagenumCount" style="text-align: center; padding: 10px;" >
 			<c:if test="${pageMaker.prev}">
 			<a href="/hiphople/contents/list?pageNum=${pageMaker.startPage-1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a>
@@ -63,9 +71,11 @@
 			<a href="/hiphople/contents/list?pageNum=${pageMaker.endPage+1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a>
 			</c:if>
 			</div>
-		</div>
+		</div>-->
 	</div><!-- end contslistwrap -->
-	
+	<%-- <c:forEach items="${contents}" var="cont">
+	${cont.uploadPath}/${cont.fileName}
+	</c:forEach> --%>
 	<%@include file="../include/footer.jsp"%>
 </body>
 </html>
