@@ -9,7 +9,10 @@ public class ArticleVO {
 	private String category;
 	private String content;
 	private String writer;
-	private String contsimg;	
+	private String contsimg;
+	private String uuid;
+	private String uploadPath;
+	private String fileName;
 	private String regdate;
 	private int viewcnt;
 	private List<BoardAttachVO> attachList;
@@ -23,18 +26,15 @@ public class ArticleVO {
 	public String getTitle() {
 		return title;
 	}
-
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
 	public String getCategory() {
 		return category;
 	}
 	public void setCategory(String category) {
 		this.category = category;
 	}
-	
 	public String getContent() {
 		return content;
 	}
@@ -71,11 +71,30 @@ public class ArticleVO {
 	public void setAttachList(List<BoardAttachVO> attachList) {
 		this.attachList = attachList;
 	}
+	public String getUuid() {
+		return uuid;
+	}
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
+	public String getUploadPath() {
+		return uploadPath;
+	}
+	public void setUploadPath(String uploadPath) {
+		this.uploadPath = uploadPath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
 	@Override
 	public String toString() {
 		return "ArticleVO [bno=" + bno + ", title=" + title + ", category=" + category + ", content=" + content
-				+ ", writer=" + writer + ", contsimg=" + contsimg + ", regdate=" + regdate + ", viewcnt=" + viewcnt
-				+ ", attachList=" + attachList + "]";
+				+ ", writer=" + writer + ", contsimg=" + contsimg + ", uuid=" + uuid + ", uploadPath=" + uploadPath
+				+ ", fileName=" + fileName + ", regdate=" + regdate + ", viewcnt=" + viewcnt + ", attachList="
+				+ attachList + "]";
 	}
 	
 }
