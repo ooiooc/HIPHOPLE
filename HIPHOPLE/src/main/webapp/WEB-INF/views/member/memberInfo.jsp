@@ -15,11 +15,17 @@
 <%@include file="../include/header2.jsp"%>
 </head>
 <body>
+	
 	<div class="meminfowrap">
+			
 	<h1 class="category_mypg">MY PAGE</h1>
 	<form role="form" action="/hiphople/member/updateMember" method="post">
+		<sec:authorize access="isRememberMe()">
+       	<h2 style="text-align: center;">This user is login by "Remember Me Cookies"</h2>
+   		</sec:authorize>
 		<!-- 프로필 이미지 -->
 		<div class="myimg"></div>
+		
 		<table class="meminfobox">
 		<tr>
 			<td class="meminfo" id="mypgimg"><label class="mypglb">프로필 사진 등록</label></td>
@@ -49,10 +55,10 @@
 			<input class="meminfoip"  type="password" name="newPass" id="userpw" value=""/></td>
 		</tr>
 		
-		<tr>
+		<!-- <tr>
 			<td class="meminfo"><label class="mypglb">새 비밀번호 확인</label><br>
 			<input class="meminfoip"  type="password" name="newPass" id="userpw" value=""/></td>
-		</tr>
+		</tr> -->
 		
 		</table>
 		
@@ -63,11 +69,21 @@
 		
 		<!-- update msg -->
 		<p class="mypgmsg">${msg}</p>
-		
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> 
 	
+	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	<!-- <script type="application/javascript" th:inline="javascript">
+        $(function() {
+            var csrfToken = /*[[${_csrf.token}]]*/ null;
+            var csrfHeader = /*[[${_csrf.headerName}]]*/ null;
+            $(document).ajaxSend(function (e, xhr, options) {
+                xhr.setRequestHeader(csrfHeader, csrfToken);
+            });
+        });
+    </script> -->
 	</form>
 	</div>
+					
+
 	<%@include file="../include/footer.jsp"%>
 </body>
 </html>
