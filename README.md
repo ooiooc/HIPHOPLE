@@ -23,6 +23,6 @@
 
  ## 주요 기능
 >### 회원가입
-- ![join](https://user-images.githubusercontent.com/70251769/104797449-71a85180-5801-11eb-9a86-5d27ed86a1bd.gif)
+![join](https://user-images.githubusercontent.com/70251769/104797449-71a85180-5801-11eb-9a86-5d27ed86a1bd.gif)
 
 `ㅇㅇ` 
