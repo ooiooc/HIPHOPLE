@@ -17,19 +17,12 @@
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
 		<!-- hikari -->
 		<!-- <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
-		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/test?serverTimezone=Asia/Seoul"></property> -->
 		
 		<!-- log4jdbc-log4j2 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		 <!--
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://springdb.ckiueenxdxjc.ap-northeast-2.rds.amazonaws.com/hiphople?serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="root"></property>
-		<property name="password" value="vhqgl218"></property>
-		
-		-->
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="jenny"></property>
-		<property name="password" value="1234"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost:port/db?serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="admin"></property>
+		<property name="password" value=""></property>
 		
 	</bean>
 	
@@ -58,8 +51,8 @@
 	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
        	<property name="host" value="smtp.gmail.com" />
       	<property name="port" value="587" />
-        <property name="username" value="shinvely90@gmail.com" />
-        <property name="password" value="rgvcqqpkllwqfoto" /><!-- 2차 인증비밀번호 -->
+        <property name="username" value="email" />
+        <property name="password" value="password" /><!-- 2차 인증비밀번호 -->
         <property name="defaultEncoding" value="UTF-8"/>
         <property name="javaMailProperties">
             <props>
