@@ -55,7 +55,9 @@
 		<sec:authorize access="isAuthenticated()">
 		<tr>
 			<td colspan="5"><!-- 내가 작성한 글 보기-->
-			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${writerid}'">내가 쓴 글</button>
+			
+			<button type="button" class="allmypost" onclick="location.href='/hiphople/community/list?type=W&keyword=${mypost}'">내가 쓴 글</button>
+ 			
  			</td>
 		</tr>
 

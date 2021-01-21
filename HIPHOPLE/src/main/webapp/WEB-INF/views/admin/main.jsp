@@ -8,7 +8,7 @@
 <meta charset="UTF-8">
 <title>Admin – HIPHOPLE</title>
 <!-- js -->
-<script type="text/javascript" src="resources/js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/reset.css"/>
 <link rel="stylesheet" type="text/css" href="../resources/css/admin.css"/>

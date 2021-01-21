@@ -21,9 +21,16 @@
 		
 		<!-- log4jdbc-log4j2 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
+		 <!--
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://springdb.ckiueenxdxjc.ap-northeast-2.rds.amazonaws.com/hiphople?serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="root"></property>
+		<property name="password" value="vhqgl218"></property>
+		
+		-->
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="jenny"></property>
 		<property name="password" value="1234"></property>
+		
 	</bean>
 	
 	<!-- 메모리 끊고 다시 연결하고 해주는 설정 -->
@@ -46,6 +53,24 @@
 	<mybatis-spring:scan base-package="com.project.mapper"/>
 	
 	<tx:annotation-driven />
+	
+	<!--  EMAIL -->
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+       	<property name="host" value="smtp.gmail.com" />
+      	<property name="port" value="587" />
+        <property name="username" value="shinvely90@gmail.com" />
+        <property name="password" value="rgvcqqpkllwqfoto" /><!-- 2차 인증비밀번호 -->
+        <property name="defaultEncoding" value="UTF-8"/>
+        <property name="javaMailProperties">
+            <props>
+            <prop key="mail.smtp.auth">true</prop><!-- SMTP 서버의 인증을 사용 -->
+            <prop key="mail.smtp.starttls.enable">true</prop><!-- 로그인시 TLS를 사용할 것인지 설정 -->
+            <!-- <prop key="mail.smtp.socketFactory.fallback">false</prop> -->
+            <prop key="mail.debug">true</prop>
+            </props>
+        </property>
+	</bean>
+	<bean id="email" class="com.project.domain.Email"></bean>
 	
 	<!-- <context:component-scan base-package="com.project.aop"></context:component-scan> -->
 	<!-- <aop:aspectj-autoproxy></aop:aspectj-autoproxy> -->

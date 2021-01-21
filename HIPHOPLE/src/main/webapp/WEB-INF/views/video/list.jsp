@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <style type="text/css">
 *{margin:0; padding:0;}
+
 a.button modal-open{
 	display:inline-block; 
 	padding: 10px 20px; 
@@ -32,16 +33,22 @@ a.button modal-open{
   min-height: 30%;
   background:#fff;
 }
+
+/* 타이틀 */
 .modal-con .mo_title{
   font-size:20px; 
   padding: 20px; 
   background : gold;
 }
+
+
 .modal-con .con{
   font-size:15px; line-height:1.3;
   padding: 30px;
 }
-.modal-con .close{
+
+
+/* .modal-con .close{
   display:block;
   position:absolute;
   width:30px; height:30px;
@@ -51,7 +58,7 @@ a.button modal-open{
   text-decoration:none;
   color:#000; font-size:20px; font-weight: bold;
   right:10px; top:10px;
-}
+} */
 </style>
 
 <%@include file="../include/header2.jsp"%>
@@ -61,12 +68,12 @@ a.button modal-open{
 	
 	<!-- 모달창 -->
 	<div>
-		<h1><a href="javascript:openModal('modal1');" class="button modal-open">open modal</a></h1>
+		<h1><a href="javascript:openModal('modal1');" class="button modal-open">모달 테스트</a></h1>
 	</div>
 	
 	<div id="modal"></div>
 	  	<div class="modal-con modal1">
-	    <a href="javascript:;" class="close">X</a>
+	    <a href="javascript:;" class="close"></a>
 	    <p class="mo_title">제목</p>
 	    <div class="con">
 	    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -74,17 +81,21 @@ a.button modal-open{
 	    </iframe>
 	    </div>
   	</div>
+  	  	
+  	<!-- js -->
   	<script type="text/javascript">
-function openModal(modalname){
-	  document.get
-	  $("#modal").fadeIn(300);
-	  $("."+modalname).fadeIn(300);
-	}
-	//
-	$("#modal, .close").on('click',function(){
-	  $("#modal").fadeOut(300);
-	  $(".modal-con").fadeOut(300);
-	});
-</script>
+		function openModal(modalname){
+			  document.get
+			  $("#modal").fadeIn(300);
+			  $("."+modalname).fadeIn(300);
+			}
+			
+			$("#modal, .close").on('click',function(){
+			  $("#modal").fadeOut(300);
+			  $(".modal-con").fadeOut(300);
+			});
+		
+	</script>
+	
 </body>
 </html>

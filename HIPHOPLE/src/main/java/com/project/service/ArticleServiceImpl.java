@@ -25,6 +25,7 @@ public class ArticleServiceImpl implements ArticleService{
 
 	@Override
 	public void insert(ArticleVO vo) throws Exception {
+		
 		//board 테이블에 insert
 		mapper.insert(vo);
 		
@@ -33,7 +34,9 @@ public class ArticleServiceImpl implements ArticleService{
 			vo.getAttachList().forEach(upload->{
 			upload.setBno(vo.getBno());
 			attachmapper.continsert(upload);
+		
 		});
+		
 	}
 	
 	//게시물 상세페이지 (한 건 select)

@@ -1,3 +1,5 @@
+
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
@@ -17,11 +19,12 @@
 	<h1 class="category_signup">CREATE NEW ACCOUNT</h1>
 	<!-- <div class="container"> -->
 	
+	<!-- <form action="/hiphople/member/join" method="post" onsubmit="return checkmem()"> -->
 	<form action="/hiphople/member/join" method="post" onsubmit="return checkmem()">
 	<table class="signupform">
 		<tr>
 			<td class="signup_label"><label class="signup_name">아이디</label><br>
-			<input class="signup_input" type="text" name="userid" id="userid">
+			<input class="signup_input" type="text" name="userid" id="userid" maxlength="12" autofocus>
 			<!-- <input class="duid_input" type="button" id="checkId" value="중복확인"><br> -->
 			<!-- 유효성 검사 메세지 -->
 			<label id="idmsg" class="msg"></label></td>
@@ -48,7 +51,9 @@
 		
 		<tr>
 			<td class="signup_label"><label class="signup_name">Email</label><br>
-			<input class="signup_input" type="text" name="email" id="email"></td>
+			<input class="signup_input" type="text" name="email" id="email">
+			<!-- 유효성 검사 메세지 -->
+			<label id="emailmsg" class="msg"></label></td>
 		</tr>
 		
 		<tr>
@@ -57,7 +62,6 @@
 			<input type="submit" value="회원가입">
 			</td>
 		</tr>
-	
 	</table>
 	
 	<!-- csrf.token값을 로그인 정보와 같이 넘겨줘야 post가능 -->

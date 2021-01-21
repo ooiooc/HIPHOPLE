@@ -55,7 +55,7 @@ public class ArticleController {
 			
 			//List<ArticleVO> article= service.listAll();
 			//
-			//model.addAttribute("contents", article);
+	 		//model.addAttribute("list", service.listAll());
 			model.addAttribute("list", service.postlistPage(cri));	
 			model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
 			model.addAttribute("category", service.categoryList());

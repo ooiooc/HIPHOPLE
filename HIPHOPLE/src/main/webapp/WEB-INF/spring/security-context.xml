@@ -25,15 +25,18 @@
 		<!-- 로그인한 상태에서는 로그인이나 회원가입 화면에 접근 불가 -->
 		<security:intercept-url pattern="/member/signin" access="isAnonymous()" />
 		<security:intercept-url pattern="/member/signup" access="isAnonymous()" />
-		
+		<security:intercept-url pattern="/member/withdrawalSuccess" access="isAnonymous()" />
 		
 			<!-- 회원만 접근 가능 -->
 			<security:intercept-url pattern="/member/memberInfo" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 			<security:intercept-url pattern="/member/withdrawal" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
 			<security:intercept-url pattern="/community/write" access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"/>
+			
 			<!-- 관리자 권한 접근 가능 -->
-			<security:intercept-url pattern="/notice/write" access="hasRole('ROLE_ADMIN')"/>
-			<security:intercept-url pattern="/interview/write" access="hasRole('ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/admin/main" access="hasRole('ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/admin/list" access="hasRole('ROLE_ADMIN')"/>
+			<security:intercept-url pattern="/notice/write" access="hasRole('ROLE_ADMIN')"/>	
+			<security:intercept-url pattern="/contents/write" access="hasRole('ROLE_ADMIN')"/>
 	
 		<!-- 폼 로그인 설정 -->
 		<security:form-login login-page="/member/signin" 
@@ -50,7 +53,6 @@
 		
 		<!-- Remember-me 설정 / 데이터베이스 이용한 자동로그인-->
 		<security:remember-me data-source-ref="dataSource" 
-								
 								remember-me-parameter="remember-me" 
 								token-validity-seconds="604800"/> <!--일주일 -->
 		

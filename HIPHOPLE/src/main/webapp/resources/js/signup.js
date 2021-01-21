@@ -126,7 +126,7 @@ $(document).ready(function(){
 			datatype: "json",
             data: {"email": $('#email').val()},
             success: function (data) {	
-                if (data == "1") {
+                if (data >= "1") {
                     $("#emailmsg").html("<p class='checkno'>이미 사용중인 이메일입니다.</p>");
 						emaildupcheck = false;
                     	$('#email').focus();
@@ -175,10 +175,23 @@ $(document).ready(function(){
 				//location.href="${pageContext.request.contextPath}/member/joinOk";
 				return true;
 	
-			}else{
+			}else if (idcheck == false){
 			//그렇지 않으면 false값 전송
-				alert("아이디와 비밀번호를 다시 확인해주세요")
+				alert("아이디를 다시 확인해주세요")
+				return false;
+			}else if(pwcheck == false){
+				alert("비밀번호를 다시 확인해주세요")
+				return false;
+			}else if(iddupcheck == false){
+				alert("사용중인 아이디입니다")
+				return false;
+			}else if(pwdupcheck == false){
+				alert("비밀번호가 일치하지 않습니다")
+				return false;
+			}else if(emaildupcheck == false){
+				alert("사용중인 이메일입니다")
 				return false;
 			}
+			
 		}	
 	} // end checkmem 

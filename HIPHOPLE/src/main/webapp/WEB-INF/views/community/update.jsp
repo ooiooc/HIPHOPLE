@@ -31,7 +31,7 @@
 			</td>
 		</tr>
 		<tr class="comtr">
-			<td class="cmtbset"  colspan="2"><label class="updatelb"><input type="text" class="posttitle" name="title" value="${update.title}"></label></td>
+			<td class="cmtbset" colspan="2"><label class="updatelb"><input type="text" class="posttitle" name="title" value="${update.title}"></label></td>
 		</tr>
 		<tr  class="comtr"> 
 			<td class="cmtbset" ><label class="updatelb">작성자</label></td>

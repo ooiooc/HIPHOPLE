@@ -6,6 +6,7 @@ import java.util.List;
 import com.project.domain.ArticleVO;
 import com.project.domain.BoardAttachVO;
 import com.project.domain.BoardVO;
+import com.project.domain.CategoriesVO;
 import com.project.domain.Criteria;
 
 
@@ -32,8 +33,11 @@ public interface ArticleService {
 	//페이징 처리를 위한 카운팅
 	public int getTotalCount(Criteria cri) throws Exception;
 		
+	//카테고리 조회
+	public List<CategoriesVO> categoryList() throws Exception;
+	
 	//BoardAttachVO에 있는 정보를 불러오는 서비스
 	//여러개의 이미지 정보를 넘겨주기 위해 List 배열 타입
-	//public List<BoardAttachVO> getAttachlist(int bno);
+	public List<BoardAttachVO> getAttachlist(int bno);
 	
 }

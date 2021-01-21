@@ -4,7 +4,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,42 +27,44 @@
 	<div class="container">
 	<header class="header2">
     	<div class="headerwrap">
-    		
-            
-            <!-- h1 내부에 상단로고 배치 -->
            	<div class="subLogo">
-            <h1><a href="/hiphople">
-                <img class="smallLogo" src="../resources/image/logo_white_150px.png" alt="logo">
-            </a></h1>
+	            <div><a href="/hiphople"><img class="smallLogo" src="../resources/image/logo_white_150px.png" alt="logo"></a>
+	            </div>
             </div>
-            
             <!-- 내비게이션 메뉴 -->
-			<form action="/hiphople/member/memberInfo" name="HomeForm" method="get">     
+			     
             <nav class="nav_wrap2">
-                <input type="hidden" name="userid" value="${login.userid}">
-           		
-                <ul class="main-nav2">
-                  	<li class="main_menu"><a class="u_line" href="/hiphople/interview/list">NEWS</a></li>
+            <form action="/hiphople/member/memberInfo" name="HomeForm" method="get">
+            	<ul class="main-nav2">
+                  	<li class="main_menu"><a class="u_line" href="/hiphople/contents/list">ARCHIVE</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/video/list">MUSIC</a></li>
-                	<li class="main_menu"><a class="u_line" href="/hiphople/interview/list">INTERVIEW</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/notice/list">NOTICE</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/community/list">COMMUNITY</a></li>
-                    
+                	<li class="main_menu" id="searchdrop"><a href="#">SEARCH</a>
+                		<ul class="dropdown">
+                			<li><button type="button" ></button><a href="#">검색</a></li>
+                		</ul>
+                	</li>
+                	
                 </ul>
-            </nav>
             </form>
+            </nav>
             
-            <ul class="side-nav2">
-            	<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
+            <nav class="nav_wrap3" style="border: 1px solid #000; padding-right: 10px;">
+            <ul class="side-nav2" style="border: 1px solid #000;">
+            	<sec:authorize access="hasRole('ROLE_ADMIN')"> 
     				<li>관리자&nbsp;</li>
-				</sec:authorize> 
-				<sec:authorize access="hasAuthority('ROLE_USER')"> 
+    			</sec:authorize> 
+				<sec:authorize access="hasRole('ROLE_USER')"> 
+				<li>회원&nbsp;</li>
+				
 				<sec:authentication property="principal.username" var="currentUserName"/>
-    				<li><a href="/hiphople/">${currentUserName}님</a></li>
+    				<li>${currentUserName}님</li>
     				<li><a href="/hiphople/member/memberInfo" class="updateMember">정보수정</a></li>
 				</sec:authorize> 
+				
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
-    				<li><a href="/hiphople/">관리자 페이지</a></li>
+    				<li><a href="/hiphople/admin/main">관리자 페이지</a></li>
 				</sec:authorize> 
 				
 				<sec:authorize access="isAuthenticated()">
@@ -74,7 +75,7 @@
 		
 				<sec:authorize access="! isAuthenticated()">
 					<li><a href="/hiphople/member/signin">LOGIN</a></li>
-					<li><a href="/hiphople/member/signup">JOIN&emsp;</a></li>
+					<li><a href="/hiphople/member/signup">JOIN</a></li>
 				</sec:authorize>
 					
 						<!-- 드롭다운 메뉴 
@@ -84,11 +85,10 @@
 						</ul> -->
 
             </ul>
-  
+  			</nav>
             <!-- <div class="big-bg"><img src="/Images/main-bg.jpg" alt="메인이미지"></div> -->
-            </div><!-- headerwrap -->
-        </header>
-        <!-- End of Header -->
-        
+		</div><!-- headerwrap -->
+	</header>
+    <!-- End of Header -->
 </body>
 </html>

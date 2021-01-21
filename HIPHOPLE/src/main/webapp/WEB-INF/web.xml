@@ -29,9 +29,9 @@
 		<multipart-config>
 			<location>C:\Users\shinv\Upload</location>
 			<!-- 1024*1024*20 -->
-			<max-file-size>20971520</max-file-size>
-			<max-require-size>41943040</max-require-size>
-			<file-size-threshold>20971520</file-size-threshold>
+			<max-file-size>20971520</max-file-size>	<!-- 1MM * 20 -->
+			<max-require-size>41943040</max-require-size> <!-- 40 MM -->
+			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
 		</multipart-config>
 	</servlet>
 		

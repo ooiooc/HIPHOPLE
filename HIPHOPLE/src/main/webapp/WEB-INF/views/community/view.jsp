@@ -11,7 +11,7 @@
 <meta charset="UTF-8">
 <title>Community – HIPHOPLE</title>
 <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script></head>
-<script type="text/javascript" src="../resources/js/view.js"></script></head>
+<script type="text/javascript" src="../resources/js/cmview.js"></script></head>
 <link rel="stylesheet" type="text/css" href="../resources/css/view.css"/>
 </head>
 <body>
@@ -36,7 +36,7 @@
 		<div class="notice_title"><h1 class="catetitle">COMMUNITY</h1></div>		
 			<ul class="notice_box">
 				<li class="n_titlebox">
-					<div class="n_title">${view.title}</div>
+					<div class="n_title">${view.writer}&emsp;${view.category}&emsp;${view.title}&emsp;${view.viewcnt}</div>
 					<div class="n_date"><fmt:parseDate var="writeDate" value="${view.regdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
 					<fmt:formatDate value="${writeDate}" pattern="yyyy년 M월 d일"></fmt:formatDate></div>
 				</li>
@@ -56,11 +56,16 @@
 			</div>
 			<!-- 목록 수정 삭제 버튼 영역 -->
 			<div class="notice_btn">
-				<c:if test="${login != null}">	
-				<button type="button" class="btn-warning">수정</button>
-				<button type="button" class="btn-danger">삭제</button>
+			
+			<!-- 작성자 아이디와 현재 접속중인 유저 아이디 일치할 경우 수정 삭제 가능 -->
+			<sec:authorize access="hasAnyRole('ROLE_USER','ROLE_ADMIN')"> 
+			<sec:authentication property="principal.username" var="currentUserName"/>
+				<c:if test ="${currentUserName == view.writerid}">
+				<button type="button" class="modifybtn">수정</button>
+				<button type="button" class="deletebtn">삭제</button>
 				</c:if>
-				<button type="button" class="btn-primary">목록</button>
+			</sec:authorize>
+				<button type="button" class="listbtn">LIST</button>
 			</div>
 		</div><!-- notice content 끝 -->
 		

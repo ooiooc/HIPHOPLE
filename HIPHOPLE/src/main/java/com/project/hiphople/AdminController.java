@@ -33,7 +33,7 @@ public class AdminController {
 	@Autowired
 	private MemberService meservice;
 	
-	//관리자 페이지
+	// 회원관리 화면
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public void meminfoList(Model model, Criteria cri, Principal principal, RedirectAttributes rttr) throws Exception{ 
 
@@ -48,7 +48,13 @@ public class AdminController {
 		model.addAttribute("total", meservice.memberTotal()); // 총 회원 수
 		model.addAttribute("pageMaker", new PageDTO(cri, meservice.meminfoCount(cri)));
 		
-		}
+	}
+	// 메인
+	@RequestMapping(value = "/main", method = RequestMethod.GET)
+	public void adminpage(Model model, Criteria cri, Principal principal, RedirectAttributes rttr) throws Exception{ 
+		logger.info("관리자 페이지 접속");
+	}
+	
 }// end
 
 

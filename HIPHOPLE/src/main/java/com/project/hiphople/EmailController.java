@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.project.domain.MemberVO;
-import com.project.email.Email;
+import com.project.domain.Email;
 import com.project.service.EmailService;
 import com.project.service.MemberService;
 
@@ -42,7 +42,7 @@ public class EmailController {
 		//String tomail = (String)paramMap.get("receiveMail")
 		//String memberid = request.getParameter("userid");
 		String tomail = request.getParameter("receiveMail");
-		String str = emailService.getTempPassword();
+		//String str = emailService.getTempPassword();
 		
 		//일치하는 이메일이 존재하는 지 여부
 		//String result = meservice.memberInfo(userid);

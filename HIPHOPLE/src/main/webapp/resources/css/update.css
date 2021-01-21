@@ -1,23 +1,153 @@
 @charset "UTF-8";
-
-*{
-	font-family: 'Noto Sans KR', sans-serif;
-	/* text-align: center; */
-}
-
-h1{
-	text-align: center;
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
 
 table{
 	border-collapse: collapse;
 	/*border: 1px solid #000;*/
 	border: 1px solid #e6d1cf;
 	width: 37rem;
-	margin: 1em auto;
+	margin: 0 auto;
 	text-align: center;
 }
 
 #modDiv{
 	margin: 1em auto;
 }
+
+			/* 공지사항 update */
+		
+/* notice 수정페이지 타이틀 */		
+.catetitle{
+	margin-top:50px;
+	margin-bottom: 40px;
+	letter-spacing: 2px;
+	font-weight: 900;
+	font-size: 28px;
+}
+
+/* notice 테이블 */
+.updatetb{
+	width: 700px;
+/* 	text-align: center; */
+	/* 테이블 font */
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+}
+
+
+
+/* 페이지 번호 */
+.bnoArea{
+	
+}
+
+.pgnum{
+	width: 100%;
+	border: 0;
+	text-align: left;
+	text-indent: 5px;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+}
+
+.updatelb{
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+} 
+
+/* 게시판 테이블 간격 */
+.tbset, #tbset{
+	padding: 4px;
+}
+.tbsetbtn{
+	padding: 10px;
+	border-left: 0;
+	border-right: 0;
+}
+
+/* notice 게시글 타이틀 */
+.posttitle{
+	width: 100%;
+	border: 0;
+	padding:2px;
+	text-align: center;
+	font-size: 14px;
+	letter-spacing: 1px;
+	font-weight: 300;
+}
+
+/* notice textarea */
+.notextbox{
+	width: 100%;
+	height: 300px;
+	padding: 10px;
+	border:0;
+	/* font */
+	font-size: 14px;
+	letter-spacing: 0.5px;
+	font-weight: 300;
+}
+
+/* post button */
+.modifybtn,.deletebtn,.listbtn{
+	border: 0;
+	width: 80px;
+	height: 40px;
+	margin-right: 4px;
+	/* font */
+	letter-spacing: 0.5px; 	font-weight: 300; color: #333333;
+}
+
+/* uploadlist */
+.imglist{
+	/* 업로드리스트 font */
+	font-size: 14px; letter-spacing: 1px; font-weight: 300;
+}
+		/* 공지사항 update 끝*/
+		
+		
+		/* 커뮤니티 update */
+/* wrap */
+.comupdatewrap{
+	width:100%;
+	padding:50px;
+	/* margin-bottom: 30px; */
+}		
+		
+/* 수정 페이지 테이블 */
+.comupdatetb{
+	width: 700px;
+	height: 700px;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 50px;
+}	
+
+.comtr{
+	height: 20px;
+}
+
+.cmtbset, #cmtbset{
+	padding: 4px;
+}
+
+.cmwriter,.cmdate{
+	font-size: 14px; letter-spacing: 1px; font-weight: 300;
+}	
+	
+/* summernote */
+
+
+/* post button */
+.cmodifybtn,.cdeletebtn,.clistbtn{
+	border: 0;
+	width: 80px;
+	height: 40px;
+	margin-right: 4px;
+	/* font */
+	letter-spacing: 1.5px; 	font-weight: 300; font-size: 14px; 
+}
+		/* 커뮤니티 update 끝 */

@@ -1,5 +1,9 @@
 package com.project.service;
 
+import java.io.UnsupportedEncodingException;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMessage.RecipientType;
@@ -16,8 +20,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.project.domain.MailUtils;
 import com.project.domain.MemberVO;
-import com.project.email.Email;
+import com.project.domain.TempKey;
+import com.project.domain.Email;
 import com.project.hiphople.EmailController;
 
 @Service
@@ -35,8 +41,8 @@ public class EmailServiceImpl implements EmailService{
 	public void sendMail(Email email) {
 		
 		//보내는 사람
-		String setFrom = "hiphople<shinvely90@gmail.com>";
-		String setSubject = "[hiphopLE] Please reset your password";
+		String setFrom = "HiphopLE<shinvely90@gmail.com>";
+		String setSubject = "[HiphopLE] Please reset your password";
 		
 		//받는 사람
 		
@@ -107,9 +113,40 @@ public class EmailServiceImpl implements EmailService{
 	            e.printStackTrace();
 	        }
 	    }
+	
+	//회원가입 인증메일 전송
+	@Override
+	public String sendAuth(String email) throws Exception {
+		
+		String authkey = new TempKey().getKey(50, false); // 인증키 생성
+		
+        //인증메일 보내기
+        try {
+            MailUtils sendMail = new MailUtils(mailSender);
+            sendMail.setSubject("[힙합엘이] 회원가입 이메일 인증");
+            sendMail.setText(new StringBuffer().append("<h1>[이메일 인증]</h1>")
+            .append("<p>아래 링크를 클릭하시면 이메일 인증이 완료됩니다.</p>")
+            .append("<a href='http://localhost:8050/hiphople/member/signupConfirm?email=")
+            .append(email)
+            .append("&authKey=")
+            .append(authkey)
+            .append("' target='_blenk'>이메일 인증 확인</a>")
+            .toString());
+            sendMail.setFrom("shinvely90@gmail.com", "HiphopLE");
+            sendMail.setTo(email);
+            sendMail.send();
+        } catch (MessagingException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
+          return authkey;
+    }
 
-}//끝
+}// end
+	
+
 	
 	
 

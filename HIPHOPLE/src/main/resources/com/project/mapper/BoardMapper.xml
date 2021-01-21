@@ -6,7 +6,6 @@
     
 <mapper namespace="com.project.mapper.BoardMapper">
 
-	
 	<!-- 공지사항 게시글 추가 -->
 	<insert id="insert">
 	<!-- insert 하기 전 bno 생성 -->
@@ -55,7 +54,7 @@
 	
 	<![CDATA[
 		where rownum > (#{pageNum}-1)*#{amount} 
-			and rownum <= #{pageNum}*#{amount};
+			and rownum <= #{pageNum}*#{amount}
 	]]> 
 	</select>
 	

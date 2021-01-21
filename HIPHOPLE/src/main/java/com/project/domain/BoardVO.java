@@ -7,6 +7,7 @@ import com.project.domain.BoardAttachVO;
 public class BoardVO {
 
 	private int bno;
+	private int likecnt;	
 	private String category;
 	private String title;
 	private String content;
@@ -73,12 +74,20 @@ public class BoardVO {
 	public void setWriterid(String writerid) {
 		this.writerid = writerid;
 	}
-
+	
+	public int getLike() {
+		return likecnt;
+	}
+	
+	public void setLikecnt(int likecnt) {
+		this.likecnt = likecnt;
+	}
+	
 	@Override
 	public String toString() {
-		return "BoardVO [bno=" + bno + ", category=" + category + ", title=" + title + ", content=" + content
-				+ ", writer=" + writer + ", regdate=" + regdate + ", writerid=" + writerid + ", viewcnt=" + viewcnt
-				+ ", attachList=" + attachList + "]";
+		return "BoardVO [bno=" + bno + ", likecnt=" + likecnt + ", category=" + category + ", title=" + title
+				+ ", content=" + content + ", writer=" + writer + ", regdate=" + regdate + ", writerid=" + writerid
+				+ ", viewcnt=" + viewcnt + ", attachList=" + attachList + "]";
 	}
 	
 }

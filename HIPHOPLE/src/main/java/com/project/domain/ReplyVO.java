@@ -6,7 +6,7 @@ public class ReplyVO {
     private int bno; 					
     private String replytext;
 	private String replyer;
-	private String userid;
+	private String replyid;
 	private String regdate; 	
     private String updatedate;
     
@@ -34,12 +34,11 @@ public class ReplyVO {
 	public void setReplyer(String replyer) {
 		this.replyer = replyer;
 	}
-	
-	public String getUserid() {
-		return userid;
+	public String getReplyid() {
+		return replyid;
 	}
-	public void setUserid(String userid) {
-		this.userid = userid;
+	public void setReplyid(String replyid) {
+		this.replyid = replyid;
 	}
 	public String getRegdate() {
 		return regdate;
@@ -57,7 +56,7 @@ public class ReplyVO {
 	@Override
 	public String toString() {
 		return "ReplyVO [rno=" + rno + ", bno=" + bno + ", replytext=" + replytext + ", replyer=" + replyer
-				+ ", userid=" + userid + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
+				+ ", userid=" + replyid + ", regdate=" + regdate + ", updatedate=" + updatedate + "]";
 	}
 	
 }

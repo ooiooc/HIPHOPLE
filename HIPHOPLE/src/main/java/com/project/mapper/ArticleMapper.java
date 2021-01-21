@@ -3,6 +3,7 @@ package com.project.mapper;
 import java.util.List;
 
 import com.project.domain.ArticleVO;
+import com.project.domain.CategoriesVO;
 import com.project.domain.Criteria;
 
 public interface ArticleMapper {
@@ -30,5 +31,8 @@ public interface ArticleMapper {
 		
 	//총 게시글 count
 	public int getTotalCount(Criteria cri);
+	
+	//카테고리 조회
+	public List<CategoriesVO> categoryList() throws Exception;
 		
 }

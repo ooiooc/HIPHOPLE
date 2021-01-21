@@ -12,6 +12,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.core.io.FileSystemResource;
@@ -32,14 +34,23 @@ import net.coobird.thumbnailator.Thumbnailator;
 @Controller
 public class UploadController {
 	
+	//@javax.annotation.Resource(name="uploadPath")
 	private String uploadPath;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	//파일 업로드 테스트 화면
+	/*
 	@RequestMapping(value="content/uploadForm", method=RequestMethod.GET)
 	public void uploadForm() throws Exception{
 		logger.info("파일 업로드 화면 get");
+	}
+	
+	// 파일 업로드 ajax 화면 
+	@RequestMapping(value = "content/uploadAjax", method = RequestMethod.GET)
+	public void uploadAjax() {
+		logger.info("파일 업로드 ajax 화면");
+			
 	}
 	
 	//파일 업로드
@@ -68,9 +79,9 @@ public class UploadController {
 		}
 	}
 }
+	*/
 	
-		//연/월/일 폴더 생성하는 getFolder() 메소드
-		//연/월/일(날짜), 오늘 날짜를 어떻게 구할 것인지? 
+		//날짜별 폴더 생성하는 getFolder() 메소드
 		private String getFolder() {
 			
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd"); //반드시 대문자 MM으로
@@ -82,7 +93,7 @@ public class UploadController {
 			
 		}
 			
-		//이미지 파일을 판단할 수 있게 하는 메소드
+		//이미지 파일 여부 확인
 		//이미지이면 true, 아닐 경우 false
 		private boolean checkImageType(File file) {
 			try {
@@ -97,29 +108,33 @@ public class UploadController {
 				return false;
 			}
 		
-		//파일 업로드 ajax 화면
-		@RequestMapping(value = "content/uploadAjax", method = RequestMethod.GET)
-		public void uploadAjax() {
-			logger.info("파일 업로드 ajax 화면");
-			
-		}
+
 	
-		
+		// 파일 업로드
 		@RequestMapping(value = "uploadAjax", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-		public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] file) throws Exception {
+		public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] file,  HttpServletRequest request) throws Exception {
+			
 			logger.info("파일 업로드 ajax 처리");
 			logger.info("파일의 길이 : " + file.length);
-			String uploadPath = "C:\\Users\\shinv\\Upload";
+			
+			//배포 디렉토리
+			String root_path = request.getSession().getServletContext().getRealPath("/").concat("resources");
+			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+			String uploadPath = root_path + File.separator + "upload"+ File.separator ;
+
+			//String root_path = request.getSession().getServletContext().getRealPath("/"); 
+			//String uploadPath = "C:\\Users\\shinv\\Upload";
 			
 			//AttachFileDto 클래스를 list 배열로 생성
 			List<AttachFileDTO> list = new ArrayList();
 			
+			//File uploadFolder = new File(root_path + uploadPath, getFolder());
 			File uploadFolder = new File(uploadPath, getFolder());
 			logger.info("파일업로드 폴더 : " + uploadFolder);
 			
 			
-			//연월일 폴더 만들기
-			//exist()메소드를 통해 생성하고자 하는 폴더가 존재하지 않으면 폴더를 만들도록 한다
+			// 오늘 날짜(2020/00/00) 폴더 생성
+			//exist()메소드를 통해 생성하고자 하는 폴더가 존재하지 않으면 폴더 생성
 			if(uploadFolder.exists()==false) { 
 				uploadFolder.mkdirs();
 			}
@@ -128,7 +143,7 @@ public class UploadController {
 				logger.info("파일명 : " + multipartFile.getOriginalFilename());
 				logger.info("파일크기 : " + multipartFile.getSize());
 				logger.info("파일종류 : " + multipartFile.getContentType());
-				//logger.info("파일저장위치 : " + uploadPath);
+				logger.info("파일저장위치 : " + uploadPath);
 				
 				AttachFileDTO attach = new AttachFileDTO();
 
@@ -136,35 +151,37 @@ public class UploadController {
 
 				attach.setFileName(fileName);
 				
-				//UUID 적용
+				//uuid 적용
 				String uploadFileName=multipartFile.getOriginalFilename();
 				
 				UUID uuid = UUID.randomUUID();
 				
 				uploadFileName = uuid.toString() + "_" + uploadFileName;				
+				//uploadFileName = uploadFileName;				
 				
 				try {
 					//File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
-					//그냥 파일 저장
+					//원본 파일 저장
 					File saveFile = new File(uploadFolder, uploadFileName);
 					//uploadPath 파일폴더 경로
 					//multipartFile 파일에 대한 정보 => saveFile에 저장
 					
 					multipartFile.transferTo(saveFile); //transferTo 폴더에 파일을 저장
-					System.out.println("getFolder ="+getFolder());
+					System.out.println("getFolder = "+getFolder());
 					//AttachFileDTO 클래스에 uploadPath 변수에 날짜저장
 					attach.setUploadPath(getFolder());
 					//AttachFileDTO 클래스에 uuid 변수에 uuid 저장
 					attach.setUuid(uuid.toString());
 					
-					//파일 저장할 때 이미지 파일이면 썸네일 만들어서 저장
+					//파일 저장할 때 이미지 파일이면 썸네일 생성 후 저장
 					if(checkImageType(saveFile)) {
 						
-						//업로드된 파일이 이미지라는 뜻
+						//업로드된 파일이 이미지
 						attach.setImage(true);
 						
+						//썸네일 이미지 생성
 						FileOutputStream thumbnail = new FileOutputStream(new File(uploadFolder, "s_" + uploadFileName));
-						Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100,100);
+						Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100, 100);
 						thumbnail.close();
 					}
 					
@@ -179,12 +196,17 @@ public class UploadController {
 			//return new ResponseEntity<String>("SUCCESS", HttpStatus.OK);
 		}
 		
-		//display(업로드 파일이 이미지인 것)
+		// 이미지 업로드 파일 보여주는 화면 display
 		@RequestMapping(value = "display", method = RequestMethod.GET)
-		public ResponseEntity<byte[]> getFile(String fileName) {
+		public ResponseEntity<byte[]> getFile(String fileName,HttpServletRequest request) {
 			logger.info("fileName = " + fileName);
 			
-			File file = new File("C:\\Users\\shinv\\Upload\\" + fileName);
+			String root_path = request.getSession().getServletContext().getRealPath("/").concat("resources");
+			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
+			String uploadPath = root_path + File.separator + "upload"+File.separator ;
+			
+			File file = new File(uploadPath + fileName);
+			//File file = new File("resources/upload/" + fileName);
 			
 			logger.info("file = " + file);
 			
@@ -193,14 +215,14 @@ public class UploadController {
 					try {
 						HttpHeaders header = new HttpHeaders();
 						header.add("Content-Type", Files.probeContentType(file.toPath()));
-						result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file),header,HttpStatus.OK);
+						result = new ResponseEntity<>(FileCopyUtils.copyToByteArray(file), header, HttpStatus.OK);
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
 					return result;
 				}
 				
-		//download(업로드 파일이 아닌 것)
+		// 첨부파일 다운로드
 		@RequestMapping(value="download", method=RequestMethod.GET, produces=MediaType.APPLICATION_OCTET_STREAM_VALUE)
 		public ResponseEntity<Resource> downloadFile(String fileName){
 			logger.info("download file : " + fileName);
@@ -220,10 +242,10 @@ public class UploadController {
 					}
 					return new ResponseEntity<Resource>(resource, header, HttpStatus.OK);
 				
-				}//end of download
+				}
 			
 		
-		//deleteFile(파일 삭제)
+		// 첨부파일 삭제
 		@RequestMapping(value="deleteFile", method = RequestMethod.POST)
 			public ResponseEntity<String> deleteFile(String fileName, String type){ // public void가 아닌 이상 return 타입이 있어야 하는데, return타입이 없으면 deleteFile에 빨간 줄 뜸(기억)
 					
@@ -254,5 +276,5 @@ public class UploadController {
 					
 			return new ResponseEntity<>("이미지가 삭제되었습니다", HttpStatus.OK);
 					
-		}//end of deleteFile
+		}
 }

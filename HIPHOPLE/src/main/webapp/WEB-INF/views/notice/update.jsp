@@ -4,63 +4,80 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-
-<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script></head>
-<script type="text/javascript" src="../resources/js/update.js"></script></head>
+<title>Notice – HIPHOPLE</title>
+<!-- js -->
+<script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
+<script type="text/javascript" src="../resources/js/update.js"></script>
+<script type="text/javascript" src="../resources/js/write.js"></script>
+<!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/update.css"/>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
-
 </head>
 <body>
+	<%@include file="../include/header2.jsp"%>
 	
-	
-	<h1>글 수정 페이지</h1>
+	<h1 class="catetitle">NOTICE</h1>
 	<form action="/hiphop/notice/update" method="post" role="form"> <!-- modify controller로 이동 -->
-	<table border="1" style="width:400; text-align:center ">
+	<table class="updatetb" border="1">
 		<tr>
-			<td colspan="2" class="bnoArea">
+			<td class="tbset" colspan="2" class="bnoArea">
 			<!-- 페이지 번호 -->
-			<input type="text" name="pageNum" value="${cri.pageNum}" readonly="readonly"><br>
-			
-			<span></span><input type="text" name="bno" id="bno" value="${update.bno}"></td>
-		</tr>
-		<tr>
-			<td colspan="2"><input type="text" name="title" value="${update.title}"></td>
-			
-		</tr>
-		
-		<tr> 
-			<td>작성자</td>
-			<td>${update.writer}</td>
-		</tr>
-		
-		<tr>	
-			<td>작성일</td>
-			<td>${update.regdate}</td>
-		</tr>
-		
-		<tr>
-			<td>내용</td>
-			<td><textarea rows="" cols="" name="content" >${update.content}</textarea></td>
-		</tr>
-		
-		<tr>
-			<td colspan="2">
-			<!-- <input type="submit" value="글 수정"> -->
-			<button type="button" class="btn-warning">수정</button>
-			<button type="button" class="btn-danger">삭제</button>
-			<button type="button" class="btn-primary">목록</button>
+			<input type="text" class="pgnum" name="bno" id="bno" value="${update.bno}">
+			<input type="text" class="pgnum" name="pageNum" style="display: none;" value="${cri.pageNum}" readonly="readonly"><br>
 			</td>
 		</tr>
-		
+		<tr>
+			<td class="tbset"  colspan="2"><label class="updatelb"><input type="text" class="posttitle" name="title" value="${update.title}"></label></td>
+		</tr>
+		<tr> 
+			<td class="tbset" ><label class="updatelb">작성자</label></td>
+			<td class="tbset" >${update.writer}</td>
+		</tr>
+		<tr>	
+			<td class="tbset" ><label class="updatelb">작성일</label></td>
+			<td class="tbset" >${update.regdate}</td>
+		</tr>
+		<tr>
+			<td class="tbset" ><label class="updatelb">내용</label></td>
+			<td class="tbset" ><textarea class="notextbox" rows="" cols="" name="content">${update.content}</textarea></td>
+		</tr>
+		<tr>
+			<td class="tbsetbtn"  colspan="2">
+			<!-- <input type="submit" value="글 수정"> -->
+			<button type="button" class="modifybtn">수정</button>
+			<button type="button" class="deletebtn">삭제</button>
+			<button type="button" class="listbtn">목록</button>
+			</td>
+		</tr>
 		<!-- 업로드란 -->
 		<tr>
-			<td colspan="2" class="uploadResult">
-			<h4>이미지 업로드 목록</h4>
+			<td id="tbset" colspan="2" class="fileUpload">
+				<h4 class="imglist">이미지 업로드</h4>
+				<input class="uplodeFile" type="file" name="file" multiple />
+			</td>
+		</tr>
+		<tr>
+			<td id="tbset"  colspan="2" class="uploadResult" style="text-align: center;">
+				<h4 class="imglist">이미지 목록</h4>
 				<ul></ul>
 			</td>
 		</tr>
+		
+		<!-- 파일 업로드 영역 -->
+	<!-- <div class="fileUpload" style="text-align: center;">파일 업로드 영역<br>
+	<input class="uplodeFile" type="file" name="file" multiple />
+	</div> -->
+	
+	<!-- 파일 업로드 결과 확인-->
+	<!-- <div class="uploadResult">파일 업로드 목록
+	<ul>
+	
+	</ul>
+	</div>-->
+		
+		<!-- <tr>
+			<td class="tbset"  colspan="2" class="uploadResult">
+				<input class="uplodeFile" type="file" name="file" multiple></td>
+		</tr> -->
 		
 		<!-- 댓글 설정 -->
 		<!-- 작성댓글 보이는 공간 -->

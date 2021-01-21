@@ -11,11 +11,12 @@ public class PagingVO {
 				start, //sql 쿼리 start
 				end; //sql 쿼리 end
 	
-	private int cntPage = 5;
+	private int cntPage = 5; //페이지당 글 갯수 한 
 	
 	public PagingVO() {
 	}
 	
+	//총 게시글 수, 현재 페이지, 페이지당 글 갯수
 	public PagingVO(int total, int nowPage, int cntPerPage) {
 		setNowPage(nowPage);
 		setCntPerPage(cntPerPage);

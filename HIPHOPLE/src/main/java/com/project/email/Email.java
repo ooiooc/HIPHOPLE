@@ -7,7 +7,6 @@ public class Email {
 	private String content; //내용
 	private String receiveMail; //수신이메일
 
-	
 	public String getSubject() {
 		return subject;
 	}

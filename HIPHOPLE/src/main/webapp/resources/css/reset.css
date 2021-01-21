@@ -10,11 +10,10 @@
 	font-family: 'Noto Sans KR','Spoqa Han Sans',  'Spoqa Han Sans JP', 'Sans-serif', 'Noto Sans KR'; 
 	margin: 0;
 	padding: 0;
-	
 	/* 테두리에 따라서 크기를 정하는 속성 */
 	box-sizing: border-box; 
 	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box; 
+	-moz-box-sizing: border-box;
  	/* background-color: pink; */
 }
 
@@ -28,13 +27,13 @@ html, body{
 	/* background-color: #e8eaee; */
 }
 
-ul{
-	display: flex;/* li요소 가로정렬할때 발생하는 여백 제거용*/
-}
+/* ul{
+	display: flex;li요소 가로정렬할때 발생하는 여백 제거용
+} */
 
 li{
 	list-style-type: none;
-	display: inline-block; /* 가로정렬 */
+	/* display: inline-block; */  /* 가로정렬 */
 }
 
 

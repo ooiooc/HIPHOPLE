@@ -209,10 +209,10 @@ public class BoardController{
 		model.addAttribute("list", service.commlistPage(cri));
 		
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userid = authentication.getName(); 
-		model.addAttribute("writerid", userid);
-		model.addAttribute("mypost", service.allmyPost(userid));
-		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
+		String writerid = authentication.getName(); 
+		//model.addAttribute("writerid", writerid);
+		model.addAttribute("mypost", service.allmyPost(writerid));
+		model.addAttribute("pageMaker", new PageDTO(cri, service.comTotalcount(cri)));
  	}
  	
  	//community 내 글 리스트 조회
@@ -220,23 +220,14 @@ public class BoardController{
 	public void mypostGet(@ModelAttribute("boardVO") BoardVO vo, Model model, Criteria cri) throws Exception{ //모델 안에 넣어주기 위해서(select된 내용을 화면에 보여주기) 위에 model 선언
  		logger.info("내가 작성한 글 전부 보기" + cri);
  		
+ 		//현재 접속중인 유저 아이디
  		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String userid = authentication.getName();
- 		
- 		model.addAttribute("writerid", userid);
- 		model.addAttribute("mypost", service.allmyPost(userid));
- 		
- 		
+ 		String writerid = authentication.getName(); 
+ 			
+ 		model.addAttribute("writer", service.allmyPost(writerid));
+ 		model.addAttribute("pageMaker", new PageDTO(cri, service.getTotalCount(cri)));
  	}
- 	
-	/*
-	 * @RequestMapping(value="member/searchPwform", method=RequestMethod.GET) public
-	 * void searchPwForm(){ logger.info("비밀번호 찾기 화면");
-	 * 
-	 * }
-	 */
- 	
- 	
+
  	//비디오 화면 모달 창 삽입
  	@RequestMapping(value="video/list", method = RequestMethod.GET)
 		public void videoGet() throws Exception{

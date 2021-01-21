@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,8 +10,6 @@
 <title>Notice – HIPHOPLE</title>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/list.css"/>
-<style type="text/css">
-</style>
 </head>
 <body>
 	<%@include file="../include/header2.jsp"%>
@@ -35,15 +34,15 @@
 	<!-- 공지사항 페이징 -->
 	<div class="pagenumCount" id="noticepg" style="text-align: center; padding: 10px;" >
 	<c:if test="${pageMaker.prev}">
-	<a href="/hiphople/notice/noticelist?pageNum=${pageMaker.startPage-1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a>
+	<a href="/hiphople/notice/list?pageNum=${pageMaker.startPage-1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">이전</a>
 	</c:if>
 		
 	<c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage}">
-	 <a href="/hiphople/notice/noticelist?pageNum=${num}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num}</a>
+	 <a href="/hiphople/notice/list?pageNum=${num}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">${num}</a>
 	</c:forEach>
 	
 	<c:if test="${pageMaker.next}">
-	<a href="/hiphople/notice/noticelist?pageNum=${pageMaker.endPage+1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a>
+	<a href="/hiphople/notice/list?pageNum=${pageMaker.endPage+1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a>
 	</c:if>
 	</div>
 	

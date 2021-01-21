@@ -34,19 +34,19 @@
 			<fmt:parseDate var="writeDate" value="${view.regdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
 			<fmt:formatDate value="${writeDate}" pattern="yyyy년 MM월 dd일"></fmt:formatDate>&emsp;/&emsp;${view.viewcnt} views
 			</div>
+			<div class="contsimg">
+				<ul>
+				</ul>
+			</div>
 			<div class="article_text">
-				<p style="font: bold;">
+				<p class="contstext">
 				${fn:replace(view.content, replaceChar, "<br/>")}
 				</p>
 			</div>
 			
 			
 			<!-- 업로드 영역 -->
-			<div class="uploadResult">
-				<h4>파일 업로드 목록</h4>
-				<ul>
-				</ul>
-			</div>
+			
 		</div><!-- article box -->
 			<!-- article 목록 수정 버튼 -->
 			<div class="buttonList">
@@ -66,13 +66,17 @@
 				<!-- 작성된 댓글 리스트 -->
 				<!-- <ul id="replies">	
 				</ul> -->
+				
 				<div id="replies" class="noreply">
 				</div>
 				
-				<!-- 댓글 수정창 -->
+				
+				<!-- 댓글 수정창 --><!-- 로그인 아이디와 댓글 아이디가 일치하면 수정창 출력 -->
+				<%-- <sec:authentication property="principal.username" var="currentUser"/>
+				<c:if test= "${currentUser == replyid}"> --%>
 				<div id="modDiv">
 					<div class="modal-title"></div>
-					<!-- <div id="replywriter">작성자<input type="text" id="rewriter"> -->
+					<!-- <div id="replywriter">작성자<input type="text" id="rewriter"></div> -->
 					<div class="retext">
 					<textarea cols="60" rows="10" id="replytext" class="replymodtext"></textarea></div> 
 					<div class="modDivbtn">
@@ -81,6 +85,7 @@
 						<button type="button" id="closeBtn">닫기</button>
 					</div>
 				</div><!-- 수정창 끝 -->
+				<%-- </c:if>  --%>	
 			</div><!-- 댓글 리스트 -->
 			
 			<!-- 댓글 페이징 -->
@@ -92,13 +97,18 @@
 			<!-- 댓글 작성란 -->	
 			<div class="replyForm">
 				<div class="reply_writer">
-				<input class="reply_writerbox" id="newReplyWriter" type="hidden" value="${user}"></div>
+				<!-- 댓글 작성자 이름/아이디 -->
+				<input class="reply_writerbox" id="newReplyUserid" type="hidden" value="${userid}"></div>
+				<input class="reply_writerbox" id="newReplyWriter" type="hidden" value="${writer}"></div>
+				
 					<!-- 회원 댓글창 -->
 					<sec:authorize access="isAuthenticated()">
+					
 					<div class="reply_text">
 					<textarea class="reply_textbox" id="newReplyText" cols="60" rows="10" placeholder="댓글을 입력해주세요"></textarea>
 					</div>
 					<div class="replySumbit"><button type="submit" id="replybtn">등록</button></div>
+					
 					</sec:authorize>
 					
 					<!-- 비회원 댓글창 -->

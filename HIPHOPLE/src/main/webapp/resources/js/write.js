@@ -4,11 +4,10 @@
 
 $(document).ready(function(){
 	
+	//파일 업로드 정규식 검사
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$"); //정규식(해당 종류의 파일은 업로드 할 수 없도록 처리)
 	var maxSize = 5242880; //파일 사이즈(5MB) 1204(MB) * 1024(MB) * 5 
 	
-	
-	//정규식
 	function checkExtension(fileName, fileSize){
 		
 		if(fileSize >= maxSize){
@@ -22,7 +21,6 @@ $(document).ready(function(){
 		}
 		return true;
 	}
-	
 	
 	//=================== 이미지 업로드 =============================
 		
@@ -45,7 +43,7 @@ $(document).ready(function(){
 					var sfileCallPath = encodeURIComponent(obj.uploadPath + "/s_" + obj.uuid +"_"+ obj.fileName);
 					str+= "<li data-fileName='"+ obj.fileName +"' data-uuid='"+ obj.uuid +"' data-uploadpath='"+ obj.uploadPath +"' data-fileType='"+ obj.image +"'>"+
 					"<img src='/hiphople/display?fileName=" + fileCallPath +"'>" +
-					"<span data-file='"+ sfileCallPath +"' data-type='image'><img src='/hiphople/resources/Image/d-icon.png'><span>" +"</li>";	
+					"<span class='deleteimg' data-file='"+ sfileCallPath +"' data-type='image'><img src='/hiphople/resources/image/icon/trash.svg'><span>" +"</li>";	
 				
 				}
 					
@@ -101,10 +99,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		alert("글쓰기 전송");
 		
-		
 		//alert("글쓰기 성공");
-		
-	
 		
 		var str="";
 		$(".uploadResult ul li").each(function(i,obj){
@@ -125,6 +120,4 @@ $(document).ready(function(){
 	
 	
 })//end
-
-
 	

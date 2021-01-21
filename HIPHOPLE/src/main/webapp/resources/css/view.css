@@ -121,6 +121,11 @@ n_titlebox{
 	/* border: 1px solid #000; */
 }
 
+
+
+
+
+
 /* 공지사항 버튼 영역*/
 .notice_btn{
 	margin: 30px auto;
@@ -165,8 +170,6 @@ n_titlebox{
 	background: #e2b9b3;
 }
 
-
-
 p{
 	font-size: 14px;
 }
@@ -176,7 +179,7 @@ p{
 	width: 900px;
 	margin: 0 auto;
 	margin-top: 40px;
-	border: 1px solid #000;
+	/* border: 1px solid #000; */
 }
 
 .article_title{
@@ -188,8 +191,10 @@ p{
 .article_text{
 	background: #f9f9f9;
 	width: 100%;
-	height:600px;
+	height: auto;
 	margin: 100px auto;
+	padding: 20px;
+	/* border: 1px solid #000; */
 }
 
 /* about writer */
@@ -197,6 +202,24 @@ p{
 	width: 100%;
 	height: 100px;
 	text-align: center;
+}
+
+/* contents 내용 */
+.contstext{
+	font-weight:300; font-size: 15px; letter-spacing: 0.5px;
+}
+
+
+/* contents view 이미지 */
+.contsimg{
+	text-align: center;
+	margin-top: 16px;
+	/* border: 1px solid #000; */
+}
+
+.contsimg img{
+	width: 800px;
+	height: 370px;
 }
 
 /* contents 목록 버튼 영역 */
@@ -362,19 +385,46 @@ p{
 	/* border: 1px solid #000; */
 }
 
+/* 댓글 0 */
+#noreply{
+	text-align: center;
+	font-size: 16px; font-weight: 400; color:#333333; letter-spacing: 0.5px;
+}
+
 .replyLi{
 	border: 1px solid #dddddd;
 	margin-bottom: 10px;
-	font-size: 12px; font-weight: 400; color:#333333;
+	/* font-size: 12px; font-weight: 400; color:#333333; */
 }
+
 /* 댓글 리스트 작성자 */
 div.replyLi .replyer{
 	font-size: 16px; font-weight: 500; color:#333333;
-	margin-bottom: 5px;
+	padding-top: 4px;
+		display: flex;
+	justify-content: space-between;
 }
+
+/* 댓글 리스트 작성자 아이디 */
+div.replyLi .replyid{
+	font-size: 16px; font-weight: 500; color:#333333;
+	padding-top: 4px;
+	display: none;
+}
+
 /* 댓글 리스트 내용 */
 div.replyLi .replytext{
-	font-size: 14px; font-weight: 400; color:#333333;
+	font-size: 15px; font-weight: 400; color:#333333;
+}
+
+/* 댓글 등록일 */
+.replydate{
+	font-size: 13px; font-weight: 400; color:#333333;
+	/* 
+	display: flex;
+	justify-content:flex-end;
+	text-align: right; 
+	*/
 }
 
 /* ajax 댓글 리스트 버튼 */

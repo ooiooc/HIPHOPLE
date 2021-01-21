@@ -8,10 +8,12 @@ public class MemberVO {
 	private String userpw;
 	private String username;
 	private String email;
-	private Date regdate;
-	private Date updatedate;
+	private String regdate;
+	private String updatedate;
 	private int enabled;
 	private String authority;
+	private String authkey;
+	private int authstatus;
 
 	//private boolean useCookie;
 	
@@ -39,19 +41,20 @@ public class MemberVO {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-	public Date getRegdate() {
+	
+	
+	public String getRegdate() {
 		return regdate;
 	}
-	public void setRegdate(Date regdate) {
+	public void setRegdate(String regdate) {
 		this.regdate = regdate;
 	}
-	public Date getUpdatedate() {
+	public String getUpdatedate() {
 		return updatedate;
 	}
-	public void setUpdatedate(Date updatedate) {
+	public void setUpdatedate(String updatedate) {
 		this.updatedate = updatedate;
 	}
-	
 	public String getAuthority() {
 		return authority;
 	}
@@ -66,13 +69,23 @@ public class MemberVO {
 		this.enabled = enabled;
 	}
 	
-	
-	
+	public String getAuthkey() {
+		return authkey;
+	}
+	public void setAuthkey(String authkey) {
+		this.authkey = authkey;
+	}
+	public int getAuthstatus() {
+		return authstatus;
+	}
+	public void setAuthstatus(int authstatus) {
+		this.authstatus = authstatus;
+	}
 	@Override
 	public String toString() {
 		return "MemberVO [userid=" + userid + ", userpw=" + userpw + ", username=" + username + ", email=" + email
 				+ ", regdate=" + regdate + ", updatedate=" + updatedate + ", enabled=" + enabled + ", authority="
-				+ authority + "]";
+				+ authority + ", authkey=" + authkey + ", authstatus=" + authstatus + "]";
 	}
 	
 }

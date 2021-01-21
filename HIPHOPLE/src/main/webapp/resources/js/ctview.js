@@ -11,7 +11,6 @@ $(document).ready(function(){
 	$("#contModbtn").on("click", function(){
 		formObj.attr("action", "/hiphople/contents/update");
 		//attr안에 값이 하나면 getter, 값이 두 개  들어가면 setter
-		//action=myapp/board/mod =get방식
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
@@ -20,7 +19,6 @@ $(document).ready(function(){
 	$(".deletebtn").on("click", function(){
 		alert("삭제되었습니다")
 		formObj.attr("action", "/hiphople/contents/delete"); 
-		//action=myapp/board/remove =post방식
 		formObj.attr("method", "post");
 		formObj.submit();
 	});
@@ -28,7 +26,6 @@ $(document).ready(function(){
 	//목록 버튼 클릭했을 때
 	$("#contListbtn").on("click", function(){
 		formObj.attr("action", "/hiphople/contents/list");
-		//action=myapp/board/list = 
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
@@ -38,7 +35,7 @@ $(document).ready(function(){
 		alert(bno);
 		console.log(bno);	
 	
-	//attachList에 대한 처리
+	//attachList 이미지 업로드 파일 리스트 가져오기
 	$.getJSON("/hiphople/contents/getAttachlist", {bno:bno}, function(arr){
 		console.log(arr);		
 		
@@ -49,6 +46,7 @@ $(document).ready(function(){
 			var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid +"_"+ attach.fileName);
 
 			//파일 타입에 따라 이미지 여부 확인
+			// encodeURIComponent 특정 문자를 유니코드 형식으로 변환
 			if(attach.fileType){ //image type
 				var sfileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid +"_"+ attach.fileName);
 				str+= "<li><img src='/hiphople/display?fileName=" + fileCallPath +"'></li>";
@@ -60,7 +58,7 @@ $(document).ready(function(){
 			
 		})
 		
-		$(".uploadResult ul").html(str);
+		$(".contsimg ul").html(str);
 	})
 
 });//final end

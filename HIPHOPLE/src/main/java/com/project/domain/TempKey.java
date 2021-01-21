@@ -2,7 +2,7 @@ package com.project.domain;
 
 import java.util.Random;
 
-//이메일 인증 키 생성
+//이메일 인증키 난수 생성
 public class TempKey {
 
 	private boolean lowerCheck;
