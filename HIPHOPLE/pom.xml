@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.project</groupId>
 	<artifactId>hiphople</artifactId>
-	<name>HIPHOPLE</name>
+	<name>hiphople</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -255,6 +255,7 @@
 		</dependency>        
 	</dependencies>
     <build>
+    	<finalName>hiphople</finalName>
         <plugins>
             <plugin>
                 <artifactId>maven-eclipse-plugin</artifactId>
