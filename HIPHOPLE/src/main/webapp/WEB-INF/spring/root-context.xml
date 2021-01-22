@@ -25,7 +25,6 @@
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://springdb.ckiueenxdxjc.ap-northeast-2.rds.amazonaws.com/hiphople?serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="root"></property>
 		<property name="password" value="vhqgl218"></property>
-		
 		-->
 		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=Asia/Seoul"></property>
 		<property name="username" value="jenny"></property>
