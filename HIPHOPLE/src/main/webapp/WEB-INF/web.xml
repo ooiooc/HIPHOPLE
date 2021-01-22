@@ -34,9 +34,7 @@
 			<file-size-threshold>20971520</file-size-threshold> <!-- 20MB -->
 		</multipart-config>
 	</servlet>
-		
 
-	
 	<!-- 한글 깨짐방지 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
