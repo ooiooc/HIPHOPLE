@@ -83,12 +83,6 @@
 			<version>2.9.4</version>
 		</dependency>
 		
-		<!-- websocket -->
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-websocket</artifactId>
-		    <version>4.2.4.RELEASE</version>
-		</dependency>
 		
 		<!-- 파일 업로드 -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
