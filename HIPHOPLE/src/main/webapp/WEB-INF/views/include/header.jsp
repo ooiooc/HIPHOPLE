@@ -29,18 +29,22 @@
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
     				<li>관리자&nbsp;</li>
 				</sec:authorize> 
+				
 				<sec:authorize access="hasAuthority('ROLE_USER')"> 
 					<li>회원&nbsp;</li>
 				</sec:authorize>
+				
 				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal.username" var="currentUserName"/>
     				<%-- <li><a href="/hiphople/">${currentUserName}&nbsp;님</a></li> --%>
     				<li>${currentUserName}&nbsp;님</li>
     				<li><a href="/hiphople/member/memberInfo" class="updateMember">정보수정</a></li>
 				</sec:authorize> 
+				
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
     				<li><a href="/hiphople/admin/main">관리자 페이지</a></li>
 				</sec:authorize> 
+				
 				<sec:authorize access="isAuthenticated()">
   				<form id="logout" action="/hiphople/logout" method="POST">	
   					<li><a href="#" onclick="document.getElementById('logout').submit();">로그아웃</a></li>
@@ -72,7 +76,7 @@
            		
                 <ul class="main-nav">
                     <li class="main_menu"><a class="u_line" href="/hiphople/contents/list">ARCHIVE</a></li>
-                	<li class="main_menu"><a class="u_line" href="/hiphople/video/list">MUSIC</a></li>
+                	<li class="main_menu"><a class="u_line" href="#">MUSIC</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/notice/list">NOTICE</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/community/list">COMMUNITY</a></li>
                 	<li class="main_menu"><a class="u_line" href="#">SEARCH</a></li>

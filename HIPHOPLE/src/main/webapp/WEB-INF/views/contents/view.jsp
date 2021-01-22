@@ -52,7 +52,8 @@
 			<div class="buttonList">
 				<button type="button" class="article_btn" id="contListbtn">목록</button>&emsp;
 				<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
-				<button type="button" class="article_btn" id="contModbtn">수정</button>
+				<button type="button" class="article_btn" id="contModbtn">수정</button>&emsp;
+				<button type="button" class="article_btn" id="contDelbtn">삭제</button>
 				</sec:authorize>
 			</div>
 		

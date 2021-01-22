@@ -37,7 +37,7 @@
             <form action="/hiphople/member/memberInfo" name="HomeForm" method="get">
             	<ul class="main-nav2">
                   	<li class="main_menu"><a class="u_line" href="/hiphople/contents/list">ARCHIVE</a></li>
-                	<li class="main_menu"><a class="u_line" href="/hiphople/video/list">MUSIC</a></li>
+                	<li class="main_menu"><a class="u_line" href="#">MUSIC</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/notice/list">NOTICE</a></li>
                 	<li class="main_menu"><a class="u_line" href="/hiphople/community/list">COMMUNITY</a></li>
                 	<li class="main_menu" id="searchdrop"><a href="#">SEARCH</a>
@@ -55,9 +55,12 @@
             	<sec:authorize access="hasRole('ROLE_ADMIN')"> 
     				<li>관리자&nbsp;</li>
     			</sec:authorize> 
-				<sec:authorize access="hasRole('ROLE_USER')"> 
-				<li>회원&nbsp;</li>
 				
+				<sec:authorize access="hasRole('ROLE_USER')"> 
+					<li>회원&nbsp;</li>
+				</sec:authorize>
+				
+				<sec:authorize access="isAuthenticated()">
 				<sec:authentication property="principal.username" var="currentUserName"/>
     				<li>${currentUserName}님</li>
     				<li><a href="/hiphople/member/memberInfo" class="updateMember">정보수정</a></li>

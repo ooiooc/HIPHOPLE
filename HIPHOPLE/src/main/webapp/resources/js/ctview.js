@@ -16,7 +16,7 @@ $(document).ready(function(){
 	});
 	
 	//삭제 버튼 클릭했을 때
-	$(".deletebtn").on("click", function(){
+	$("#contDelbtn").on("click", function(){
 		alert("삭제되었습니다")
 		formObj.attr("action", "/hiphople/contents/delete"); 
 		formObj.attr("method", "post");
