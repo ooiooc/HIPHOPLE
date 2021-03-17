@@ -187,6 +187,7 @@
 	<select id="comTotalcount" resultType="int">
 		select count(*) from community
 		
+		<!-- post type -->
 		<if test="type != null">
 			<!-- category -->
 			<if test="type == 'F'.toString()">
