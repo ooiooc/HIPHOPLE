@@ -65,15 +65,19 @@
 	select atc.bno, atc.title, atc.category, atc.content, atc.writer, atc.regdate, atc.viewcnt, u.uuid, u.uploadPath, u.fileName 
 		from article as atc
 			join article_upload as u on atc.bno = u.bno
-	
-		<if test="type != null">
-			<if test="type == 'F'.toString()">
-			where category like CONCAT('%', #{category}, '%')		
-			</if>
-		</if>	
-		
+			
+			<if test="type != null">
+				<if test="type == 'F'.toString()">
+				where category like CONCAT('%', #{category}, '%')		
+				</if>
+			</if>	
+			
 		order by bno desc
-	
+		
+	<![CDATA[
+		where rownum > (#{pageNum}-1)*#{amount} 
+			and rownum <= #{pageNum}*#{amount};
+	]]> 
 	</select>	
 	
 

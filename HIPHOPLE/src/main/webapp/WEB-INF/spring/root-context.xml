@@ -22,9 +22,9 @@
 		<!-- log4jdbc-log4j2 -->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
 		
-		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://localhost/db?serverTimezone=Asia/Seoul"></property>
-		<property name="username" value="admin"></property>
-		<property name="password" value=""></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=Asia/Seoul"></property>
+		<property name="username" value="jenny"></property>
+		<property name="password" value="1234"></property>
 		
 	</bean>
 	

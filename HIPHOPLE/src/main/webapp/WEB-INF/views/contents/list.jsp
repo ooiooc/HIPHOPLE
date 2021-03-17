@@ -54,7 +54,7 @@
 		<sec:authorize access="hasAuthority('ROLE_ADMIN')"> 
 			<div class="article_write"><button class="writebtn"  onclick="location.href='/hiphople/contents/write'">WRITE</button></div>
 		</sec:authorize>
-		<!--  
+		
 		<div class="pageno">
 			
 	
@@ -71,7 +71,7 @@
 			<a href="/hiphople/contents/list?pageNum=${pageMaker.endPage+1}&type=${pageMaker.cri.type}&keyword=${pageMaker.cri.keyword}">다음</a>
 			</c:if>
 			</div>
-		</div>-->
+		</div>
 	</div><!-- end contslistwrap -->
 	<%-- <c:forEach items="${contents}" var="cont">
 	${cont.uploadPath}/${cont.fileName}

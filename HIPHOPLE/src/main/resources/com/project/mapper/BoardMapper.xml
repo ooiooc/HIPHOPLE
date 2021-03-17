@@ -171,8 +171,9 @@
 		from (select @rownum:=@rownum+1 as rownum, b.* 
 			from (select @rownum:=0) as tmp, community as b 
 
-		<include refid="search"></include> <!-- include refid를 이용하여 반복되는 쿼리사용 -->
-	  
+		<include refid="search"></include>  <!--include refid를 이용하여 반복되는 쿼리사용 -->
+	  	
+	  	
 	    order by bno desc
 	   ) as boardList
 	
@@ -185,6 +186,18 @@
 	<!-- 커뮤니티 게시물 총 갯수 -->
 	<select id="comTotalcount" resultType="int">
 		select count(*) from community
+		
+		<if test="type != null">
+			<!-- category -->
+			<if test="type == 'F'.toString()">
+			where category like CONCAT('%', #{category}, '%')	
+			</if>
+			<!-- writer -->
+			<if test="type == 'W'.toString()">
+			where writer like CONCAT('%', #{keyword}, '%')		
+			</if>
+		</if>
+		
 	</select>
 	
 	<!-- 커뮤니티 조회수 update -->
