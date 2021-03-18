@@ -123,7 +123,6 @@ public class UploadController {
 			//String uploadPath = root_path + File.separator + "upload"+ File.separator ;
 
 			//String root_path = request.getSession().getServletContext().getRealPath("/"); 
-			//String uploadPath = "C:\\Users\\shinv\\Upload";
 			String uploadPath = "C:\\Users\\shinv\\git\\HipHop\\HIPHOPLE\\src\\main\\webapp\\resources\\upload";
 			
 			//AttachFileDto 클래스를 list 배열로 생성
@@ -205,6 +204,7 @@ public class UploadController {
 			String root_path = request.getSession().getServletContext().getRealPath("/").concat("resources");
 			//String uploadPath = request.getSession().getServletContext().getRealPath("/resources/upload/");
 			//String uploadPath = root_path + File.separator + "upload"+File.separator ;
+
 			String uploadPath = "C:\\Users\\shinv\\git\\HipHop\\HIPHOPLE\\src\\main\\webapp\\resources\\upload\\";
 			
 			File file = new File(uploadPath + fileName);
