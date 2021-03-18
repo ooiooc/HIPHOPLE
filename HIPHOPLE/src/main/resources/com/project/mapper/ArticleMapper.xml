@@ -74,10 +74,7 @@
 			
 		order by bno desc
 		
-	<![CDATA[
-		where rownum > (#{pageNum}-1)*#{amount} 
-			and rownum <= #{pageNum}*#{amount};
-	]]> 
+	
 	</select>	
 	
 

@@ -115,7 +115,7 @@ public class ArticleController {
 	 	public void modifyGet(ArticleVO vo, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
 	 			logger.info("contents 업데이트 화면 get");
 	 			model.addAttribute("update", service.select(vo));	
-	 			logger.info("update get ::::: " + vo);
+	 			logger.info("update get ....... " + vo);
 	 	}
 	 
 	// contents 수정 기능
