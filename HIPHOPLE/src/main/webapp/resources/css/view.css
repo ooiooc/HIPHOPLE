@@ -49,20 +49,27 @@ li{
 .notice_wrap{
 	width: 100%;
 	height: auto;
-	/* border: 1px solid #000; */
+	/* border: 1px solid #000; */\
 	margin-bottom: 50px; /* 아래 여백 */
+}
+
+.noticebox{
+	margin: 0 auto;
+	border: 1px solid #000;
+	
 }
 
 /* 공지사항 카테고리 타이틀 */
 .notice_title{
-	width: 800px;
+	width: 900px;
 	text-align:center;
 	margin: 26px auto;
 /* 	border: 1px solid #E9E9E9;
  */}
  
 .catetitle{
-	margin-top:50px;
+	width: 900px;
+	margin-top: 100px;
 	margin-bottom: 40px;
 	letter-spacing: 2px;
 	font-weight: 900;
@@ -75,7 +82,7 @@ li{
 	margin: 14px auto;
 	display: block;
 	text-align: center;
-	border-top: 1px solid #000;	
+	/* border-top: 1px solid #000; */
 	border-bottom: 1px solid #000;
 }
 
@@ -85,15 +92,29 @@ n_titlebox{
 
 /* 공지사항 타이틀*/
 .n_title{
-	width:auto;
+	width:100%;
 	font-weight: bold;
-	font-size: 18px;
+	font-size: 24px;
+	padding: 20px;
+}
+
+/* 공지사항 카테고리*/
+.n_cate{
+	width:100px;
+	margin: 0 auto;
+	background-color: #000;
+	color:#f9f9f9;
+	font-weight: bold;
+	/* color:#E3E4E0; */
+	font-size: 16px;
+	margin-bottom: 10px;
 }
 
 /* 공지사항 작성일*/
 .n_date{
-	color:#E3E4E0;
+	color:#acaca4;
 	font-size: 14px;
+	margin-bottom: 10px;
 }
 
 /* 공지사항 컨텐츠 전체영역 */
