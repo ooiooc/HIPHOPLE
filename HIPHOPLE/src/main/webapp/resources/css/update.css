@@ -25,9 +25,12 @@ table{
 	font-size: 28px;
 }
 
+
+
 /* notice 테이블 */
 .updatetb{
 	width: 700px;
+	height: auto;
 /* 	text-align: center; */
 	/* 테이블 font */
 	font-size: 14px;
@@ -151,3 +154,48 @@ table{
 	letter-spacing: 1.5px; 	font-weight: 300; font-size: 14px; 
 }
 		/* 커뮤니티 update 끝 */
+		
+		
+		/* contents update */
+
+/* 업로드 이미지 목록 */
+#viewimglist{
+	/* width: 100%; */
+	height: auto;
+}
+
+.contstitle{
+	margin: 0 auto;
+	margin-top:90px;
+	/* margin-bottom: 20px; */
+	letter-spacing: 2px;
+	font-weight: 900;
+	font-size: 28px;
+}
+
+/*  */
+.uploadResult ul{
+	/* width: 100%; */
+	height: auto;
+	margin: 0 auto;
+	/* border: 1px solid #000; */
+}
+
+.deleteicon{
+	width: 20px;
+	height: 20px;
+	/* margin: 0 auto; */
+	/* border: 1px solid #000; */
+	
+}
+
+
+/* 썸네일 삭제 버튼 크기 설정 */
+.deleteimg img{
+	width: 20px;
+	height: 20px;
+	margin-left:10px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	/* border: 1px solid #000; */
+}
