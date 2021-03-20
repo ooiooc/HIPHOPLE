@@ -17,10 +17,12 @@ $(document).ready(function(){
 	
 	//삭제 버튼 클릭했을 때
 	$("#contDelbtn").on("click", function(){
+		if(confirm("삭제하시겠습니까?") == true){
 		alert("삭제되었습니다")
 		formObj.attr("action", "/hiphople/contents/delete"); 
 		formObj.attr("method", "post");
 		formObj.submit();
+		}
 	});
 	
 	//목록 버튼 클릭했을 때
@@ -49,7 +51,7 @@ $(document).ready(function(){
 			// encodeURIComponent 특정 문자를 유니코드 형식으로 변환
 			if(attach.fileType){ //image type
 				var sfileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid +"_"+ attach.fileName);
-				str+= "<li><img src='/hiphople/display?fileName=" + fileCallPath +"'></li>";
+				str+= "<li><img src='/hiphople/display?fileName=" +  fileCallPath +"'></li>";
 			
 			}else{ //other type
 				str+= "<li><a href='/hiphople/download?fileName="+ fileCallPath +"'>"+ attach.fileName + "</a></li>";			
