@@ -151,6 +151,19 @@
 		    <version>5.0.7.RELEASE</version>
 		</dependency>
 	
+		<!-- Google Login API -->
+        <dependency>
+             <groupId>org.springframework.social</groupId>
+            <artifactId>spring-social-google</artifactId>
+            <version>1.0.0.RELEASE</version>
+        </dependency>
+        
+        <dependency>
+              <groupId>org.apache.httpcomponents</groupId>
+              <artifactId>httpclient</artifactId>
+              <version>4.5.3</version>
+        </dependency>
+		
 		<!-- Spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
