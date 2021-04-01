@@ -36,6 +36,15 @@
 		select * from article_upload where bno=#{bno}
 	</select>
 	
+	<!-- update -->
+	<update id="updateFile" parameterType="hashMap">
+    	update article_upload set 
+    		uuid = #{uuid},
+    		uploadPath = #{uploadPath},
+    		fileName = #{fileName},
+    		fileType = #{fileType},
+    	where bno=#{bno}
+    </update>
 	
 	
 	</mapper>
