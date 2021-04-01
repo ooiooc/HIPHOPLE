@@ -23,5 +23,7 @@ public interface BoardAttachMapper {
 			
 	//파일 업로드를 attach 테이블에서 select
 	public List<BoardAttachVO> contselect (int bno);
-
+	
+	//파일 update
+	public List<BoardAttachVO> updateFile (int bno);
 }
