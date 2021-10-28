@@ -34,7 +34,7 @@ $(document).ready(function(){
 	
 	//bno값을 저장하는 변수
 	var bno = $("#bno").val()
-		alert(bno);
+		//alert(bno);
 		console.log(bno);	
 	
 	//attachList 이미지 업로드 파일 리스트 가져오기

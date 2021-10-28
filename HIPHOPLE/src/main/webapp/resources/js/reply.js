@@ -164,7 +164,7 @@ $(document).ready(function(){
 			
 			// 현재 접속 중인 아이디와 댓글 작성 아이디와 일치할 경우 수정창 보이기
 			if(newreplyid == replyid){
-				alert("현재 세션 접속 중인 아이디와 댓글 아이디가 일치합니다.");
+				alert("현재 접속 중인 아이디와 댓글 아이디가 일치합니다.");
 				//alert(rno + ":" + replytext + " [작성자]"+ replyer+" [작성자 아이디]" + replyid);
 			
 				// 기존의 댓글 불러오기

@@ -88,7 +88,7 @@ $(document).ready(function(){
 			contentType: false,
 			type: "POST",
 			success: function(data){
-				alert("업로드 완료")
+				alert("이미지 업로드 완료")
 				console.log(data);
 				showUploadFile(data); //첨부파일 출력 메소드 호출
 			}
@@ -124,7 +124,7 @@ $(document).ready(function(){
 	$("input[type='submit']").click(function(e){
 		
 		e.preventDefault();
-		alert("글쓰기 전송");
+		
 		
 		//alert("글쓰기 성공");
 		var fileName=$("#fileName").val();

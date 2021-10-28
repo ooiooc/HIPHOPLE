@@ -7,8 +7,9 @@ import org.junit.Test;
 
 public class DBtest {
 
-	private static final String driver = "com.mysql.jdbc.Driver";
-	private static final String url = "jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=Asia/Seoul";
+	//private static final String driver = "com.mysql.jdbc.Driver";
+	private static final String driver = "com.mysql.cj.jdbc.Driver";
+	private static final String url = "jdbc:mysql://127.0.0.1:3306/hiphople?serverTimezone=UTC";
 	private static final String user = "jenny";
 	private static final String pw = "1234";
 	

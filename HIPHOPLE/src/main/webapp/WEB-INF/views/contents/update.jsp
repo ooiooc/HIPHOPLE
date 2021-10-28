@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +9,14 @@
 <!-- js -->
 <script type="text/javascript" src="../resources/js/jquery-3.5.1.js"></script>
 <script type="text/javascript" src="../resources/js/ctupdate.js"></script>
-<script type="text/javascript" src="../resources/js/write.js"></script>
+<!-- <script type="text/javascript" src="../resources/js/write.js"></script> -->
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="../resources/css/update.css"/>
 </head>
 <body>
 	<%@include file="../include/header2.jsp"%>
 	
-	<h1 class="catetitle">CONTENTS</h1>
+	<h1 class="contstitle">CONTENTS</h1>
 	<form action="/hiphop/contents/update.do" method="post" role="form"> <!-- modify controller로 이동 -->
 	<table class="updatetb" border="1">
 		<tr>
@@ -56,9 +57,11 @@
 			</td>
 		</tr>
 		<tr>
-			<td id="tbset"  colspan="2" class="uploadResult" style="text-align: center;">
+			<td id="viewimglist"  colspan="2" class="uploadResult" style="text-align: center;">
 				<h4 class="imglist">이미지 목록</h4>
-				<ul></ul>
+				<%-- <img  src="../resources/upload/2021/03/18/s_${img.uuid}_${img.fileName}" alt=""/> --%>
+				<ul>
+				</ul>
 			</td>
 		</tr>
 		

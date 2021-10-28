@@ -6,7 +6,7 @@ $(document).ready(function(){
 	var formObj = $("form[role='form']"); // 
 	
 	console.log(formObj);
-	
+	/* 
 	//수정 버튼 클릭했을 때
 	$(".modifybtn").on("click", function(){
 		formObj.attr("action", "/hiphople/contents/update.do");
@@ -16,6 +16,7 @@ $(document).ready(function(){
 		formObj.attr("method", "post");
 		formObj.submit();
 	});
+	
 	
 	//삭제 버튼 클릭했을 때
 	$(".deletebtn").on("click", function(){
@@ -33,13 +34,13 @@ $(document).ready(function(){
 		formObj.attr("method", "get");
 		formObj.submit();
 	});
-	
+	*/
 	//bno값을 저장하는 변수
 	var bno = $("#bno").val()
 		alert(bno);
 		console.log(bno);	
-	 
-	//attachList 이미지 업로드 파일 리스트 가져오기
+	/* 
+	//기존 attach 리스트 불러오기
 	$.getJSON("/hiphople/contents/getAttachlist", {bno:bno}, function(arr){
 		console.log(arr);		
 		
@@ -64,9 +65,8 @@ $(document).ready(function(){
 		
 		$(".uploadResult ul").html(str);
 	})// 기존 이미지 불러오기 끝
-	
+	 */
 
-	
 	//이미지 추가
 	//파일 업로드 정규식 검사
 	var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$"); //정규식(해당 종류의 파일은 업로드 할 수 없도록 처리)
@@ -87,8 +87,42 @@ $(document).ready(function(){
 	}//추가 끝
 		
 	
-	//업로드 파일 출력
+	$("input[type='file']").change(function(e){
+ 
+	var formData = new FormData();  //폼 태그에 대응되는 객체
+    var inputFile = $("input[name='file']");
+    var files = inputFile[0].files;
+   
+	console.log(formData);
+
+
+    // formData 에 file 추가
+    for (var i = 0; i < files.length; i++) {
+       if (!checkExtension(files[i].name, files[i].size)) {
+          return false;
+       }
+       formData.append("file", files[i]);
+    }
+   
+   
+    $.ajax({
+      url: '/hiphople/uploadAjax',
+      processData: false,
+      contentType: false,
+      data: formData,
+      type: 'POST',
+      dataType: 'json',  
+      success: function(result){
+		 alert("업로드 완료")	
+         console.log(result); 
+         showUploadResult(result);  //업로드 결과 처리 함수
+      }
+   });
+   
+});
 	
+	
+	//업로드 파일 출력
 	function showUploadFile(uploadResultArr){
 			
 		if (!uploadResultArr || uploadResultArr.length == 0) {return;}
@@ -114,17 +148,43 @@ $(document).ready(function(){
 					
 			})
 			
-			/*$(".uploadResult ul").append(str);	*/
+			$(".uploadResult ul").append(str);
 		}
 
-	//이미지 삭제
+	//첨부파일 삭제
 	$(".uploadResult").on("click", ".deleteicon", function(e){
   	console.log("delete file");
-   	if(confirm("해당 파일을 삭제하시겠습니까?")) {
+   	if(confirm("선택하신 파일을 삭제하시겠습니까?")) {
     	var targetLi = $(this).closest("li");
       	targetLi.remove();
    		}
 	});//이미지 삭제 끝
 	
+	//새로 추가한 파일로 수정하려면
+		//글쓰기 버튼을 클릭하면 이벤트 start
+	//input 태그 중에서 type 속성이 submit과 같은 것을 선택
+	// 게시글 입력/수정 submit 처리시에 첨부파일 정보도 함께 처리
+	$(".modifybtn").click(function(e){
+		
+		e.preventDefault();
+		alert("글쓰기 전송");
+		
+		//alert("글쓰기 성공");
+		
+		var str="";
+		$(".uploadResult ul li").each(function(i,obj){
+			var jobj=$(obj);
+			console.log(jobj);
+			
+			str+= "<input type='text' name='attachList["+ i +"].fileName' value='"+ jobj.data("filename") +"'/>";
+			str+= "<input type='text' name='attachList["+ i +"].uuid' value='"+ jobj.data("uuid") +"'/>";
+			str+= "<input type='text' name='attachList["+ i +"].uploadPath' value='"+ jobj.data("uploadpath") +"'/>";
+			str+= "<input type='text' name='attachList["+ i +"].fileType' value='"+ jobj.data("filetype") +"'/>";
+			
+		})
+		//formObj에 str을 추가(append)하여 submit
+		formObj.append(str).submit();
+		//$(".uploadResult1").html(str);
 	
+	})//글쓰기 버튼을 클릭하면 이벤트 end
 });

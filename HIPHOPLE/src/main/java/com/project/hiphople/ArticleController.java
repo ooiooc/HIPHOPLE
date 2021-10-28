@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.project.domain.ArticleVO;
+import com.project.domain.AttachFileDTO;
 import com.project.domain.BoardAttachVO;
 import com.project.domain.Criteria;
 import com.project.domain.MemberVO;
@@ -112,13 +113,21 @@ public class ArticleController {
 	
 	// contents 수정
 	@RequestMapping(value="update", method = RequestMethod.GET)
-	 	public void modifyGet(ArticleVO vo, @ModelAttribute("cri") Criteria cri, Model model) throws Exception{
-	 			logger.info("contents 업데이트 화면 get");
-	 			model.addAttribute("update", service.select(vo));	
-	 			logger.info("update get ....... " + vo);
+	 	public void modifyGet(ArticleVO vo, @ModelAttribute("cri") Criteria cri, Model model, AttachFileDTO attach) throws Exception{
+	 		logger.info("contents 업데이트 화면 get");
+	 		model.addAttribute("update", service.select(vo));
+	 		//int bno = vo.setBno(service.select(vo));
+	 		//logger.info("게시글 번호 : " + bno);
+	 		model.addAttribute("img", service.getAttachlist(vo.getBno()));
+	 		logger.info("attachlist : " + service.getAttachlist(vo.getBno()));
+	 		//String uploadpath = attach.getUploadPath(); 
+	 		//model.addAttribute("path", uploadpath);
+	 		logger.info("update get ....... " + vo);
+	 			
 	 	}
 	 
-	// contents 수정 기능
+	// contents 수정 기능 - 글만 수정 가능, 업로드 파일 못 불러옴 
+	/*
 	@RequestMapping(value="update.do", method = RequestMethod.POST)
 		public String modifyPost(ArticleVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
 			logger.info("update post" + vo);
@@ -129,6 +138,19 @@ public class ArticleController {
 			rttr.addFlashAttribute("msg", "SUCCESS!");
 			return "redirect:/contents/list"; 
 		}
+	*/
+	
+	// contents 
+	@RequestMapping(value="update.do", method = RequestMethod.POST)
+	public String modifyPost(ArticleVO vo, Criteria cri, RedirectAttributes rttr) throws Exception {
+		logger.info("update post" + vo);
+		service.update(vo);
+				
+		//수정했을때 아래의 내용 전송
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addFlashAttribute("msg", "SUCCESS!");
+		return "redirect:/contents/list"; 
+	}
 	 
 	// 첨부파일 리스트 가져오기
 	@RequestMapping(value = "getAttachlist", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

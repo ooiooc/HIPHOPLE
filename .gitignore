@@ -1,7 +1,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/git,java,maven,eclipse,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=git,java,maven,eclipse,intellij
 
-**/spring/root-context.xml
 
 ### Eclipse ###
 .metadata

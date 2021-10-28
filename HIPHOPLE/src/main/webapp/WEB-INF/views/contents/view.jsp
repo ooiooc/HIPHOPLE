@@ -34,6 +34,7 @@
 			<fmt:parseDate var="writeDate" value="${view.regdate}" pattern="yyyy-MM-dd HH:mm:ss"></fmt:parseDate>
 			<fmt:formatDate value="${writeDate}" pattern="yyyy년 MM월 dd일"></fmt:formatDate>&emsp;/&emsp;${view.viewcnt} views
 			</div>
+			<!-- 업로드 이미지 영역 -->
 			<div class="contsimg">
 				<ul>
 				</ul>
