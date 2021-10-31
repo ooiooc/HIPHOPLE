@@ -1,0 +1,361 @@
+@charset "UTF-8";
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;300;400;500;700;900&display=swap');
+
+			/* Notice */
+/* 공지사항 박스 */
+.notice_area{
+	width: 100%;
+	padding: 50px;
+	/* height: auto; */
+}
+
+/* 공지사항 타이틀 박스*/
+.notice_title{
+	width: 800px;
+	text-align:center;
+/* 	border-top: 1px solid #000;
+	border-bottom: 1px solid #000; */
+	margin: 26px auto;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	letter-spacing: 2px; font-size: 16px; font-weight: 900;
+}
+
+/* 공지사항 타이틀 */
+.catenotice{
+	font-size: 28px;
+	font-weight: 900;
+	letter-spacing: 2px;
+
+}
+
+/* 공지사항 게시글 리스트 */
+.notice_list{
+	width: 800px;
+	margin: 13px auto;
+	display: block;
+	text-align: center;
+	border-top: 1px solid #999999;	
+	border-bottom: 1px solid #999999;
+}
+
+.n_content{
+	padding: 6px;
+}
+
+.n_title{
+	font-weight: 500; font-size: 18px; letter-spacing: 0.5px; color: #333333;
+}
+
+.n_date{
+	color:#999999;
+	font-size: 14px;
+}
+
+/* 글쓰기 버튼 */
+.notice_write{
+	width: 100%;
+	text-align:center;
+	margin: 30px auto;
+}
+
+.writebtn{
+	width: 80px;
+	height:40px;
+	font-size: 14px; letter-spacing: 2px; font-weight:400;
+	color:#fff;
+	padding:6px 6px;
+	margin-bottom:30px;
+	/* border-radius: 4px 4px; */
+	background: #000;
+	border: 0;
+}
+
+/* 공지사항 페이지 번호 */
+#noticepg{
+	margin-bottom: 50px;
+}
+			/* 공지사항 끝 */
+
+
+			/* 커뮤니티 */
+/* 커뮤니티 타이틀  */
+.community_title{
+	width: 800px;
+	text-align:center;
+	/* border-top: 1px solid #000;
+	border-bottom: 1px solid #000; */
+	margin: 0 auto;
+	margin-top: 50px;
+	font-weight: 900;
+	font-size: 28px;
+	letter-spacing: 2px;
+}
+
+/* 커뮤니티 테이블  */
+.comwrap{
+	padding: 50px;
+}
+
+.comlist{
+	text-align: center; 
+	margin: 0 auto;
+	margin-top: 20px;
+}
+
+.comsubtitle{
+	display:inline-block; 
+	font-weight: 400; letter-spacing: 1px; font-size: 14px; text-align: center;
+	padding-top:10px;
+	padding-bottom: 10px;
+	margin: 0 20px;
+	/* border: 1px solid #000; */
+}
+
+.combox{
+	border-collapse: collapse;
+	border: 0;
+	/*border: 1px solid #e6d1cf;*/
+	width: 800px;
+	margin: 0 auto;
+	text-align: center;
+	margin-top: 50px;	
+}
+
+.comtr{
+	border-bottom: 1px solid #E9E9E9;
+	font-size: 14px; letter-spacing:1px; font-weight: 400; color:#333333;
+	height: 32px;
+}
+
+.comtr td{
+	font-size: 14px; letter-spacing:1px; font-weight: 300; color:#333333;
+}
+
+th:nth-child(2){
+	width: 380px;
+}
+
+
+/* 작성글 없을때 */
+.nolist{
+	font-size: 14px; letter-spacing:1px; font-weight: 300; color:#333333;
+	padding: 8px;
+}
+
+.comm_pgnum{
+	margin: 10px;
+	font-size: 14px; letter-spacing:1px; font-weight: 400; color:#333333;
+}
+
+/* 커뮤니티 글쓰기 버튼 */
+button.cmwrite{
+	width: 80px;
+	padding: 8px 8px;
+	background: #333333;
+	font-size: 14px; letter-spacing:1.5px; font-weight: 400; color:#E9E9E9;
+	border: 0;
+}
+
+
+/* 커뮤니티 내가 쓴 글 버튼 */
+button.allmypost{
+	width: 86px;
+	padding: 8px 8px;
+	background: #dddddd;
+	font-size: 14px; letter-spacing:1.5px; font-weight: 400; color:#333333;
+	margin-top:10px;
+	border: 0;
+	float: right;
+	
+}
+/* 커뮤니티 검색 영역 */
+.cmsearch{
+	margin-top: 10px;
+	margin-bottom: 70px;
+}
+
+/* 검색옵션, 검색어 입력창 */
+.cmsearchbar{
+	height: 24px;
+	font-size: 14px; letter-spacing:1.5px; font-weight: 400; color:#999999;
+}
+.cmsearchip{
+	height: 26px;
+	font-size: 14px; letter-spacing:1.5px; font-weight: 400; color:#999999;
+}
+
+/* 커뮤니티 검색버튼 */
+.cmsearchbtn{
+	width: 80px;
+	padding: 3px 3px;
+	background: #333333;
+	font-size: 14px; letter-spacing:1.5px; font-weight: 400; color:#E9E9E9;
+	/* margin: 4px; */
+	border: 0;
+}
+			/* 커뮤니티 끝 */
+	
+
+
+			/* contents */
+/* 인터뷰 타이틀 */
+.contitle{
+	margin-top: 50px;
+	text-align:center;
+	letter-spacing: 2px; font-size:28px; font-weight: 900;
+	color: #999999;
+}
+
+.contlist{
+	text-align: center; 
+	margin: 0 auto;
+}
+
+.consubtitle{
+	display:inline-block; 
+	font-weight: 500; letter-spacing: 2px; font-size: 15px; text-align: center;
+	padding-top:30px;
+	padding-bottom: 40px;
+	margin: 0 20px;
+}
+
+
+div.contslistwrap{
+	width : 100%;
+	height: auto;
+	margin : 0 auto;
+	text-align: center;
+	padding : 50px;
+	/* padding-top: 70px; */
+	background: #ededee;
+}
+
+/* 콘텐츠 감싸는 영역  */
+div.contslist{
+	/* padding-top : 40px; */
+	padding-bottom: 50px;
+	display : grid;
+	grid-template-rows : repeat(auto-fit,minmax(18%,auto)) ;
+	/* 	grid-template-columns : repeat(auto-fit,minmax(18%,auto)) ; */
+	grid-template-columns : repeat(4, 1fr); ;
+	place-items : center start;
+	column-gap : 40px;
+	/* row-gap : 50px; */
+	row-gap : 50px;
+	width : 70vw;
+	height : 100%;
+	margin : 0 auto;
+	justify-content: stretch;
+	/* border : 1px solid red; */	
+}
+
+
+@media all and (min-width:768px) and (max-width:1023px) { 
+	div.contslist{
+	grid-template-rows : repeat(auto-fit,minmax(auto,100%)) ;
+	grid-template-columns : repeat(3, 1fr);
+	}
+}
+
+@media all and (max-width:767px) {
+	div.contslist{
+	grid-template-rows : repeat(auto-fit,minmax(auto,100%)) ;
+	grid-template-columns : repeat(2, 1fr); ;
+	}
+	
+}
+
+/* article 컨텐츠 박스 */
+div.gridconts{
+	/* background: #e2b9b3; */
+	width :100%;
+	height : 100%;
+	display : flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	/* border: 1px solid #000;	 */
+}
+
+div#contsimg{
+	width : 100%;
+	height : 100%;
+	overflow : hidden;
+	transition: all ease 0.5s;
+}
+
+div#contsimg img{
+	width : 100%;
+	height: 100%;
+	/* height : 15em; */
+}
+
+
+div#contsimg img:hover{
+	opacity: 0.5;
+}
+
+div.context{
+	padding-top:-20px;
+	width: 100%;
+	height: 100px;
+	display: inline-block;
+	
+	overflow:hidden;
+	/* white-space:nowrap; 
+	text-overflow:ellipsis; */
+}
+
+p.contcate{
+	vertical-align: top;
+	padding : 5px 0;
+	font-size : 15px;
+	font-weight: 700;
+	text-align: center;
+	letter-spacing: 1px;
+}
+
+span.conttitle{
+	padding-bottom : 5px;
+	text-align: center;
+	font-size : 14px;
+	font-weight: 300;
+	letter-spacing: 0.5px;
+	/* text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap; */
+}
+
+
+/* article img */
+.contsimg{
+	/* width: 100%;
+	height: 240px;
+	bottom: 0; */
+	/* background: #e2b9b3; */
+	/* background: #f9f9f9; */
+	/* border: 1px solid #000; */
+	text-align: center;
+	width :100%;
+	height : 100%; 
+	overflow : hidden;
+	border: 1px solid #000;	
+}
+
+/* article 타이틀 소개 박스 */
+.a_box{
+	width:300px;
+	display:inline-block;
+	/* height: 100%; */
+	padding: 10px;
+	/* border: 1px solid #000; */
+}
+
+.pageno{
+	/* border: 1px solid #000;	 */
+	margin-bottom: 30px;
+	letter-spacing: 2px; font-size:16px; font-weight: 500;
+}
+
+
