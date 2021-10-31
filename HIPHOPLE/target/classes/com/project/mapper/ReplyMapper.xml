@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="com.project.mapper.ReplyMapper">
+ 	
+ 	<!-- 인터뷰 댓글 목록 -->
+ 	<select id="list" resultType="com.project.domain.ReplyVO">
+	<!-- select * from reply
+	where bno=#{bno}
+	order by rno desc -->
+	
+	select rno, bno, replytext, replyer, replyid, regdate, updatedate
+	from (
+			select @rownum:=@rownum+1 as rownum, b.* 
+			from (select @rownum:=0) as tmp, article_reply as b 
+			where bno = #{bno}
+		    order by rno asc
+		 ) as boardList
+	
+	<![CDATA[
+		where rownum > (#{cri.pageNum}-1)*#{cri.amount} 
+		and rownum <= #{cri.pageNum}*#{cri.amount};
+	]]> 
+	<!-- list에 bno와 cri가 같이  같이 있기 때문에 구분시켜주기 위해 cri를 붙여준다. -->
+	</select>
+	
+	<!-- 인터뷰 댓글 총 갯수  -->
+	<select id="getCountByBno" resultType="int">
+	select count(*) from article_reply where bno = #{bno}
+	</select>
+	
+	<!-- 인터뷰 댓글 추가 -->
+	<insert id="insert">
+ 	insert into article_reply(bno, replytext, replyer, replyid) 
+ 	values(#{bno},#{replytext},#{replyer},#{replyid})
+ 	</insert>
+ 	
+ 	<!-- 인터뷰 댓글 수정 -->
+ 	<update id="update">
+ 	update article_reply set replytext=#{replytext}, 
+ 					updatedate=now()
+	where rno=#{rno} 
+ 	</update>
+
+	<!-- 인터뷰 댓글 삭제 -->
+	<delete id="delete">
+	delete from article_reply
+	where rno=#{rno}
+	</delete>
+	
+</mapper>
