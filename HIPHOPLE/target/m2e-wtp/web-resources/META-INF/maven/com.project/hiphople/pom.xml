@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.project</groupId>
 	<artifactId>hiphople</artifactId>
-	<name>hiphople</name>
+	<name>HIPHOPLE</name>
 	<packaging>war</packaging>
 	<version>1.0.0-BUILD-SNAPSHOT</version>
 	<properties>
@@ -83,7 +83,6 @@
 			<version>2.9.4</version>
 		</dependency>
 		
-		
 		<!-- 파일 업로드 -->
 		<!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
 		<dependency>
@@ -142,6 +141,7 @@
         </dependency>
        	<dependency>
             <groupId>org.springframework</groupId>
+            
             <artifactId>spring-context-support</artifactId>
             <version>5.0.7.RELEASE</version>
         </dependency>
@@ -161,8 +161,17 @@
         <dependency>
               <groupId>org.apache.httpcomponents</groupId>
               <artifactId>httpclient</artifactId>
-              <version>4.5.3</version>
+              <!-- <version>4.5.3</version> -->
+              <version>4.5.9</version>
         </dependency>
+        
+        <!-- 아마존 S3 -->
+		<!-- https://mvnrepository.com/artifact/com.amazonaws/aws-java-sdk-s3 -->
+		<dependency>
+		    <groupId>com.amazonaws</groupId>
+		    <artifactId>aws-java-sdk-s3</artifactId>
+		    <version>1.11.699</version>
+		</dependency>
 		
 		<!-- Spring -->
 		<dependency>
