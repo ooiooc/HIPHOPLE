@@ -4,14 +4,14 @@
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/mvc https://www.springframework.org/schema/mvc/spring-mvc.xsd
-		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
 	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
 	
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
-	
+
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" />
 	
@@ -22,22 +22,23 @@
 	</beans:bean>
 	
 	<!-- upload -->
-	<beans:bean id="multipartResolver"
-		class="org.springframework.web.multipart.support.StandardServletMultipartResolver"
-		lazy-init="false">
+	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver">
 	<!-- 파일 업로드 시 최대 파일 크기(10MB)	 -->
 	</beans:bean>
-
-	<!-- 파일 업로드 위치 -->
+	
+	<!-- 파일 업로드 path 설정 / 로컬 -->
 	<beans:bean id="uploadPath" class="java.lang.String">
 		<beans:constructor-arg value="C:\Users\shinv\Upload"></beans:constructor-arg>
 	</beans:bean>
+	
+	<!-- 파일 업로드 path 설정 / S3 -->
+    <beans:bean class="java.lang.String" id="s3uploadPath">
+    	<beans:constructor-arg value="upload"> </beans:constructor-arg>
+	</beans:bean>
 
 	<!-- controller package 경로 -->
-	<context:component-scan
-		base-package="com.project.hiphople, com.project.email"
-		scoped-proxy="interfaces" />
-
+	<context:component-scan base-package="com.project.hiphople, com.project.email"/>
+	
 	<!-- 인터셉터 설정 -->
 	<!-- <beans:bean id="sampleInterceptor" class="com.myspring.interceptor.SampleInterceptor"></beans:bean> -->
 	
