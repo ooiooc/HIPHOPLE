@@ -45,15 +45,15 @@ $(document).ready(function(){
 		
 		$(arr).each(function(i, attach){ //arr[i]에 있는 값을 attach에 넣는 것을 반복
 			
-			var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid +"_"+ attach.fileName);
-
+			//var fileCallPath = encodeURIComponent(attach.uploadPath + "/" + attach.uuid +"_"+ attach.fileName);
+			var fileCallPath = attach.uploadPath + "/" + attach.uuid +"_"+ attach.fileName;
+			
 			//파일 타입에 따라 이미지 여부 확인
 			// encodeURIComponent 특정 문자를 유니코드 형식으로 변환
-			if(attach.fileType){ //image type
+			if(attach.fileType){ // 이미지
 				var sfileCallPath = encodeURIComponent(attach.uploadPath + "/s_" + attach.uuid +"_"+ attach.fileName);
-				str+= "<li><img src='/hiphople/display?fileName=" +  fileCallPath +"'></li>";
-			
-			}else{ //other type
+				str+= "<li><img src='" + fileCallPath + "'></li>";
+			}else{ // 이미지 x
 				str+= "<li><a href='/hiphople/download?fileName="+ fileCallPath +"'>"+ attach.fileName + "</a></li>";			
 				
 			}
